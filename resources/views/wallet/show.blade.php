@@ -58,14 +58,14 @@
                         </table>
 
                         {{-- Действия с кошельком --}}
-                        <form method="post" action="{{ route('wallet.list.destroy', $wallet->wallet_id) }}">
+                        <form method="post" action="{{ route('wallet.destroy', $wallet->wallet_id) }}">
                             @csrf
                             @method('DELETE')
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('wallet.list.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
+                                <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
                                 <a href="{{ route('wallet.payment.create', $wallet->wallet_id) }}" class="btn btn-primary me-md-2">{{ __('Транзакция') }}</a>
-                                <a href="{{ route('wallet.list.edit', $wallet->wallet_id) }}" class="btn btn-warning me-md-2">{{ __('Изменить') }}</a>
+                                <a href="{{ route('wallet.edit', $wallet->wallet_id) }}" class="btn btn-warning me-md-2">{{ __('Изменить') }}</a>
                                 <button type="submit" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кошелек?') }}')" class="btn btn-danger">{{ __('Удалить') }}</button>
                             </div>
                         </form>

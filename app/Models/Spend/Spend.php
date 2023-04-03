@@ -38,7 +38,7 @@ class Spend extends Model{
      */
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'owner_id', 'user_id');
+        return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 
 

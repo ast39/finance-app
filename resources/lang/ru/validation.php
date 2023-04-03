@@ -1,0 +1,41 @@
+<?php
+
+return [
+    'numeric'  => ':attribute должен быть числом',
+    'required' => 'Заполните поле: :attribute',
+    'unique'   => ':attribute - дублирование данных',
+
+    'attributes' => [
+        'title'                 => 'Название',
+        'budget'                => 'Бюджет',
+        'name'                  => 'Имя',
+        'username'              => 'Никнейм',
+        'email'                 => 'E-Mail адрес',
+        'first_name'            => 'Имя',
+        'last_name'             => 'Фамилия',
+        'password'              => 'Пароль',
+        'password_confirmation' => 'Подтверждение пароля',
+        'city'                  => 'Город',
+        'country'               => 'Страна',
+        'address'               => 'Адрес',
+        'phone'                 => 'Телефон',
+        'mobile'                => 'Моб. номер',
+        'age'                   => 'Возраст',
+        'sex'                   => 'Пол',
+        'gender'                => 'Пол',
+        'day'                   => 'День',
+        'month'                 => 'Месяц',
+        'year'                  => 'Год',
+        'hour'                  => 'Час',
+        'minute'                => 'Минута',
+        'second'                => 'Секунда',
+        'content'               => 'Контент',
+        'description'           => 'Описание',
+        'excerpt'               => 'Выдержка',
+        'date'                  => 'Дата',
+        'time'                  => 'Время',
+        'available'             => 'Доступно',
+        'size'                  => 'Размер',
+    ],
+
+];

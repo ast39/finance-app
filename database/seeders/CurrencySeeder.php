@@ -20,8 +20,8 @@ class CurrencySeeder extends Seeder {
         ]);
 
         WalletCurrency::create([
-            'title' => 'USD',
-            'abbr'  => 'Доллар США',
+            'title' => 'Доллар США',
+            'abbr'  => 'USD',
         ]);
 
         WalletCurrency::create([

@@ -1,29 +1,25 @@
 <?php
 
-use App\Http\Controllers\Credit\CreditCalcController;
-use App\Http\Controllers\Credit\CreditCheckController;
-use App\Http\Controllers\Credit\CreditPaymentController;
-use App\Http\Controllers\Deposit\DepositCalcController;
-use App\Http\Controllers\Deposit\DepositPaymentController;
-use App\Http\Controllers\Spend\SpendCategoryController;
-use App\Http\Controllers\Spend\SpendController;
-use App\Http\Controllers\Wallet\WalletPaymentController;
-use App\Http\Controllers\Credit\CreditController;
-use App\Http\Controllers\Deposit\DepositController;
-use App\Http\Controllers\Wallet\WalletController;
-use App\Http\Controllers\Wallet\WalletCurrencyController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Wallet\{
+    WalletController, WalletPaymentController, WalletCurrencyController
+};
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\Credit\{
+    CreditController, CreditCalcController, CreditCheckController, CreditPaymentController
+};
+
+use App\Http\Controllers\Deposit\{
+    DepositController, DepositCalcController, DepositPaymentController
+};
+
+use App\Http\Controllers\Spend\{
+    SpendController, SpendCategoryController
+};
+
+use Illuminate\Support\Facades\{
+    Route, Auth
+};
+
 
 Route::get('/', function () {
     return redirect('/wallet/list');
@@ -32,17 +28,13 @@ Route::get('/', function () {
 # Кошелек
 Route::group(['prefix' => 'wallet', 'middleware' => ['auth']], function() {
 
-    # Кошельки
-    Route::group(['prefix' => 'list'], function() {
-
-        Route::get('', [WalletController::class, 'index'])->name('wallet.list.index');
-        Route::get('create', [WalletController::class, 'create'])->name('wallet.list.create');
-        Route::post('', [WalletController::class, 'store'])->name('wallet.list.store');
-        Route::get('{id}', [WalletController::class, 'show'])->name('wallet.list.show');
-        Route::get('{id}/edit', [WalletController::class, 'edit'])->name('wallet.list.edit');
-        Route::put('{id}', [WalletController::class, 'update'])->name('wallet.list.update');
-        Route::delete('{id}', [WalletController::class, 'destroy'])->name('wallet.list.destroy');
-    });
+    Route::get('', [WalletController::class, 'index'])->name('wallet.index');
+    Route::get('create', [WalletController::class, 'create'])->name('wallet.create');
+    Route::post('', [WalletController::class, 'store'])->name('wallet.store');
+    Route::get('{id}', [WalletController::class, 'show'])->name('wallet.show');
+    Route::get('{id}/edit', [WalletController::class, 'edit'])->name('wallet.edit');
+    Route::put('{id}', [WalletController::class, 'update'])->name('wallet.update');
+    Route::delete('{id}', [WalletController::class, 'destroy'])->name('wallet.destroy');
 
     # Переводы по кошелькам
     Route::group(['prefix' => 'payment'], function() {

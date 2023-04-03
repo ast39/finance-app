@@ -4,7 +4,7 @@ namespace App\Http\Requests\Wallet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WalletFilterRequest extends FormRequest {
+class WalletUpdateRequest extends FormRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,10 @@ class WalletFilterRequest extends FormRequest {
     {
         return [
 
-            'currency'     => 'int|nullable',
-            'balance_from' => 'int|nullable',
-            'balance_to'   => 'int|nullable',
+            'title'       => 'string|unique:wallets,title,' . $this->id . ',wallet_id',
+            'note'        => 'string',
+            'amount'      => 'numeric',
+            'status'      => 'integer',
         ];
     }
 }

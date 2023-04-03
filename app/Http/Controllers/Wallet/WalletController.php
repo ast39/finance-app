@@ -3,15 +3,28 @@
 namespace App\Http\Controllers\Wallet;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Dictionarable;
 use App\Http\Filters\WalletFilter;
 use App\Http\Requests\Wallet\WalletFilterRequest;
+use App\Http\Requests\Wallet\WalletStoreRequest;
+use App\Http\Requests\Wallet\WalletUpdateRequest;
 use App\Models\Wallet\Wallet;
+use App\Packages\Finance\Wallet\WalletManager;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller {
 
+    use Dictionarable;
+
+
+    /**
+     * @param WalletFilterRequest $request
+     * @return View
+     * @throws BindingResolutionException
+     */
     public function index(WalletFilterRequest $request): View
     {
         $data = $request->validated();
@@ -26,7 +39,7 @@ class WalletController extends Controller {
 
         $safes_page = Wallet::where('owner_id', Auth::id())
             ->filter($filter)
-            ->paginate(config('user.limits.wallet'));
+            ->paginate(config('limits.wallet'));
 
         return view('wallet.index', [
             'wallets' => $safes_page,
@@ -34,33 +47,94 @@ class WalletController extends Controller {
         ]);
     }
 
+    /**
+     * @return View
+     */
     public function create(): View
     {
-        return view('wallet.create');
+        return view('wallet.create', [
+            'currencies' => $this->walletCurrencies(),
+        ]);
     }
 
-    public function store(): RedirectResponse
+    /**
+     * @param WalletStoreRequest $request
+     * @return RedirectResponse
+     */
+    public function store(WalletStoreRequest $request): RedirectResponse
     {
+        $data = $request->validated();
 
+        $data['owner_id'] = Auth::id();
+
+        return redirect()->route('wallet.show', Wallet::create($data)->wallet_id);
     }
 
+    /**
+     * @param int $id
+     * @return View
+     */
     public function show(int $id): View
     {
+        $wallet = Wallet::find($id);
+        if (is_null($wallet)) {
+            abort(404);
+        }
 
+        return view('wallet.show', [
+            'wallet'  => $wallet,
+            'details' => WalletManager::calculate($wallet),
+        ]);
     }
 
+    /**
+     * @param int $id
+     * @return View
+     */
     public function edit(int $id): View
     {
-        return view('wallet.edit');
+        $wallet = Wallet::find($id);
+        if (is_null($wallet)) {
+            abort(404);
+        }
+
+        return view('wallet.edit', [
+            'wallet' => $wallet,
+        ]);
     }
 
-    public function update(int $id): RedirectResponse
+    /**
+     * @param WalletUpdateRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function update(WalletUpdateRequest $request, int $id): RedirectResponse
     {
+        $data = $request->validated();
 
+        $wallet = Wallet::find($id);
+        if (is_null($wallet)) {
+            return back()->withErrors(['action' => 'Обновляемый кошелек не найден']);
+        }
+
+        $wallet->update($data);
+
+        return redirect()->route('wallet.show', $id);
     }
 
+    /**
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function destroy(int $id): RedirectResponse
     {
+        $wallet = Wallet::find($id);
+        if (is_null($wallet)) {
+            return back()->withErrors(['action' => 'Удаляемый кошелек не найден']);
+        }
 
+        $wallet->delete();
+
+        return redirect()->route('wallet.index');
     }
 }
