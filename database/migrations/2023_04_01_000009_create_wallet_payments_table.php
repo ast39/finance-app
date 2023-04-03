@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('wallet_payments', function (Blueprint $table) {
             $table->id('payment_id');
-            $table->unsignedInteger('wallet_id')
+            $table->unsignedBigInteger('wallet_id')
                 ->comment('Транзакция к кошельку');
             $table->unsignedFloat('amount', 11, 2)
                 ->comment('Сумма транзакции');

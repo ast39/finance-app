@@ -30,7 +30,7 @@ class Deposit extends Model {
      */
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'owner_id');
+        return $this->belongsTo(User::class, 'owner_id', 'user_id');
     }
 
     /**
@@ -38,7 +38,7 @@ class Deposit extends Model {
      */
     public function payments(): HasMany
     {
-        return $this->hasMany(WalletPayment::class, 'deposit_id', 'deposit_id');
+        return $this->hasMany(DepositPayment::class, 'deposit_id', 'deposit_id');
     }
 
 

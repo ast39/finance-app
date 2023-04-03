@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('deposit_payments', function (Blueprint $table) {
             $table->id('payment_id');
-            $table->unsignedInteger('deposit_id')
+            $table->unsignedBigInteger('deposit_id')
                 ->comment('Пополняемый вклад');
             $table->unsignedFloat('amount', 11, 2)
                 ->comment('Сумма пополнения');

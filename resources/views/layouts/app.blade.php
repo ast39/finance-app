@@ -30,7 +30,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @if (Route::has('deposit.calc.create'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('deposit.calc.create') }}">{{ __('Рассчитать вклад') }}</a>
+                            </li>
+                        @endif
 
+                        @if (Route::has('credit.calc.create'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('credit.calc.create') }}">{{ __('Рассчитать кредит') }}</a>
+                            </li>
+                        @endif
+
+                        @if (Route::has('credit.check.create'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('credit.check.create') }}">{{ __('Проверить кредит') }}</a>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -55,9 +71,23 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    @if (Route::has('wallet.list.index'))
+                                        <a class="dropdown-item" href="{{ route('wallet.list.index') }}">{{ __('Кошельки') }}</a>
+                                    @endif
+
+                                    @if (Route::has('credit.list.index'))
+                                        <a class="dropdown-item" href="{{ route('credit.list.index') }}">{{ __('Кредиты') }}</a>
+                                    @endif
+
+                                    @if (Route::has('deposit.list.index'))
+                                        <a class="dropdown-item" href="{{ route('deposit.list.index') }}">{{ __('Вклады') }}</a>
+                                    @endif
+
+                                    @if (Route::has('spend.list.index'))
+                                        <a class="dropdown-item" href="{{ route('spend.list.index') }}">{{ __('Траты') }}</a>
+                                    @endif
+
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

@@ -24,13 +24,6 @@ return new class extends Migration
 
             $table->comment('Валюты кошельков');
         });
-
-        Schema::table('wallets', function(Blueprint $table) {
-            $table->foreign('currency_id', 'wallet_currency_key')
-                ->references('currency_id')
-                ->on('wallet_currencies')
-                ->onDelete('cascade');
-        });
     }
 
     /**

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('credits', function (Blueprint $table) {
             $table->id('credit_id');
-            $table->unsignedInteger('owner_id')
+            $table->unsignedBigInteger('owner_id')
                 ->comment('Хозяин кредита');
             $table->string('title', 64)
                 ->comment('Название кредита');
@@ -37,13 +37,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->comment('Кредиты пользователей');
-        });
-
-        Schema::table('credit_payments', function(Blueprint $table) {
-            $table->foreign('credit_id', 'credit_payment_key')
-                ->references('credit_id')
-                ->on('credits')
-                ->onDelete('cascade');
         });
     }
 

@@ -24,13 +24,6 @@ return new class extends Migration
 
             $table->comment('Категории трат');
         });
-
-        Schema::table('spends', function(Blueprint $table) {
-            $table->foreign('category_id', 'category_key')
-                ->references('category_id')
-                ->on('spending_categories')
-                ->onDelete('cascade');
-        });
     }
 
     /**

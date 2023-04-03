@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->id('wallet_id');
-            $table->unsignedTinyInteger('currency_id')
+            $table->unsignedBigInteger('currency_id')
                 ->default('1')
                 ->comment('Валюта кошелька');
-            $table->unsignedInteger('owner_id')
+            $table->unsignedBigInteger('owner_id')
                 ->comment('Владелец кошелька');
             $table->string('title', 64)
                 ->comment('Название кошелька');
@@ -32,13 +32,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->comment('Кошельки пользователей');
-        });
-
-        Schema::table('wallet_payments', function(Blueprint $table) {
-            $table->foreign('wallet_id', 'wallet_payment_key')
-                ->references('wallet_id')
-                ->on('wallets')
-                ->onDelete('cascade');
         });
     }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('deposits', function (Blueprint $table) {
             $table->id('deposit_id');
-            $table->integer('owner_id')
+            $table->unsignedBigInteger('owner_id')
                 ->comment('Хозяин вклада');
             $table->string('title', 64)
                 ->comment('Название вклада');
@@ -38,13 +38,6 @@ return new class extends Migration
                 ->default(1);
 
             $table->timestamps();
-        });
-
-        Schema::table('deposit_payments', function(Blueprint $table) {
-            $table->foreign('deposit_id', 'deposit_payment_key')
-                ->references('deposit_id')
-                ->on('deposits')
-                ->onDelete('cascade');
         });
     }
 

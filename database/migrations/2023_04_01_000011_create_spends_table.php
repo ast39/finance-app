@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('spends', function (Blueprint $table) {
             $table->id('spend_id');
-            $table->unsignedInteger('owner_id')
+            $table->unsignedBigInteger('owner_id')
                 ->comment('Хозяин транзакции');
-            $table->unsignedInteger('category_id')
+            $table->unsignedBigInteger('category_id')
                 ->comment('Категория транзакции');
             $table->float('amount',11, 2)
                 ->comment('Сумма транзакции');
