@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="safeAmount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
+                                <label for="safeAmount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Баланс') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="safeAmount" name="amount" placeholder="250000" value="{{ $wallet->amount }}" aria-describedby="safeTitleHelp">
                                     <span class="input-group-text">руб.</span>

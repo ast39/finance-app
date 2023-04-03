@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Wallet;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\Dictionarable;
 use App\Http\Filters\WalletFilter;
+use App\Http\Mutators\WalletMutator;
 use App\Http\Requests\Wallet\WalletFilterRequest;
 use App\Http\Requests\Wallet\WalletStoreRequest;
 use App\Http\Requests\Wallet\WalletUpdateRequest;
 use App\Models\Wallet\Wallet;
-use App\Packages\Finance\Wallet\WalletManager;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -33,17 +33,13 @@ class WalletController extends Controller {
             'queryParams' => array_filter($data)
         ]);
 
-        $safes_all = Wallet::where('owner_id', Auth::id())
-            ->get()
-            ->toArray();
-
-        $safes_page = Wallet::where('owner_id', Auth::id())
+        $page_wallets = Wallet::where('owner_id', Auth::id())
             ->filter($filter)
             ->paginate(config('limits.wallet'));
 
         return view('wallet.index', [
-            'wallets' => $safes_page,
-            'balance' => $safes_all,
+            'wallets'     => $page_wallets,
+            'wallet_list' => $this->allWallets(),
         ]);
     }
 
@@ -82,8 +78,7 @@ class WalletController extends Controller {
         }
 
         return view('wallet.show', [
-            'wallet'  => $wallet,
-            'details' => WalletManager::calculate($wallet),
+            'wallet'  => (new WalletMutator())($wallet),
         ]);
     }
 

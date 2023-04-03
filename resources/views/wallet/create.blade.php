@@ -21,7 +21,7 @@
                             @method('POST')
 
                             <div class="mb-3">
-                                <label for="currency_id" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('Валюта') }}</label>
+                                <label for="currency_id" class="form-label">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</label>
                                 <select name="currency_id" id="currency_id" class="form-select form-control" aria-describedby="currency_idHelp">
                                     @forelse($currencies as $currency)
                                         <option title="{{ $currency->title }}" value="{{ $currency->currency_id }}">{{ $currency->abbr }}</option>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="amount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
+                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Баланс') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="amount" name="amount" placeholder="250000" value="{{ old('amount') }}" aria-describedby="amountHelp">
                                     <span class="input-group-text">{{ __('руб.') }}</span>

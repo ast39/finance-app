@@ -22,27 +22,29 @@ use Illuminate\Support\Facades\{
 
 
 Route::get('/', function () {
-    return redirect('/wallet/list');
+    return redirect('/wallet/item');
 });
 
 # Кошелек
 Route::group(['prefix' => 'wallet', 'middleware' => ['auth']], function() {
 
-    Route::get('', [WalletController::class, 'index'])->name('wallet.index');
-    Route::get('create', [WalletController::class, 'create'])->name('wallet.create');
-    Route::post('', [WalletController::class, 'store'])->name('wallet.store');
-    Route::get('{id}', [WalletController::class, 'show'])->name('wallet.show');
-    Route::get('{id}/edit', [WalletController::class, 'edit'])->name('wallet.edit');
-    Route::put('{id}', [WalletController::class, 'update'])->name('wallet.update');
-    Route::delete('{id}', [WalletController::class, 'destroy'])->name('wallet.destroy');
+    # Сами кошельки
+    Route::group(['prefix' => 'item'], function() {
+
+        Route::get('', [WalletController::class, 'index'])->name('wallet.index');
+        Route::get('create', [WalletController::class, 'create'])->name('wallet.create');
+        Route::post('', [WalletController::class, 'store'])->name('wallet.store');
+        Route::get('{id}', [WalletController::class, 'show'])->name('wallet.show');
+        Route::get('{id}/edit', [WalletController::class, 'edit'])->name('wallet.edit');
+        Route::put('{id}', [WalletController::class, 'update'])->name('wallet.update');
+        Route::delete('{id}', [WalletController::class, 'destroy'])->name('wallet.destroy');
+    });
 
     # Переводы по кошелькам
     Route::group(['prefix' => 'payment'], function() {
 
-        Route::get('', [WalletPaymentController::class, 'index'])->name('wallet.payment.index');
-        Route::get('create', [WalletPaymentController::class, 'create'])->name('wallet.payment.create');
+        Route::get('create/{wallet_id}', [WalletPaymentController::class, 'create'])->name('wallet.payment.create');
         Route::post('', [WalletPaymentController::class, 'store'])->name('wallet.payment.store');
-        Route::get('{id}', [WalletPaymentController::class, 'show'])->name('wallet.payment.show');
         Route::get('{id}/edit', [WalletPaymentController::class, 'edit'])->name('wallet.payment.edit');
         Route::put('{id}', [WalletPaymentController::class, 'update'])->name('wallet.payment.update');
         Route::delete('{id}', [WalletPaymentController::class, 'destroy'])->name('wallet.payment.destroy');

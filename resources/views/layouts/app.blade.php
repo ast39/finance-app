@@ -1,3 +1,7 @@
+@php
+    use App\Libs\Icons;
+@endphp
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -12,6 +16,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <!-- Fa Icons CSS (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -71,8 +78,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if (Route::has('wallet.list.index'))
-                                        <a class="dropdown-item" href="{{ route('wallet.list.index') }}">{{ __('Кошельки') }}</a>
+                                    @if (Route::has('wallet.index'))
+                                        <a class="dropdown-item" href="{{ route('wallet.index') }}">{!! Icons::get(Icons::WALLET) !!} {{ __('Кошельки') }}</a>
                                     @endif
 
                                     @if (Route::has('credit.list.index'))

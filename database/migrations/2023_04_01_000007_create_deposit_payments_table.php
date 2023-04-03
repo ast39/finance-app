@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('payment_id');
             $table->unsignedBigInteger('deposit_id')
                 ->comment('Пополняемый вклад');
-            $table->unsignedFloat('amount', 11, 2)
+            $table->float('amount', 11, 2)
                 ->comment('Сумма пополнения');
             $table->tinyText('note')
                 ->nullable()

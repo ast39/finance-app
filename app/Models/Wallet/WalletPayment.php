@@ -28,12 +28,13 @@ class WalletPayment extends Model {
      */
     public function wallet(): BelongsTo
     {
-        return $this->belongsTo(Wallet::class, 'wallet_id', 'wallet_id');
+        return $this->belongsTo(Wallet::class, 'wallet_id', 'wallet_id')
+            ->without('payments');
     }
 
 
     protected $with = [
-        'deposit'
+        'wallet'
     ];
 
     protected $casts = [
