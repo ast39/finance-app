@@ -30,7 +30,7 @@
                                     @endforelse
                                 </select>
                                 <div id="currency_idHelp" class="form-text">{{ __('Валюта кошелька') }}</div>
-                                @error('currency_idHelp')
+                                @error('currency_id')
                                     <p class="text-danger mt-2">{{ $message }}</p>
                                 @enderror
                             </div>

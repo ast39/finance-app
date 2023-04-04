@@ -50,6 +50,32 @@ class Wallet extends Model {
     }
 
 
+    /**
+     * Сразу же просчитаем сальдо по всем транзакциям
+     *
+     * @return float
+     */
+    public function getBalanceAttribute(): float
+    {
+        return $this->amount + WalletPayment::where('wallet_id', $this->wallet_id)
+            ->get()
+            ->pluck('amount')
+            ->sum() ?: 0;
+    }
+
+    /**
+     * Сразу же просчитаем кол-во транзакций
+     *
+     * @return int
+     */
+    public function getTransactionsAttribute(): int
+    {
+        return WalletPayment::where('wallet_id', $this->wallet_id)
+            ->get()
+            ->count() ?: 0;
+    }
+
+
     protected $with = [
         'currency',
         'owner',

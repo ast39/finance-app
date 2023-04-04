@@ -23,22 +23,16 @@
                                 <legend>{{ __('Фильтрация') }}</legend>
 
                                 <div class="row">
-                                    <div class="mb-3 col-6">
-                                        <label for="balance_from" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('С балансов выше') }}</label>
-                                        <input type="text" class="form-control" id="balance_from" name="balance_from" placeholder="1000" value="{{ old('balance_from') ?? request()->balance_from }}" aria-describedby="balance_fromHelp">
-                                        <div id="balance_fromHelp" class="form-text">{{ __('Не показывать кошельки с балансом ниже указанного') }}</div>
-                                        @error('balance_from')
-                                            <p class="text-danger mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3 col-6">
-                                        <label for="balance_to" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('С балансов ниже') }}</label>
-                                        <input type="text" class="form-control" id="balance_to" name="balance_to" placeholder="100000" value="{{ old('balance_to') ?? request()->balance_to}}" aria-describedby="balance_toHelp">
-                                        <div id="balance_toHelp" class="form-text">{{ __('Не показывать кошельки с балансом выше указанного') }}</div>
-                                        @error('balance_to')
-                                        <p class="text-danger mt-2">{{ $message }}</p>
-                                        @enderror
+                                    <div class="mb-3 col-12">
+                                        <label for="currency" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('С балансов выше') }}</label>
+                                        <select name="currency" id="currency" class="form-select form-control">
+                                            <option title="{{ __('Все') }}" {{ (request()->currency ?? 0) == 0 ? 'selected' : '' }} value="0">{{ __('Все') }}</option>
+                                            @forelse($currencies as $currency)
+                                                <option title="{{ $currency->title }}" {{ (request()->currency ?? 0) == $currency->currency_id ? 'selected' : '' }} value="{{ $currency->currency_id }}">{{ $currency->abbr }}</option>
+                                            @empty
+                                                <option value="1">{{ __('RUB') }}</option>
+                                            @endforelse
+                                        </select>
                                     </div>
                                 </div>
 
@@ -50,7 +44,8 @@
                         </div>
 
                         {{-- Список кошельков --}}
-                        <table class="table table-striped admin-table__adapt admin-table__instrument">
+                        <table class="table table-striped admin-table__adapt admin-table__instrument caption-top">
+                            <caption>{{ __('Найденные кошельки') }}</caption>
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -62,7 +57,7 @@
                             </thead>
                             <tbody>
                             @forelse($wallets as $wallet)
-                                <tr>
+                                <tr class="align-middle">
                                     <td data-label="#"><b>{{ ($wallets->currentpage() - 1) * $wallets->perpage() + $loop->index + 1 }}</b></td>
                                     <td data-label="{{ __('Название') }}"><a class="text-decoration-none text-primary" href="{{ route('wallet.show', $wallet->wallet_id) }}">{{ $wallet->title ?? '' }}</a></td>
                                     <td class="text-end" data-label="{{ __('Первая сумма') }}">{{ number_format($wallet->amount ?? 0, 2, '.', ' ') }} {{ $wallet->currency['abbr'] }}</td>
@@ -72,9 +67,9 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <a title="{{ __('Открыть') }}" href="{{ route('wallet.show', $wallet->wallet_id) }}" class="btn btn-primary"><i class="bi bi-text-center" style="font-size: 1rem"></i></a>
-                                            <a title="{{ __('Изменить') }}" href="{{ route('wallet.edit', $wallet->wallet_id) }}" class="btn btn-warning"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
-                                            <button type="submit" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кошелек?') }}')" class="btn btn-danger"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
+                                            <a title="{{ __('Открыть') }}" href="{{ route('wallet.show', $wallet->wallet_id) }}" class="btn btn-sm btn-primary me-1"><i class="bi bi-text-center" style="font-size: 1rem"></i></a>
+                                            <a title="{{ __('Изменить') }}" href="{{ route('wallet.edit', $wallet->wallet_id) }}" class="btn btn-sm btn-warning me-1"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
+                                            <button type="submit" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кошелек?') }}')" class="btn btn-sm btn-danger"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -94,22 +89,23 @@
                         </div>
 
                         {{-- Сальдо по кошелькам --}}
-                        <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument">
+                        <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument caption-top">
+                            <caption>{{ __('Сальдо по всем кошелькам') }}</caption>
                             <thead>
                                 <tr>
-                                    <th class="text-center">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
+                                    <th class="text-start">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
                                     <th class="text-center">{!! Icons::get(Icons::WALLET) !!} {{ __('Всего кошельков') }}</th>
                                     <th class="text-center">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Транзакций по кошелькам') }}</th>
-                                    <th class="text-center">{!! Icons::get(Icons::BALANCE) !!} {{ __('Общий баланс кошельков') }}</th>
+                                    <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Общий баланс кошельков') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($wallet_list as $currency => $wallet)
-                                    <tr>
-                                        <td data-label="{{ __('Валюта') }}" class="text-center">{{ $currency }}</td>
+                                    <tr class="align-middle">
+                                        <td data-label="{{ __('Валюта') }}" class="text-start">{{ $currency }}</td>
                                         <td data-label="{{ __('Кол-во кошельков') }}" class="text-center">{{ count($wallet ?: []) }}</td>
                                         <td data-label="{{ __('Транзакций') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['count_transactions'];}, $wallet)), 0, '.', ' ') }}</td>
-                                        <td data-label="{{ __('Общий баланс') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['balance'];}, $wallet)), 0, '.', ' ') }} {{ $currency }}</td>
+                                        <td data-label="{{ __('Общий баланс') }}" class="text-end">{{ number_format(array_sum(array_map(function($e) {return $e['balance'];}, $wallet)), 2, '.', ' ') }} {{ $currency }}</td>
                                     </tr>
                                 @empty
                                     <tr>

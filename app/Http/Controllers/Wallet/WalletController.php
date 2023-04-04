@@ -35,11 +35,15 @@ class WalletController extends Controller {
 
         $page_wallets = Wallet::where('owner_id', Auth::id())
             ->filter($filter)
+            ->where('status', config('statuses.on'))
+            ->orderBy('currency_id')
+            ->orderBy('title')
             ->paginate(config('limits.wallet'));
 
         return view('wallet.index', [
             'wallets'     => $page_wallets,
             'wallet_list' => $this->allWallets(),
+            'currencies'  => $this->walletCurrencies(),
         ]);
     }
 

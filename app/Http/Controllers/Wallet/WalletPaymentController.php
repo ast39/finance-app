@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Wallet;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Wallet\Payment\WalletPaymentStoreRequest;
+use App\Http\Requests\Wallet\Payment\WalletPaymentUpdateRequest;
 use App\Models\Wallet\Wallet;
 use App\Models\Wallet\WalletPayment;
 use Illuminate\Contracts\View\View;
@@ -26,9 +28,17 @@ class WalletPaymentController extends Controller {
         ]);
     }
 
-    public function store(): RedirectResponse
+    /**
+     * @param WalletPaymentStoreRequest $request
+     * @return RedirectResponse
+     */
+    public function store(WalletPaymentStoreRequest $request): RedirectResponse
     {
-        return redirect()->route('wallet.item.index');
+        $data = $request->validated();
+
+        WalletPayment::create($data);
+
+        return redirect()->route('wallet.index');
     }
 
     public function edit(int $id): View
@@ -43,16 +53,30 @@ class WalletPaymentController extends Controller {
         ]);
     }
 
-    public function update(int $id): RedirectResponse
+    /**
+     * @param WalletPaymentUpdateRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function update(WalletPaymentUpdateRequest $request, int $id): RedirectResponse
     {
-        return redirect()->route('wallet.item.index');
+        $data = $request->validated();
+
+        $payment = WalletPayment::find($id);
+        if (is_null($payment)) {
+            return back()->withErrors(['action' => 'Обновляемая транзакция не найдена']);
+        }
+
+        $payment->update($data);
+
+        return redirect()->route('wallet.index');
     }
 
     public function destroy(int $id): RedirectResponse
     {
-        $payment = WalletPayment::findOrFail($id);
+        $payment = WalletPayment::find($id);
         if (is_null($payment)) {
-            redirect()->back()->withErrors(['action' => 'Удаляемая транзакция не найдена']);
+            return redirect()->back()->withErrors(['action' => 'Удаляемая транзакция не найдена']);
         }
 
         $payment->delete();
