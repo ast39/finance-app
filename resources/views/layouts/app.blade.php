@@ -39,19 +39,19 @@
                     <ul class="navbar-nav me-auto">
                         @if (Route::has('deposit.calc.create'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('deposit.calc.create') }}">{{ __('Рассчитать вклад') }}</a>
+                                <a class="nav-link" href="{{ route('deposit.calc.create') }}">{!! Icons::get(Icons::CHECK_UP) !!} {{ __('Рассчитать вклад') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('credit.calc.create'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('credit.calc.create') }}">{{ __('Рассчитать кредит') }}</a>
+                                <a class="nav-link" href="{{ route('credit.calc.create') }}">{!! Icons::get(Icons::CHECK_DOWN) !!} {{ __('Рассчитать кредит') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('credit.check.create'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('credit.check.create') }}">{{ __('Проверить кредит') }}</a>
+                                <a class="nav-link" href="{{ route('credit.check.create') }}">{!! Icons::get(Icons::CHECK) !!} {{ __('Проверить кредит') }}</a>
                             </li>
                         @endif
                     </ul>
@@ -83,19 +83,19 @@
                                     @endif
 
                                     @if (Route::has('credit.list.index'))
-                                        <a class="dropdown-item" href="{{ route('credit.list.index') }}">{{ __('Кредиты') }}</a>
+                                        <a class="dropdown-item" href="{{ route('credit.list.index') }}">{!! Icons::get(Icons::CREDITS) !!}  {{ __('Кредиты') }}</a>
                                     @endif
 
                                     @if (Route::has('deposit.list.index'))
-                                        <a class="dropdown-item" href="{{ route('deposit.list.index') }}">{{ __('Вклады') }}</a>
+                                        <a class="dropdown-item" href="{{ route('deposit.list.index') }}">{!! Icons::get(Icons::DEPOSITS) !!} {{ __('Вклады') }}</a>
                                     @endif
 
-                                    @if (Route::has('spend.list.index'))
-                                        <a class="dropdown-item" href="{{ route('spend.list.index') }}">{{ __('Траты') }}</a>
+                                    @if (Route::has('spend.index'))
+                                        <a class="dropdown-item" href="{{ route('spend.index') }}">{!! Icons::get(Icons::SPEND) !!} {{ __('Траты') }}</a>
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {!! Icons::get(Icons::LOGOUT) !!} {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -113,5 +113,7 @@
             @yield('content')
         </main>
     </div>
+
+@stack('js')
 </body>
 </html>

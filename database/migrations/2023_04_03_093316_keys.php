@@ -11,20 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('credits', function(Blueprint $table) {
-            $table->foreign('owner_id', 'credit_owner_key')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
-
-        Schema::table('deposits', function(Blueprint $table) {
-            $table->foreign('owner_id', 'deposit_owner_key')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-        });
-
         Schema::table('wallets', function(Blueprint $table) {
             $table->foreign('owner_id', 'wallet_owner_key')
                 ->references('id')
@@ -32,8 +18,23 @@ return new class extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::table('spends', function(Blueprint $table) {
-            $table->foreign('owner_id', 'spend_owner_key')
+        Schema::table('wallets', function(Blueprint $table) {
+            $table->foreign('currency_id', 'wallet_currency_key')
+                ->references('currency_id')
+                ->on('wallet_currencies')
+                ->onDelete('cascade');
+        });
+
+        Schema::table('wallet_payments', function(Blueprint $table) {
+            $table->foreign('wallet_id', 'wallet_payment_key')
+                ->references('wallet_id')
+                ->on('wallets')
+                ->onDelete('cascade');
+        });
+
+
+        Schema::table('credits', function(Blueprint $table) {
+            $table->foreign('owner_id', 'credit_owner_key')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
@@ -46,6 +47,14 @@ return new class extends Migration
                 ->onDelete('cascade');
         });
 
+
+        Schema::table('deposits', function(Blueprint $table) {
+            $table->foreign('owner_id', 'deposit_owner_key')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+
         Schema::table('deposit_payments', function(Blueprint $table) {
             $table->foreign('deposit_id', 'deposit_payment_key')
                 ->references('deposit_id')
@@ -53,17 +62,18 @@ return new class extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::table('wallet_payments', function(Blueprint $table) {
-            $table->foreign('wallet_id', 'wallet_payment_key')
-                ->references('wallet_id')
-                ->on('wallets')
+
+        Schema::table('spends', function(Blueprint $table) {
+            $table->foreign('owner_id', 'spend_owner_key')
+                ->references('id')
+                ->on('users')
                 ->onDelete('cascade');
         });
 
-        Schema::table('wallets', function(Blueprint $table) {
-            $table->foreign('currency_id', 'wallet_currency_key')
-                ->references('currency_id')
-                ->on('wallet_currencies')
+        Schema::table('spends', function(Blueprint $table) {
+            $table->foreign('wallet_id', 'spend_wallet_key')
+                ->references('wallet_id')
+                ->on('wallets')
                 ->onDelete('cascade');
         });
 

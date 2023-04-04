@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Wallet\Payment;
+namespace App\Http\Requests\Spend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WalletPaymentUpdateRequest extends FormRequest {
+class SpendFilterRequest extends FormRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class WalletPaymentUpdateRequest extends FormRequest {
     {
         return [
 
-            'note'      => 'string|nullable',
-            'amount'    => 'numeric',
+            'category' => 'int|nullable',
+            'wallet'   => 'int|nullable',
         ];
     }
 }

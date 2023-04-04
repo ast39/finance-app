@@ -9,6 +9,14 @@ class Icons {
     const TYPE           = 'bi bi-list';
     const CATEGORY       = 'bi bi-list-ul';
     const CURRENCY       = 'bi bi-currency-exchange';
+    const TAG            = 'bi bi-tag';
+    const SPEND          = 'bi bi-cart-dash';
+    const LOGOUT         = 'bi bi-box-arrow-right';
+    const DEPOSITS       = 'bi bi-box-arrow-in-down';
+    const CREDITS        = 'bi bi-calculator';
+    const CHECK_UP       = 'bi bi-arrow-bar-up';
+    const CHECK_DOWN     = 'bi bi-arrow-bar-down';
+    const CHECK          = 'bi bi-check2-all';
 
     const AMOUNT         = 'bi bi-collection';
     const PERCENT        = 'bi bi-percent';
@@ -18,7 +26,6 @@ class Icons {
     const CALENDAR_MONTH = 'bi bi-calendar3';
     const CALENDAR_DAY   = 'bi bi-calendar2-date';
 
-    const CASH           = 'bi bi-currency-exchange';
     const BALANCE        = 'bi bi-cash-coin';
     const CHECK_LIST     = 'bi bi-card-checklist';
     const CHECKED        = 'bi bi-check2-all';

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('spend_id');
             $table->unsignedBigInteger('owner_id')
                 ->comment('Хозяин транзакции');
+            $table->unsignedBigInteger('wallet_id')
+                ->comment('Кошелек для списания');
             $table->unsignedBigInteger('category_id')
                 ->comment('Категория транзакции');
             $table->float('amount',11, 2)

@@ -42,7 +42,7 @@ class WalletController extends Controller {
 
         return view('wallet.index', [
             'wallets'     => $page_wallets,
-            'wallet_list' => $this->allWallets(),
+            'wallet_list' => $this->allWallets(true),
             'currencies'  => $this->walletCurrencies(),
         ]);
     }

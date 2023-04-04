@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Spend;
 
 use App\Http\Resources\UserResource;
+use App\Http\Resources\Wallet\WalletResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,13 +21,14 @@ class SpendResource extends JsonResource {
     {
         return [
 
-            'spend_id'    => $this->spend_id    ?? null,
+            'spend_id'    => $this->spend_id     ?? null,
             'owner'       => new UserResource($this->owner),
+            'wallet'      => new WalletResource($this->wallet),
             'category'    => new SpendCategoryResource($this->category),
             'amount'      => $this->amount       ?? null,
-            'note'        => $this->note      ?? null,
-            'status'       => $this->status       ?? null,
-            'created'      => $this->created_at   ?? null,
+            'note'        => $this->note         ?? null,
+            'status'      => $this->status       ?? null,
+            'created'     => $this->created_at   ?? null,
         ];
     }
 }

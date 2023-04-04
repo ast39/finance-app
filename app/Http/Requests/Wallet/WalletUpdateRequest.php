@@ -26,7 +26,7 @@ class WalletUpdateRequest extends FormRequest {
         return [
 
             'title'       => 'string|unique:wallets,title,' . $this->id . ',wallet_id',
-            'note'        => 'string',
+            'note'        => 'string|nullable',
             'amount'      => 'numeric',
             'status'      => 'integer',
         ];

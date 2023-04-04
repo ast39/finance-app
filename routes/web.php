@@ -147,15 +147,15 @@ Route::group(['prefix' => 'deposit', 'middleware' => ['auth']], function() {
 Route::group(['prefix' => 'spend', 'middleware' => ['auth']], function() {
 
     # Расходы
-    Route::group(['prefix' => 'list'], function () {
+    Route::group(['prefix' => 'item'], function () {
 
-        Route::get('', [SpendController::class, 'index'])->name('spend.list.index');
-        Route::get('create', [SpendController::class, 'create'])->name('spend.list.create');
-        Route::post('', [SpendController::class, 'store'])->name('spend.list.store');
-        Route::get('{id}', [SpendController::class, 'show'])->name('spend.list.show');
-        Route::get('{id}/edit', [SpendController::class, 'edit'])->name('spend.list.edit');
-        Route::put('{id}', [SpendController::class, 'update'])->name('spend.list.update');
-        Route::delete('{id}', [SpendController::class, 'destroy'])->name('spend.list.destroy');
+        Route::get('', [SpendController::class, 'index'])->name('spend.index');
+        Route::get('create', [SpendController::class, 'create'])->name('spend.create');
+        Route::post('', [SpendController::class, 'store'])->name('spend.store');
+        Route::get('{id}', [SpendController::class, 'show'])->name('spend.show');
+        Route::get('{id}/edit', [SpendController::class, 'edit'])->name('spend.edit');
+        Route::put('{id}', [SpendController::class, 'update'])->name('spend.update');
+        Route::delete('{id}', [SpendController::class, 'destroy'])->name('spend.destroy');
     });
 
     # Категории
