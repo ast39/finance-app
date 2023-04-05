@@ -14,54 +14,20 @@ class SpendCategorySeeder extends Seeder {
      */
     public function run()
     {
-        SpendCategory::create([
-            'title'     => 'Прочее',
-            'parent_id' => null,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Еда',
-            'parent_id' => null,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Здоровье',
-            'parent_id' => null,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Досуг',
-            'parent_id' => null,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Дети',
-            'parent_id' => null,
-        ]);
-
-        $car_id = SpendCategory::create([
-            'title'     => 'Автомобиль',
-            'parent_id' => null,
-        ])->category_id;
-
-        SpendCategory::create([
-            'title'     => 'Топливо',
-            'parent_id' => $car_id,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Парковка',
-            'parent_id' => $car_id,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Страховки',
-            'parent_id' => $car_id,
-        ]);
-
-        SpendCategory::create([
-            'title'     => 'Сервис',
-            'parent_id' => $car_id,
-        ]);
+        SpendCategory::create(['title' => 'Прочее']);
+        SpendCategory::create(['title' => 'Еда']);
+        SpendCategory::create(['title' => 'Здоровье']);
+        SpendCategory::create(['title' => 'Досуг']);
+        SpendCategory::create(['title' => 'Дети',]);
+        SpendCategory::create(['title' => 'Топливо']);
+        SpendCategory::create(['title' => 'Парковка']);
+        SpendCategory::create(['title' => 'Страховки']);
+        SpendCategory::create(['title' => 'Сервис']);
+        SpendCategory::create(['title' => 'Подарки']);
+        SpendCategory::create(['title' => 'Одежда']);
+        SpendCategory::create(['title' => 'Техника']);
+        SpendCategory::create(['title' => 'Мебель']);
+        SpendCategory::create(['title' => 'Кредиты']);
+        SpendCategory::create(['title' => 'Квартира']);
     }
 }

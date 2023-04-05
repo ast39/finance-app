@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id('category_id');
             $table->string('title')
                 ->comment('Название категории');
-            $table->unsignedInteger('parent_id')
-                ->nullable()
-                ->default(null)
-                ->comment('Родительская категория');
 
             $table->timestamps();
 

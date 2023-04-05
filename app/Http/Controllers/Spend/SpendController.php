@@ -40,6 +40,7 @@ class SpendController extends Controller {
 
         return view('spend.index', [
             'spends'     => $page_spends,
+            'spend_list' => $this->allSpends(true),
             'categories' => $this->spendCategories(),
             'wallets'    => $this->allWallets(),
         ]);
@@ -59,7 +60,9 @@ class SpendController extends Controller {
 
         $data['owner_id'] = Auth::id();
 
-        return redirect()->route('wallet.show', Spend::create($data)->spend_id);
+        Spend::create($data);
+
+        return redirect()->route('spend.index');
     }
 
     public function show(int $id): View

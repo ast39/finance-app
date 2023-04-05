@@ -43,7 +43,7 @@ class WalletPayment extends Model {
     ];
 
     protected $fillable = [
-        'payment_id', 'wallet_id', 'amount', 'note', 'status', 'created_at', 'updated_at',
+        'payment_id', 'wallet_id', 'spend_id', 'amount', 'note', 'status', 'created_at', 'updated_at',
     ];
 
     protected $hidden = [];

@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id('payment_id');
             $table->unsignedBigInteger('wallet_id')
                 ->comment('Транзакция к кошельку');
+            $table->unsignedBigInteger('spend_id')
+                ->nullable()
+                ->default(null)
+                ->comment('Соответствие транзакции расходу');
             $table->float('amount', 11, 2)
                 ->comment('Сумма транзакции');
             $table->tinyText('note')

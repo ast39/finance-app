@@ -27,7 +27,7 @@ class WalletSeeder extends Seeder {
             'owner_id'    => 1,
             'title'       => 'Кошелек №2',
             'note'        => 'Для трат в долларах',
-            'amount'      => 500,
+            'amount'      => 550,
         ]);
 
         Wallet::create([

@@ -24,7 +24,7 @@
 
                                 <div class="row">
                                     <div class="mb-3 col-6">
-                                        <label for="category" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('Категория') }}</label>
+                                        <label for="category" class="form-label">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</label>
                                         <select name="category" id="category" class="form-select form-control">
                                             <option title="{{ __('Все') }}" {{ (request()->category ?? 0) == 0 ? 'selected' : '' }} value="0">{{ __('Все') }}</option>
                                             @forelse($categories as $category)
@@ -35,7 +35,7 @@
                                     </div>
 
                                     <div class="mb-3 col-6">
-                                        <label for="wallet" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('Кошелек') }}</label>
+                                        <label for="wallet" class="form-label">{!! Icons::get(Icons::WALLET) !!} {{ __('Кошелек') }}</label>
                                         <select name="wallet" id="wallet" class="form-select form-control">
                                             <option title="{{ __('Все') }}" {{ (request()->currency ?? 0) == 0 ? 'selected' : '' }} value="0">{{ __('Все') }}</option>
                                             @forelse($wallets as $wallet)
@@ -106,20 +106,28 @@
                             <caption>{{ __('Сальдо по всем расходам') }}</caption>
                             <thead>
                                 <tr>
-                                    <th class="text-start">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
                                     <th class="text-start">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</th>
+                                    <th class="text-center">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
                                     <th class="text-center">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Транзакций по категории') }}</th>
                                     <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Потрачено в категории') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($wallet_list as $currency => $wallet)
-                                    <tr class="align-middle">
-                                        <td data-label="{{ __('Валюта') }}" class="text-start">{{ $currency }}</td>
-                                        <td data-label="{{ __('Кол-во кошельков') }}" class="text-center">{{ count($wallet ?: []) }}</td>
-                                        <td data-label="{{ __('Транзакций') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['count_transactions'];}, $wallet)), 0, '.', ' ') }}</td>
-                                        <td data-label="{{ __('Общий баланс') }}" class="text-end">{{ number_format(array_sum(array_map(function($e) {return $e['balance'];}, $wallet)), 2, '.', ' ') }} {{ $currency }}</td>
-                                    </tr>
+                                @forelse($spend_list as $category => $wallet)
+                                    @forelse($wallet as $currency => $spends)
+                                        <tr class="align-middle">
+                                            <td data-label="{{ __('Категория') }}">{{ $category }}</td>
+                                            <td data-label="{{ __('Валюта') }}" class="text-center">{{ $currency }}</td>
+                                            <td data-label="{{ __('Транзакций по категории') }}" class="text-center">{{ array_sum(array_map(function($e) {return count($e);}, $wallet)) }}</td>
+                                            <td data-label="{{ __('Потрачено в категории') }}" class="text-end">{{ number_format(array_sum(array_map(function($e) {return $e['amount'];}, $spends)), 2, '.', ' ') }} {{ $currency }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</div>
+                                            </td>
+                                        </tr>
+                                    @endforelse
                                 @empty
                                     <tr>
                                         <td colspan="4">
