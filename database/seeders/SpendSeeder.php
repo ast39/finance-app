@@ -17,7 +17,7 @@ class SpendSeeder extends Seeder {
         Spend::create([
             'owner_id'    => 1,
             'wallet_id'   => 1,
-            'category_id' => 1,
+            'category_id' => 2,
             'amount'      => 1000,
             'note'        => 'Супермаркет',
         ]);

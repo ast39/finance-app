@@ -152,7 +152,6 @@ Route::group(['prefix' => 'spend', 'middleware' => ['auth']], function() {
         Route::get('', [SpendController::class, 'index'])->name('spend.index');
         Route::get('create', [SpendController::class, 'create'])->name('spend.create');
         Route::post('', [SpendController::class, 'store'])->name('spend.store');
-        Route::get('{id}', [SpendController::class, 'show'])->name('spend.show');
         Route::get('{id}/edit', [SpendController::class, 'edit'])->name('spend.edit');
         Route::put('{id}', [SpendController::class, 'update'])->name('spend.update');
         Route::delete('{id}', [SpendController::class, 'destroy'])->name('spend.destroy');

@@ -46,6 +46,9 @@ class SpendController extends Controller {
         ]);
     }
 
+    /**
+     * @return View
+     */
     public function create(): View
     {
         return view('spend.create', [
@@ -54,6 +57,10 @@ class SpendController extends Controller {
         ]);
     }
 
+    /**
+     * @param SpendStoreRequest $request
+     * @return RedirectResponse
+     */
     public function store(SpendStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
@@ -65,23 +72,56 @@ class SpendController extends Controller {
         return redirect()->route('spend.index');
     }
 
-    public function show(int $id): View
-    {
-
-    }
-
+    /**
+     * @param int $id
+     * @return View
+     */
     public function edit(int $id): View
     {
+        $spend = Spend::find($id);
+        if (is_null($spend)) {
+            abort(404);
+        }
 
+        return view('spend.edit', [
+            'spend'      => $spend,
+            'wallets'    => $this->allWallets(),
+            'categories' => $this->spendCategories(),
+        ]);
     }
 
+    /**
+     * @param SpendUpdateRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function update(SpendUpdateRequest $request, int $id): RedirectResponse
     {
+        $data = $request->validated();
 
+        $spend = Spend::find($id);
+        if (is_null($spend)) {
+            return back()->withErrors(['action' => 'Обновляемый расход не найден']);
+        }
+
+        $spend->update($data);
+
+        return redirect()->route('spend.index');
     }
 
+    /**
+     * @param int $id
+     * @return RedirectResponse
+     */
     public function destroy(int $id): RedirectResponse
     {
+        $spend = Spend::find($id);
+        if (is_null($spend)) {
+            return back()->withErrors(['action' => 'Удаляемый расход не найден']);
+        }
 
+        $spend->delete();
+
+        return redirect()->route('spend.index');
     }
 }
