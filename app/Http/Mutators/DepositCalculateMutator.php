@@ -4,7 +4,6 @@ namespace App\Http\Mutators;
 
 use App\Libs\Finance\Deposit\ResponseData;
 use App\Libs\Finance\Deposit\DepositManager;
-use App\Libs\Finance\Exceptions\RequestDataException;
 use App\Models\Deposit\DepositCalculate;
 
 class DepositCalculateMutator {

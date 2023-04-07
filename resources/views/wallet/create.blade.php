@@ -65,9 +65,11 @@
                                 @enderror
                             </div>
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                <button type="submit" class="btn btn-primary">{{ __('Добавить') }}</button>
+                            <div class="mb-3">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{{ __('Добавить') }}</button>
+                                </div>
                             </div>
                         </form>
 

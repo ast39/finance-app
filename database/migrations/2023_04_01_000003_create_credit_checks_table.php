@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('credit_checks', function (Blueprint $table) {
             $table->id('calc_id');
+            $table->unsignedBigInteger('owner_id')
+                ->nullable()
+                ->default(null)
+                ->comment('Хозяин расчета');
             $table->string('title', 64)
                 ->comment('Название кредитного предложения');
+            $table->string('currency', 4)
+                ->comment('Валюта кредита')
+                ->default('RUB');
             $table->unsignedFloat('amount',11, 2)
                 ->comment('Сумма кредита');
             $table->unsignedFloat('percent', 9, 4)

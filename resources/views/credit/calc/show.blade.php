@@ -3,6 +3,8 @@
     use App\Libs\Icons;
 @endphp
 
+@section('title', __('Расчет кредита ' . $info->credit->title))
+
 @extends('layouts.app')
 
 @section('content')

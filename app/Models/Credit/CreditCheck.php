@@ -28,7 +28,7 @@ class CreditCheck extends Model {
     ];
 
     protected $fillable = [
-        'calc_id', 'title', 'amount', 'percent', 'period', 'payment', 'created_at', 'updated_at',
+        'calc_id', 'owner_id', 'title', 'currency', 'amount', 'percent', 'period', 'payment', 'created_at', 'updated_at',
     ];
 
     protected $hidden = [];

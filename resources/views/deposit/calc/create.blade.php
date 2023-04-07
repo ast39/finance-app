@@ -43,33 +43,41 @@
                                 <div id="start_dateHelp" class="form-text mb-3">{{ __('Когда открыли вклад') }}</div>
                             </div>
 
-                            <label for="amount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control subjects" id="amount" name="amount" placeholder="250000" value="{{ old('amount') }}" aria-describedby="amountHelp" />
-                                <span class="input-group-text currency">{{ __('RUB') }}</span>
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control subjects" id="amount" name="amount" placeholder="250000" value="{{ old('amount') }}" aria-describedby="amountHelp" />
+                                    <span class="input-group-text currency">{{ __('RUB') }}</span>
+                                </div>
+                                <div id="amountHelp" class="form-text mb-3">{{ __('Сумма кредита') }}</div>
                             </div>
-                            <div id="amountHelp" class="form-text mb-3">{{ __('Сумма кредита') }}</div>
 
-                            <label for="percent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control subjects" id="percent" name="percent" placeholder="5.9" value="{{ old('percent') }}" aria-describedby="percentHelp" />
-                                <span class="input-group-text">%</span>
+                            <div class="mb-3">
+                                <label for="percent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control subjects" id="percent" name="percent" placeholder="5.9" value="{{ old('percent') }}" aria-describedby="percentHelp" />
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <div id="percentHelp" class="form-text mb-3">{{ __('Процент по кредиту') }}</div>
                             </div>
-                            <div id="percentHelp" class="form-text mb-3">{{ __('Процент по кредиту') }}</div>
 
-                            <label for="period" class="form-label">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control subjects" id="period" name="period" placeholder="24" value="{{ old('period') }}" aria-describedby="periodHelp" />
-                                <span class="input-group-text">месяцев</span>
+                            <div class="mb-3">
+                                <label for="period" class="form-label">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control subjects" id="period" name="period" placeholder="24" value="{{ old('period') }}" aria-describedby="periodHelp" />
+                                    <span class="input-group-text">месяцев</span>
+                                </div>
+                                <div id="periodHelp" class="form-text mb-3">{{ __('Срок кредита в месяцах') }}</div>
                             </div>
-                            <div id="periodHelp" class="form-text mb-3">{{ __('Срок кредита в месяцах') }}</div>
 
-                            <label for="refill" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Пополнение') }}</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="refill" name="refill" placeholder="10000" value="{{ old('refill') }}" aria-describedby="refillHelp">
-                                <span class="input-group-text currency">{{ __('RUB') }}</span>
+                            <div class="mb-3">
+                                <label for="refill" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Пополнение') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="refill" name="refill" placeholder="10000" value="{{ old('refill') }}" aria-describedby="refillHelp">
+                                    <span class="input-group-text currency">{{ __('RUB') }}</span>
+                                </div>
+                                <div id="refillHelp" class="form-text mb-3">{{ __('Сумма ежемесячного пополнения вклада') }}</div>
                             </div>
-                            <div id="refillHelp" class="form-text mb-3">{{ __('Сумма ежемесячного пополнения вклада') }}</div>
 
                             <div class="mb-3">
                                 <label for="capitalization" class="form-label">{!! Icons::get(Icons::CAPITALIZATION) !!} {{ __('Капитализация') }}</label>
@@ -89,8 +97,10 @@
                                 <div id="withdrawalHelp" class="form-text">{{ __('Снимать ежемесячно проценты или капитализировать во вклад') }}</div>
                             </div>
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <button type="submit" class="btn btn-primary">{{ __('Рассчитать') }}</button>
+                            <div class="mb-3">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <button type="submit" class="btn btn-primary">{{ __('Рассчитать') }}</button>
+                                </div>
                             </div>
 
                         </form>
