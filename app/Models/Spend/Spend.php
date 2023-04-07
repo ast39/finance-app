@@ -51,6 +51,12 @@ class Spend extends Model{
     }
 
 
+    public function setAmountAttribute($value)
+    {
+        $this->attributes['amount'] = 0 - abs($value);
+    }
+
+
     protected $with = [
         'category',
         'owner',

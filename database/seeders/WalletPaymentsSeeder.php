@@ -23,7 +23,7 @@ class WalletPaymentsSeeder extends Seeder {
 
         WalletPayment::create([
             'wallet_id' => 1,
-            'amount'    => 1500,
+            'amount'    => -1500,
             'note'      => 'Снятие 1',
         ]);
 

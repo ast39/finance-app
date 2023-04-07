@@ -15,9 +15,9 @@
 
                     <div class="card-body">
 
-                        <form method="post" action="{{ route('wallet.payment.store') }}">
+                        <form method="post" action="{{ route('wallet.payment.update', $payment->payment_id) }}">
                             @csrf
-                            @method('POST')
+                            @method('PUT')
 
                             <div class="mb-3">
                                 <label for="walletTitle" class="form-label">{{ __('Кошелек') }}</label>
@@ -55,7 +55,7 @@
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                 <a href="{{ url()->previous() }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                <button type="submit" class="btn btn-primary">{{ __('Добавить') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
                             </div>
                         </form>
 

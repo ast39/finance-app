@@ -69,7 +69,7 @@ class WalletPaymentController extends Controller {
 
         $payment->update($data);
 
-        return redirect()->route('wallet.index');
+        return redirect()->route('wallet.show', $payment->wallet_id);
     }
 
     public function destroy(int $id): RedirectResponse
