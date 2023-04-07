@@ -36,7 +36,7 @@
                                             <tbody>
                                             <tr>
                                                 <th scope="row">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</th>
-                                                <td><span class="{{ $info->credit->subject == CreditSubject::AMOUNT ? 'text-primary' : '' }}">{{ number_format($info->credit->amount ?? 0, 2, '.', ' ') }} {{ __('р.') }}</span></td>
+                                                <td><span class="{{ $info->credit->subject == CreditSubject::AMOUNT ? 'text-primary' : '' }}">{{ number_format($info->credit->amount ?? 0, 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
@@ -48,20 +48,20 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</th>
-                                                <td><span class="{{ $info->credit->subject == CreditSubject::PAYMENT ? 'text-primary' : '' }}">{{ number_format($info->credit->payment ?? 0, 2, '.', ' ') }} {{ __('р.') }}</span></td>
+                                                <td><span class="{{ $info->credit->subject == CreditSubject::PAYMENT ? 'text-primary' : '' }}">{{ number_format($info->credit->payment ?? 0, 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
                                             </tr>
                                             <tr><td colspan="2"></td></tr>
                                             <tr>
                                                 <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Тело кредита') }}</th>
-                                                <td><span class="text-success">{{ number_format($info->payments ?? '', 2, '.', ' ') }} {{ __('р.') }}</span></td>
+                                                <td><span class="text-success">{{ number_format($info->payments ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Проценты по кредиту') }}</th>
-                                                <td><span class="text-danger">{{ number_format($info->overpay ?? '', 2, '.', ' ') }} {{ __('р.') }}</span></td>
+                                                <td><span class="text-danger">{{ number_format($info->overpay ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Итого выплат') }}</th>
-                                                <td><span class="text-primary">{{ number_format($info->total_amount ?? '', 2, '.', ' ') }} {{ __('р.') }}</span></td>
+                                                <td><span class="text-primary">{{ number_format($info->total_amount ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -94,11 +94,11 @@
                                             @forelse($info->details as $row)
                                                 <tr>
                                                     <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
-                                                    <td data-label="Баланс" class="text-end">{{ number_format($row['inset_balance'], 2, '.', ' ') }} {{ __('р.') }}</td>
-                                                    <td data-label="Платеж" class="text-end">{{ number_format($row['credit_payment'], 2, '.', ' ') }} {{ __('р.') }}</td>
-                                                    <td data-label="Проценты" class="text-end">{{ number_format($row['payment_percent'], 2, '.', ' ') }} {{ __('р.') }}</td>
-                                                    <td data-label="Тело" class="text-end">{{ number_format($row['payment_body'], 2, '.', ' ') }} {{ __('р.') }}</td>
-                                                    <td data-label="Остаток" class="text-end">{{ number_format($row['outset_balance'], 2, '.', ' ') }} {{ __('р.') }}</td>
+                                                    <td data-label="Баланс" class="text-end">{{ number_format($row['inset_balance'], 2, '.', ' ') }} {{ $info->credit->currency }}</td>
+                                                    <td data-label="Платеж" class="text-end">{{ number_format($row['credit_payment'], 2, '.', ' ') }} {{ $info->credit->currency }}</td>
+                                                    <td data-label="Проценты" class="text-end">{{ number_format($row['payment_percent'], 2, '.', ' ') }} {{ $info->credit->currency }}</td>
+                                                    <td data-label="Тело" class="text-end">{{ number_format($row['payment_body'], 2, '.', ' ') }} {{ $info->credit->currency }}</td>
+                                                    <td data-label="Остаток" class="text-end">{{ number_format($row['outset_balance'], 2, '.', ' ') }} {{ $info->credit->currency }}</td>
                                                 </tr>
                                             @empty
                                                 <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Рассчет не удался') }}</div>
