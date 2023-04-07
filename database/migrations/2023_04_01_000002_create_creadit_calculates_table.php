@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('credit_calculates', function (Blueprint $table) {
             $table->id('credit_id');
+            $table->unsignedBigInteger('owner_id')
+                ->nullable()
+                ->default(null)
+                ->comment('Хозяин расчета');
             $table->string('title', 64)
                 ->comment('Название кредита');
             $table->unsignedInteger('payment_type')

@@ -94,19 +94,19 @@ class RequestData {
     private function validate()
     {
         if ($this->amount < 0) {
-            throw new RequestDataException('Amount can\'t be lower zero', 901);
+            throw new RequestDataException('Условия кредита невыполнимы. Сумма кредита 0 или меньше.', 901);
         }
 
         if ($this->percent < 0) {
-            throw new RequestDataException('Percent can\'t be lower zero', 902);
+            throw new RequestDataException('Условия кредита невыполнимы. Процент по кредиту 0 или ниже.', 902);
         }
 
         if ($this->period < 0) {
-            throw new RequestDataException('Period can\'t be lower zero', 903);
+            throw new RequestDataException('Условия кредита невыполнимы. Срок кредита 0 или меньше.', 903);
         }
 
         if ($this->payment < 0) {
-            throw new RequestDataException('Payment can\'t be lower zero', 904);
+            throw new RequestDataException('Условия кредита невыполнимы. Платеж по кредиту 0 или меньше.', 904);
         }
     }
 

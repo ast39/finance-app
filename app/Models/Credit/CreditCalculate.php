@@ -28,7 +28,7 @@ class CreditCalculate extends Model {
     ];
 
     protected $fillable = [
-        'credit_id', 'title', 'payment_type', 'currency', 'subject', 'amount', 'percent', 'period', 'payment',
+        'credit_id', 'owner_id', 'title', 'payment_type', 'currency', 'subject', 'amount', 'percent', 'period', 'payment',
         'created_at', 'updated_at',
     ];
 

@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('deposit_calculates', function (Blueprint $table) {
             $table->id('deposit_id');
+            $table->unsignedBigInteger('owner_id')
+                ->nullable()
+                ->default(null)
+                ->comment('Хозяин расчета');
             $table->string('title', 64)
                 ->comment('Название вклада');
+            $table->string('currency', 4)
+                ->comment('Валюта кредита')
+                ->default('RUB');
             $table->unsignedInteger('start_date');
             $table->unsignedFloat('amount', 11, 2)
                 ->nullable()

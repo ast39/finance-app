@@ -40,6 +40,13 @@ return new class extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::table('credit_calculates', function(Blueprint $table) {
+            $table->foreign('owner_id', 'credit_calc_owner_key')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+
         Schema::table('credit_payments', function(Blueprint $table) {
             $table->foreign('credit_id', 'credit_payment_key')
                 ->references('credit_id')
@@ -50,6 +57,13 @@ return new class extends Migration
 
         Schema::table('deposits', function(Blueprint $table) {
             $table->foreign('owner_id', 'deposit_owner_key')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+
+        Schema::table('deposit_calculates', function(Blueprint $table) {
+            $table->foreign('owner_id', 'deposit_calc_owner_key')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

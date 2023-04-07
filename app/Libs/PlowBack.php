@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Libs;
+namespace App\Libs;
 
 /**
  * Plow back format object

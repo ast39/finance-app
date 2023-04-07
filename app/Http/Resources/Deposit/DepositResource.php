@@ -20,20 +20,20 @@ class DepositResource extends JsonResource {
     {
         return [
 
-            'deposit_id'   => $this->deposit_id    ?? null,
-            'owner'        => new UserResource($this->owner),
-            'title'        => $this->title         ?? null,
-            'depositor'    => $this->depositor     ?? null,
-            'amount'       => $this->amount        ?? null,
-            'percent'      => $this->percent       ?? null,
-            'period'       => $this->period        ?? null,
-            'refill'       => $this->refill        ?? null,
-            'plow_back'    => $this->plow_back     ?? null,
-            'withdrawal'   => $this->withdrawal    ?? null,
-            'start_date'   => $this->start_date    ?? null,
-            'status'       => $this->status        ?? null,
-            'created'      => $this->created_at    ?? null,
-            'payments'     => DepositPaymentResource::collection($this->payments),
+            'deposit_id'     => $this->deposit_id    ?? null,
+            'owner'          => new UserResource($this->owner),
+            'title'          => $this->title         ?? null,
+            'depositor'      => $this->depositor     ?? null,
+            'amount'         => $this->amount        ?? null,
+            'percent'        => $this->percent       ?? null,
+            'period'         => $this->period        ?? null,
+            'refill'         => $this->refill        ?? null,
+            'capitalization' => $this->capitalization  ?? null,
+            'withdrawal'     => $this->withdrawal    ?? null,
+            'start_date'     => $this->start_date    ?? null,
+            'status'         => $this->status        ?? null,
+            'created'        => $this->created_at    ?? null,
+            'payments'       => DepositPaymentResource::collection($this->payments),
         ];
     }
 }

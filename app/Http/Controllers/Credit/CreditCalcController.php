@@ -6,14 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\Dictionarable;
 use App\Http\Mutators\CreditCalculateMutator;
 use App\Http\Requests\Credit\CreditCalcRequest;
-use App\Libs\CreditSubject;
-use App\Libs\Finance\Credit\CreditManager;
 use App\Libs\Finance\Credit\ResponseData;
 use App\Libs\Finance\Exceptions\RequestDataException;
-use App\Models\Credit\Credit;
 use App\Models\Credit\CreditCalculate;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class CreditCalcController extends Controller {
 
@@ -38,6 +36,7 @@ class CreditCalcController extends Controller {
     {
         $data = $request->validated();
 
+        $data['owner_id'] = Auth::id() ?? null;
         $id = CreditCalculate::create($data)->credit_id;
 
         return redirect()->route('credit.calc.show', $id);

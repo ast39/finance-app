@@ -17,6 +17,8 @@ class Icons {
     const CHECK_UP       = 'bi bi-arrow-bar-up';
     const CHECK_DOWN     = 'bi bi-arrow-bar-down';
     const CHECK          = 'bi bi-check2-all';
+    const PROFIT_UP      = 'bi bi-bar-chart';
+    const BALANCE_UP     = 'bi bi-box-arrow-in-down';
 
     const AMOUNT         = 'bi bi-collection';
     const PERCENT        = 'bi bi-percent';
