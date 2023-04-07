@@ -18,8 +18,11 @@ return new class extends Migration
             $table->unsignedInteger('payment_type')
                 ->comment('Тип платежа - аннуитетный или дифференцированный')
                 ->default(1);
+            $table->string('currency', 4)
+                ->comment('Валюта кредита')
+                ->default('RUB');
             $table->string('subject', 8)
-                ->comment('Предмет кредитования')
+                ->comment('Предмет расчета')
                 ->nullable();
             $table->unsignedFloat('amount',11, 2)
                 ->nullable()

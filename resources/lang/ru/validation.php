@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'numeric'  => ':attribute должен быть числом',
+    'integer'  => ':attribute - ожидается целое число',
+    'numeric'  => ':attribute - ожидается число',
     'required' => 'Заполните поле: :attribute',
     'unique'   => ':attribute - дублирование данных',
 
@@ -38,6 +39,8 @@ return [
         'size'                  => 'Размер',
         'wallet_id'             => 'Кошелек',
         'amount'                => 'Баланс',
+        'payment'               => 'Платеж',
+        'subject'               => 'Предмет расчета',
     ],
 
 ];

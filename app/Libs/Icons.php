@@ -22,6 +22,8 @@ class Icons {
     const PERCENT        = 'bi bi-percent';
     const PERIOD         = 'bi bi-clock-history';
     const PAYMENT        = 'bi bi-cash-stack';
+    const INSET          = 'bi bi-chevron-double-down';
+    const OUTSET         = 'bi bi-chevron-double-up';
 
     const CALENDAR_MONTH = 'bi bi-calendar3';
     const CALENDAR_DAY   = 'bi bi-calendar2-date';
