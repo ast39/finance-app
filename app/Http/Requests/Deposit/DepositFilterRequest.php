@@ -25,7 +25,7 @@ class DepositFilterRequest extends FormRequest {
     {
         return [
 
-            'currency' => 'int|nullable',
+            'currency' => 'nullable|string',
         ];
     }
 }

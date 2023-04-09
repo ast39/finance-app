@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Deposit;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\Dictionarable;
 use App\Http\Filters\DepositFilter;
+use App\Http\Mutators\DepositCalculateMutator;
 use App\Http\Requests\Deposit\DepositFilterRequest;
 use App\Http\Requests\Deposit\DepositStoreRequest;
 use App\Http\Requests\Deposit\DepositUpdateRequest;
@@ -35,7 +36,7 @@ class DepositController extends Controller {
         $page_deposits = Deposit::where('owner_id', Auth::id())
             ->filter($filter)
             ->where('status', config('statuses.on'))
-            ->orderBy('currency_id')
+            ->orderBy('currency')
             ->orderBy('title')
             ->paginate(config('limits.deposits'));
 
@@ -75,9 +76,13 @@ class DepositController extends Controller {
      */
     public function show(int $id): View
     {
+        $deposit = Deposit::where('owner_id', Auth::id())
+            ->findOrFail($id);
+
+        $deposit = (new DepositCalculateMutator())($deposit);
+
         return view('deposit.show', [
-            'deposit'  => Deposit::where('owner_id', Auth::id())
-                ->findOrFail($id),
+            'deposit'  => $deposit,
         ]);
     }
 

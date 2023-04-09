@@ -82,12 +82,12 @@
                                         <a class="dropdown-item" href="{{ route('wallet.index') }}">{!! Icons::get(Icons::WALLET) !!} {{ __('Кошельки') }}</a>
                                     @endif
 
-                                    @if (Route::has('credit.list.index'))
-                                        <a class="dropdown-item" href="{{ route('credit.list.index') }}">{!! Icons::get(Icons::CREDITS) !!}  {{ __('Кредиты') }}</a>
+                                    @if (Route::has('credit.index'))
+                                        <a class="dropdown-item" href="{{ route('credit.index') }}">{!! Icons::get(Icons::CREDITS) !!}  {{ __('Кредиты') }}</a>
                                     @endif
 
-                                    @if (Route::has('deposit.list.index'))
-                                        <a class="dropdown-item" href="{{ route('deposit.list.index') }}">{!! Icons::get(Icons::DEPOSITS) !!} {{ __('Вклады') }}</a>
+                                    @if (Route::has('deposit.index'))
+                                        <a class="dropdown-item" href="{{ route('deposit.index') }}">{!! Icons::get(Icons::DEPOSITS) !!} {{ __('Вклады') }}</a>
                                     @endif
 
                                     @if (Route::has('spend.index'))

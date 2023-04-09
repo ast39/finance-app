@@ -37,10 +37,9 @@ class Core {
             PlowBack::DAILY   => $this->monthlyProfitByDay($year, $month, $balance),
             PlowBack::WEEKLY  => $this->monthlyProfitByWeek($month, $balance),
             PlowBack::MONTHLY => $balance * $this->deposit->percent / 100 / 12,
+            PlowBack::YEARLY  => $balance * $this->deposit->percent / 100,
 
-            default => $month % 12 == 0
-                    ? $balance * $this->deposit->percent / 100
-                    : 0,
+            default => $balance * ($this->deposit->percent / 100 / 12 * $this->deposit->period),
         };
     }
 

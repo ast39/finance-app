@@ -67,15 +67,15 @@ Route::group(['prefix' => 'wallet', 'middleware' => ['auth']], function() {
 Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
 
     # Кредиты
-    Route::group(['prefix' => 'list'], function () {
+    Route::group(['prefix' => 'item'], function () {
 
-        Route::get('', [CreditController::class, 'index'])->name('credit.list.index');
-        Route::get('create', [CreditController::class, 'create'])->name('credit.list.create');
-        Route::post('', [CreditController::class, 'store'])->name('credit.list.store');
-        Route::get('{id}', [CreditController::class, 'show'])->name('credit.list.show');
-        Route::get('{id}/edit', [CreditController::class, 'edit'])->name('credit.list.edit');
-        Route::put('{id}', [CreditController::class, 'update'])->name('credit.list.update');
-        Route::delete('{id}', [CreditController::class, 'destroy'])->name('credit.list.destroy');
+        Route::get('', [CreditController::class, 'index'])->name('credit.index');
+        Route::get('create', [CreditController::class, 'create'])->name('credit.create');
+        Route::post('', [CreditController::class, 'store'])->name('credit.store');
+        Route::get('{id}', [CreditController::class, 'show'])->name('credit.show');
+        Route::get('{id}/edit', [CreditController::class, 'edit'])->name('credit.edit');
+        Route::put('{id}', [CreditController::class, 'update'])->name('credit.update');
+        Route::delete('{id}', [CreditController::class, 'destroy'])->name('credit.destroy');
     });
 
     # Калькуляция

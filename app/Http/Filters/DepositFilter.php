@@ -26,7 +26,7 @@ class DepositFilter extends AbstractFilter {
      */
     public function currency(Builder $builder, $value): void
     {
-        $builder->where('currency_id', $value);
+        $builder->where('currency', $value);
     }
 
 }

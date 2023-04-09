@@ -5,6 +5,7 @@ namespace App\Libs\Finance\Deposit;
 use App\Libs\Finance\DetailsTrait;
 use App\Libs\Finance\Exceptions\RequestDataException;
 use App\Libs\Finance\Exceptions\ResponseDataException;
+use App\Libs\PlowBack;
 
 /**
  * Фасад вкладов
@@ -65,7 +66,16 @@ class DepositManager {
             for ($i = 1; $i <= $deposit->period; $i++) {
 
                 $inset_balance    = $current_deposit;
-                $monthly_profit   = $depositObj->getMonthlyProfit($current_year, $current_month, $inset_balance);
+                $monthly_profit   = match ($deposit->capitalization) {
+                    PlowBack::WITHOUT =>  $i == $deposit->period
+                        ? $depositObj->getMonthlyProfit($current_year, $current_month, $inset_balance)
+                        : 0,
+                    PlowBack::YEARLY  => $i % 12 == 0
+                        ? $depositObj->getMonthlyProfit($current_year, $current_month, $inset_balance)
+                        : 0,
+
+                    default => $depositObj->getMonthlyProfit($current_year, $current_month, $inset_balance),
+                };
                 $monthly_deposit  = $depositObj->getMonthlyDeposit($monthly_profit, $i == $deposit->period);
                 $outset_balance   = $inset_balance + $monthly_deposit;
 
