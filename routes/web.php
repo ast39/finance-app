@@ -111,15 +111,15 @@ Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
 Route::group(['prefix' => 'deposit', 'middleware' => ['auth']], function() {
 
     # Вклады
-    Route::group(['prefix' => 'list'], function () {
+    Route::group(['prefix' => 'item'], function () {
 
-        Route::get('', [DepositController::class, 'index'])->name('deposit.list.index');
-        Route::get('create', [DepositController::class, 'create'])->name('deposit.list.create');
-        Route::post('', [DepositController::class, 'store'])->name('deposit.list.store');
-        Route::get('{id}', [DepositController::class, 'show'])->name('deposit.list.show');
-        Route::get('{id}/edit', [DepositController::class, 'edit'])->name('deposit.list.edit');
-        Route::put('{id}', [DepositController::class, 'update'])->name('deposit.list.update');
-        Route::delete('{id}', [DepositController::class, 'destroy'])->name('deposit.list.destroy');
+        Route::get('', [DepositController::class, 'index'])->name('deposit.index');
+        Route::get('create', [DepositController::class, 'create'])->name('deposit.create');
+        Route::post('', [DepositController::class, 'store'])->name('deposit.store');
+        Route::get('{id}', [DepositController::class, 'show'])->name('deposit.show');
+        Route::get('{id}/edit', [DepositController::class, 'edit'])->name('deposit.edit');
+        Route::put('{id}', [DepositController::class, 'update'])->name('deposit.update');
+        Route::delete('{id}', [DepositController::class, 'destroy'])->name('deposit.destroy');
     });
 
     # Калькуляция

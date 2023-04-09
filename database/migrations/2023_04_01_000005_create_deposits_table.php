@@ -17,6 +17,9 @@ return new class extends Migration
                 ->comment('Хозяин вклада');
             $table->string('title', 64)
                 ->comment('Название вклада');
+            $table->string('currency', 4)
+                ->comment('Валюта кредита')
+                ->default('RUB');
             $table->string('depositor', 64)
                 ->comment('Банк эмитент');
             $table->unsignedFloat('amount', 11, 2)

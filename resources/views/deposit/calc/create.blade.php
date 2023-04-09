@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="subject" class="form-label">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</label>
+                                <label for="currency" class="form-label">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</label>
                                 <select class="form-select" id="currency" name="currency" aria-describedby="currencyHelp">
                                     @forelse($currencies as $currency)
                                         <option {{ old('currency') == $currency->abbr ? 'selected': '' }} value="{{ $currency->abbr }}">{{ $currency->abbr }}</option>
