@@ -69,7 +69,7 @@ Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
     # Кредиты
     Route::group(['prefix' => 'item'], function () {
 
-        Route::get('', [CreditController::class, 'index'])->name('credit.index');
+        Route::get('index/{sortable?}', [CreditController::class, 'index'])->name('credit.index');
         Route::get('create', [CreditController::class, 'create'])->name('credit.create');
         Route::post('', [CreditController::class, 'store'])->name('credit.store');
         Route::get('{id}', [CreditController::class, 'show'])->name('credit.show');

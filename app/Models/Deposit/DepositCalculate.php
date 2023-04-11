@@ -28,7 +28,7 @@ class DepositCalculate extends Model {
     ];
 
     protected $fillable = [
-        'deposit_id', 'owner_id', 'title', 'depositor', 'amount', 'percent', 'period', 'refill', 'capitalization',
+        'deposit_id', 'currency', 'owner_id', 'title', 'depositor', 'amount', 'percent', 'period', 'refill', 'capitalization',
         'withdrawal', 'start_date', 'status', 'created_at', 'updated_at',
     ];
 

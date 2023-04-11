@@ -53,7 +53,7 @@ class Credit extends Model {
     ];
 
     protected $fillable = [
-        'credit_id', 'owner_id', 'title', 'creditor', 'amount', 'percent', 'period', 'payment',
+        'credit_id', 'currency', 'owner_id', 'title', 'creditor', 'amount', 'percent', 'period', 'payment',
         'start_date', 'payment_date', 'status', 'created_at', 'updated_at',
     ];
 

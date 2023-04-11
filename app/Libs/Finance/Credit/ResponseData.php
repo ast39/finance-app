@@ -39,11 +39,11 @@ class ResponseData {
         RequestData $credit,
         array $details,
     ) {
-        $this->credit        = $credit;
+        $this->credit = $credit;
 
         $this->overpay = round(array_sum(array_map(function ($e) {
             return $e['payment_percent'];
-        }, $details)), 2);
+        }, $details)), );
 
         $this->payments = round(array_sum(array_map(function ($e) {
             return $e['payment_body'];

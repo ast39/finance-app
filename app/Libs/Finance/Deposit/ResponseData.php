@@ -34,8 +34,7 @@ class ResponseData {
         RequestData $deposit,
         float       $profit,
         array       $details,
-    )
-    {
+    ) {
         $this->deposit       = $deposit;
         $this->refills       = round($deposit->refill * ($deposit->period - 1), 2);
         $this->profit        = round($profit, 2);

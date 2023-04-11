@@ -28,6 +28,7 @@ class CreditManager {
      * @param int|null $period
      * @param float|null $payment
      * @param array|null $payments
+     * @param int|null $credit_id
      * @return RequestData|string
      */
     public static function setCredit(
@@ -42,10 +43,11 @@ class CreditManager {
         ?int     $period,
         ?float   $payment,
         ?array   $payments,
+        ?int     $credit_id = null,
     ): RequestData|string
     {
         try {
-            return new RequestData($title, $currency, $payment_type, $start_date, $payment_date, $subject, $amount, $percent, $period, $payment, $payments);
+            return new RequestData($title, $currency, $payment_type, $start_date, $payment_date, $subject, $amount, $percent, $period, $payment, $payments, $credit_id);
         } catch (RequestDataException $exception) {
             return $exception->getCode() . ': '. $exception->getMessage();
         }

@@ -9,6 +9,9 @@ use App\Libs\Finance\Exceptions\RequestDataException;
  */
 class RequestData {
 
+    # ID кредита
+    public ?int $credit_id;
+
     # Заголовок кредита
     public string $title;
 
@@ -69,6 +72,7 @@ class RequestData {
         ?int    $period       = null,
         ?float  $payment      = null,
         ?array  $payments     = null,
+        ?int    $credit_id    = null,
     ) {
         $this->title        = $title;
         $this->currency     = $currency;
@@ -81,6 +85,7 @@ class RequestData {
         $this->period     = $period;
         $this->payment    = (float) str_replace(',', '.', $payment);
         $this->payments   = $payments ?: [];
+        $this->credit_id  = $credit_id;
 
         $this->validate();
     }
