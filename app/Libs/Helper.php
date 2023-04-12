@@ -150,4 +150,24 @@ class Helper {
     {
         return Storage::disk('icons')->files();
     }
+
+    /**
+     * Форматированный вывод подсчета данных по ключу массива
+     *
+     * @param array $data
+     * @param string $key
+     * @param int $round
+     * @return string
+     */
+    public static function total(array $data, string $key, int $round = 0): string
+    {
+        return
+            number_format(
+                array_sum(
+                    array_map(function($e) use ($key) {
+                        return $e[$key];
+                    }, $data)
+                ), $round, '.', ' '
+            );
+    }
 }

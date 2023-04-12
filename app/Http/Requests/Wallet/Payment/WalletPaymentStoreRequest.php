@@ -29,7 +29,7 @@ class WalletPaymentStoreRequest extends FormRequest {
             'note'      => 'string|nullable',
             'amount'    => [
                 'required',
-                'regex:/^\d+(\.\d{1,2})?$/',
+                'regex:/^[-+]?\d+(\.\d{1,2})?$/',
             ],
         ];
     }

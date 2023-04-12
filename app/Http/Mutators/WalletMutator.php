@@ -67,7 +67,7 @@ class WalletMutator {
 
         $wallet['total_deposits']    = round(array_sum(Arr::map($wallet['payments'], function ($e) {
             return max($e['transaction_amount'], 0);
-        })));
+        })), 2);
 
         $wallet['count_withdrawals'] = count(Arr::where($wallet['payments'], function ($e) {
             return $e['transaction_amount'] < 0;
@@ -75,7 +75,7 @@ class WalletMutator {
 
         $wallet['total_withdrawals'] =round(array_sum(Arr::map($wallet['payments'], function ($e) {
             return min($e['transaction_amount'], 0);
-        })));
+        })), 2);
 
         $wallet['total_transactions'] = $wallet['total_deposits'] + $wallet['total_withdrawals'];
         $wallet['count_transactions'] = $wallet['count_deposits'] + $wallet['count_withdrawals'];

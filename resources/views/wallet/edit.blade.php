@@ -39,10 +39,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Баланс') }}</label>
+                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Стартовый баланс') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="amount" name="amount" placeholder="250000" value="{{ $wallet->amount }}" aria-describedby="amountHelp">
-                                    <span class="input-group-text">руб.</span>
+                                    <span class="input-group-text">{{ $wallet->currency->abbr }}</span>
                                 </div>
                                 <div id="amountHelp" class="form-text mb-3">{{ __('Начальная сумма в кошельке') }}</div>
                                 @error('amount')
@@ -52,8 +52,8 @@
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                    <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                                    <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::SAVE) !!} {{ __('Сохранить') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -74,4 +74,14 @@
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script type="module">
+            $(document).ready(function() {
+                $('#currency').change(function() {
+                    $('.currency').html($(this).val());
+                });
+            });
+        </script>
+    @endpush
 @endsection

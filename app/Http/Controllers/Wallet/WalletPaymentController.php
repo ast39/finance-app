@@ -38,7 +38,7 @@ class WalletPaymentController extends Controller {
 
         WalletPayment::create($data);
 
-        return redirect()->route('wallet.index');
+        return redirect()->route('wallet.show', $data['wallet_id']);
     }
 
     public function edit(int $id): View

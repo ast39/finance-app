@@ -10,6 +10,7 @@ use App\Http\Requests\Wallet\WalletFilterRequest;
 use App\Http\Requests\Wallet\WalletStoreRequest;
 use App\Http\Requests\Wallet\WalletUpdateRequest;
 use App\Models\Wallet\Wallet;
+use App\Models\Wallet\WalletCurrency;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -65,7 +66,9 @@ class WalletController extends Controller {
     {
         $data = $request->validated();
 
-        $data['owner_id'] = Auth::id();
+        $data['owner_id']    = Auth::id();
+        $data['currency_id'] = WalletCurrency::where('abbr', $data['currency'])->first()?->currency_id;
+        unset($data['currency']);
 
         return redirect()->route('wallet.show', Wallet::create($data)->wallet_id);
     }

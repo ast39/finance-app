@@ -30,23 +30,23 @@
                                     <td>{{ $wallet['note'] ?? '' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::BALANCE) !!} {{ __('Стартовая сумма') }}</th>
+                                    <th>{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Стартовая сумма') }}</th>
                                     <td>{{ number_format($wallet['amount'] ?? 0, 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::CHECK_LIST) !!} {{ __('Пополнения (кол-во)') }}</th>
+                                    <th>{!! Icons::get(Icons::INSET_COUNT) !!} {{ __('Пополнения (кол-во)') }}</th>
                                     <td>{{ $wallet['count_deposits'] ?? 0 }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::PROFIT) !!} {{ __('Пополнения (сумма)') }}</th>
+                                    <th>{!! Icons::get(Icons::INSET_UD) !!} {{ __('Пополнения (сумма)') }}</th>
                                     <td>{{ number_format($wallet['total_deposits'] ?? 0, 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::CHECK_LIST) !!} {{ __('Снятия (кол-во)') }}</th>
+                                    <th>{!! Icons::get(Icons::OUTSET_COUNT) !!} {{ __('Снятия (кол-во)') }}</th>
                                     <td>{{ $wallet['count_withdrawals'] ?? 0 }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::LOSS) !!} {{ __('Снятия (сумма)') }}</th>
+                                    <th>{!! Icons::get(Icons::OUTSET_UD) !!} {{ __('Снятия (сумма)') }}</th>
                                     <td>{{ number_format($wallet['total_withdrawals'] ?? 0, 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}</td>
                                 </tr>
                                 <tr>
@@ -63,10 +63,10 @@
                             @method('DELETE')
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                <a href="{{ route('wallet.payment.create', $wallet['wallet_id']) }}" class="btn btn-primary me-md-2">{{ __('Транзакция') }}</a>
-                                <a href="{{ route('wallet.edit', $wallet['wallet_id']) }}" class="btn btn-warning me-md-2">{{ __('Изменить') }}</a>
-                                <button type="submit" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кошелек?') }}')" class="btn btn-danger">{{ __('Удалить') }}</button>
+                                <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                <a href="{{ route('wallet.payment.create', $wallet['wallet_id']) }}" class="btn btn-primary me-md-2">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Транзакция') }}</a>
+                                <a href="{{ route('wallet.edit', $wallet['wallet_id']) }}" class="btn btn-warning me-md-2">{!! Icons::get(Icons::EDIT) !!} {{ __('Изменить') }}</a>
+                                <button type="submit" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кошелек?') }}')" class="btn btn-danger">{!! Icons::get(Icons::DELETE) !!} {{ __('Удалить') }}</button>
                             </div>
                         </form>
 
@@ -85,12 +85,12 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" scope="row">#</th>
-                                                    <th class="text-center">{{ __('Дата') }}</th>
-                                                    <th class="text-end">{{ __('Входящий баланс') }}</th>
-                                                    <th class="text-end">{{ __('Транзакция') }}</th>
-                                                    <th  class="text-center">{{ __('Комментарий') }}</th>
-                                                    <th class="text-end">{{ __('Исходящий баланс') }}</th>
-                                                    <th class="text-end">{{ __('Действия') }}</th>
+                                                    <th class="text-center">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::INSET_LR) !!} {{ __('Входящий баланс') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::PROFIT_UP) !!} {{ __('Транзакция') }}</th>
+                                                    <th  class="text-center">{!! Icons::get(Icons::NOTE) !!} {{ __('Комментарий') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::OUTSET_LR) !!} {{ __('Исходящий баланс') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::TOOLS) !!} {{ __('Действия') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -100,7 +100,7 @@
                                                         <td data-label="{{ __('Дата') }}" class="text-center">{{ date('d-m-Y', $payment['date_time']) }}</td>
                                                         <td data-label="{{ __('Баланс') }}" class="text-end">{{ number_format($payment['inset_balance'], 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}</td>
                                                         <td data-label="{{ __('Прирост') }}" class="text-end {{ $payment['transaction_amount'] > 0 ? 'text-success': 'text-danger' }}">
-                                                            {{ number_format($payment['transaction_amount'], 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}
+                                                           {{ number_format($payment['transaction_amount'], 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}
                                                         </td>
                                                         <td data-label="{{ __('Комментарий') }}" class="text-center">{{ $payment['note'] }}</td>
                                                         <td data-label="{{ __('Остаток') }}" class="text-end">{{ number_format($payment['outset_balance'], 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }} <i class="{{ $payment['transaction_amount'] > 0 ? 'text-success ' . Icons::PROFIT : 'text-danger ' . Icons::LOSS }}"></i></td>

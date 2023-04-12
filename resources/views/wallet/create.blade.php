@@ -21,16 +21,16 @@
                             @method('POST')
 
                             <div class="mb-3">
-                                <label for="currency_id" class="form-label">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</label>
-                                <select name="currency_id" id="currency_id" class="form-select form-control" aria-describedby="currency_idHelp">
+                                <label for="currency" class="form-label">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</label>
+                                <select name="currency" id="currency" class="form-select form-control" aria-describedby="currencyHelp">
                                     @forelse($currencies as $currency)
-                                        <option title="{{ $currency->title }}" value="{{ $currency->currency_id }}">{{ $currency->abbr }}</option>
+                                        <option title="{{ $currency->title }}" value="{{ $currency->abbr }}">{{ $currency->abbr }}</option>
                                     @empty
                                         <option value="1">{{ __('RUB') }}</option>
                                     @endforelse
                                 </select>
-                                <div id="currency_idHelp" class="form-text">{{ __('Валюта кошелька') }}</div>
-                                @error('currency_id')
+                                <div id="currencyHelp" class="form-text">{{ __('Валюта кошелька') }}</div>
+                                @error('currency')
                                     <p class="text-danger mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -54,10 +54,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Баланс') }}</label>
+                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Стартовый баланс') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="amount" name="amount" placeholder="250000" value="{{ old('amount') }}" aria-describedby="amountHelp">
-                                    <span class="input-group-text">{{ __('руб.') }}</span>
+                                    <span class="input-group-text currency">{{ __('RUB') }}</span>
                                 </div>
                                 <div id="amountHelp" class="form-text mb-3">{{ __('Начальная сумма в кошельке') }}</div>
                                 @error('amount')
@@ -67,8 +67,8 @@
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                    <button type="submit" class="btn btn-primary">{{ __('Добавить') }}</button>
+                                    <a href="{{ route('wallet.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::CREATE) !!} {{ __('Добавить') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -89,4 +89,14 @@
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script type="module">
+            $(document).ready(function() {
+                $('#currency').change(function() {
+                    $('.currency').html($(this).val());
+                });
+            });
+        </script>
+    @endpush
 @endsection
