@@ -98,7 +98,7 @@ Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
     Route::group(['prefix' => 'payment'], function () {
 
         Route::get('', [CreditPaymentController::class, 'index'])->name('credit.payment.index');
-        Route::get('create', [CreditPaymentController::class, 'create'])->name('credit.payment.create');
+        Route::get('create/{credit_id}', [CreditPaymentController::class, 'create'])->name('credit.payment.create');
         Route::post('', [CreditPaymentController::class, 'store'])->name('credit.payment.store');
         Route::get('{id}', [CreditPaymentController::class, 'show'])->name('credit.payment.show');
         Route::get('{id}/edit', [CreditPaymentController::class, 'edit'])->name('credit.payment.edit');

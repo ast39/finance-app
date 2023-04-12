@@ -27,7 +27,10 @@ class WalletUpdateRequest extends FormRequest {
 
             'title'       => 'string|unique:wallets,title,' . $this->id . ',wallet_id',
             'note'        => 'string|nullable',
-            'amount'      => 'numeric',
+            'amount'      => [
+                'required',
+                'regex:/^\d+(\.\d{1,2})?$/',
+            ],
             'status'      => 'integer',
         ];
     }

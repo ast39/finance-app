@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Wallet\Payment;
+namespace App\Http\Requests\Credit\Payment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WalletPaymentUpdateRequest extends FormRequest {
+class CreditPaymentStoreRequest extends FormRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,12 @@ class WalletPaymentUpdateRequest extends FormRequest {
     {
         return [
 
-            'note'      => 'string|nullable',
+            'credit_id' => 'required|int',
             'amount'    => [
+                'required',
                 'regex:/^\d+(\.\d{1,2})?$/',
             ],
+            'note'      => 'nullable|string',
         ];
     }
 }

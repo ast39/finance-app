@@ -27,7 +27,10 @@ class WalletPaymentStoreRequest extends FormRequest {
 
             'wallet_id' => 'required|integer',
             'note'      => 'string|nullable',
-            'amount'    => 'required|numeric',
+            'amount'    => [
+                'required',
+                'regex:/^\d+(\.\d{1,2})?$/',
+            ],
         ];
     }
 }

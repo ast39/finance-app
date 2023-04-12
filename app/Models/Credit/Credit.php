@@ -38,7 +38,8 @@ class Credit extends Model {
      */
     public function payments(): HasMany
     {
-        return $this->hasMany(CreditPayment::class, 'credit_id', 'credit_id');
+        return $this->hasMany(CreditPayment::class, 'credit_id', 'credit_id')
+            ->without('credit');
     }
 
 

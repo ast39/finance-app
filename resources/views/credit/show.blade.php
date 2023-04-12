@@ -89,59 +89,61 @@
 
                         </form>
 
-                        <div class="accordion-item mt-3">
-                            <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    {{ __('График платежей') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                <div class="accordion-body">
+                        <div class="accordion">
+                            <div class="accordion-item mt-3">
+                                <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                        {{ __('График платежей') }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                    <div class="accordion-body">
 
-                                    <table class="table table-striped admin-table__adapt admin-table__instrument">
-                                        <thead>
-                                        <tr>
-                                            <th class="text-center" scope="row">#</th>
-                                            <th class="text-center">{{ __('Месяц') }}</th>
-                                            <th class="text-end">{{ __('Баланс') }}</th>
-                                            <th class="text-end">{{ __('Платеж') }}</th>
-                                            <th class="text-end">{{ __('Проценты') }}</th>
-                                            <th class="text-end">{{ __('Тело') }}</th>
-                                            <th class="text-end">{{ __('Остаток') }}</th>
-                                            <th class="text-center">{{ __('Оплата') }}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        @php
-                                            $payed_percent = $payed_body = $payed_payments = 0;
-                                        @endphp
-
-                                        @forelse($credit->details as $row)
-                                            <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-active': '' }}">
-                                                <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
-                                                <td data-label="{{ __('Месяц') }}" class="text-center">{{ date('d-m-Y', $row['date_time']) }}</td>
-                                                <td data-label="{{ __('Баланс') }}" class="text-end">{{ number_format($row['inset_balance'], 2, '.', ' ') }}</td>
-                                                <td data-label="{{ __('Платеж') }}" class="text-end">{{ number_format($row['credit_payment'], 2, '.', ' ') }}</td>
-                                                <td data-label="{{ __('Проценты') }}" class="text-end">{{ number_format($row['payment_percent'], 2, '.', ' ') }}</td>
-                                                <td data-label="{{ __('Тело') }}" class="text-end">{{ number_format($row['payment_body'], 2, '.', ' ') }}</td>
-                                                <td data-label="{{ __('Остаток') }}" class="text-end">{{ number_format($row['outset_balance'], 2, '.', ' ') }}</td>
-                                                <td data-label="{{ __('Оплата') }}" class="text-center {{ Helper::getPaymentTextColor($row['date_time'], $row['status']) }}"><i class="{{ Helper::getPaymentIcon($row['date_time'], $row['status']) }}"></i></td>
+                                        <table class="table table-striped admin-table__adapt admin-table__instrument">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center" scope="row">#</th>
+                                                <th class="text-center">{{ __('Месяц') }}</th>
+                                                <th class="text-end">{{ __('Баланс') }}</th>
+                                                <th class="text-end">{{ __('Платеж') }}</th>
+                                                <th class="text-end">{{ __('Проценты') }}</th>
+                                                <th class="text-end">{{ __('Тело') }}</th>
+                                                <th class="text-end">{{ __('Остаток') }}</th>
+                                                <th class="text-center">{{ __('Оплата') }}</th>
                                             </tr>
+                                            </thead>
+                                            <tbody>
 
                                             @php
-                                                if (count($credit->credit->payments) >= $loop->iteration) {
-
-                                                    $payed_percent += $row['payment_percent'];
-                                                    $payed_body    += $row['payment_body'];
-                                                    $payed_payments++;
-                                                }
+                                                $payed_percent = $payed_body = $payed_payments = 0;
                                             @endphp
-                                        @empty
-                                            <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Расчет не удался') }}</div>
-                                        @endforelse
-                                        </tbody>
-                                    </table>
+
+                                            @forelse($credit->details as $row)
+                                                <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-active': '' }}">
+                                                    <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
+                                                    <td data-label="{{ __('Месяц') }}" class="text-center">{{ date('d-m-Y', $row['date_time']) }}</td>
+                                                    <td data-label="{{ __('Баланс') }}" class="text-end">{{ number_format($row['inset_balance'], 2, '.', ' ') }}</td>
+                                                    <td data-label="{{ __('Платеж') }}" class="text-end">{{ number_format($row['credit_payment'], 2, '.', ' ') }}</td>
+                                                    <td data-label="{{ __('Проценты') }}" class="text-end">{{ number_format($row['payment_percent'], 2, '.', ' ') }}</td>
+                                                    <td data-label="{{ __('Тело') }}" class="text-end">{{ number_format($row['payment_body'], 2, '.', ' ') }}</td>
+                                                    <td data-label="{{ __('Остаток') }}" class="text-end">{{ number_format($row['outset_balance'], 2, '.', ' ') }}</td>
+                                                    <td data-label="{{ __('Оплата') }}" class="text-center {{ Helper::getPaymentTextColor($row['date_time'], $row['status']) }}"><i class="{{ Helper::getPaymentIcon($row['date_time'], $row['status']) }}"></i></td>
+                                                </tr>
+
+                                                @php
+                                                    if (count($credit->credit->payments) >= $loop->iteration) {
+
+                                                        $payed_percent += $row['payment_percent'];
+                                                        $payed_body    += $row['payment_body'];
+                                                        $payed_payments++;
+                                                    }
+                                                @endphp
+                                            @empty
+                                                <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Расчет не удался') }}</div>
+                                            @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

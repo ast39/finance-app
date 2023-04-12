@@ -28,7 +28,10 @@ class WalletStoreRequest extends FormRequest {
             'currency_id' => 'required|integer',
             'title'       => 'required|string|unique:wallets',
             'note'        => 'string|nullable',
-            'amount'      => 'required|numeric',
+            'amount'      => [
+                'required',
+                'regex:/^\d+(\.\d{1,2})?$/',
+            ],
         ];
     }
 }

@@ -28,7 +28,9 @@ class SpendUpdateRequest extends FormRequest {
             'wallet_id'   => 'integer',
             'category_id' => 'integer',
             'note'        => 'string|nullable',
-            'amount'      => 'numeric',
+            'amount'      => [
+                'regex:/^\d+(\.\d{1,2})?$/',
+            ],
         ];
     }
 }

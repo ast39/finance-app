@@ -28,7 +28,10 @@ class SpendStoreRequest extends FormRequest {
             'wallet_id'   => 'nullable|integer',
             'category_id' => 'required|integer',
             'note'        => 'nullable|string',
-            'amount'      => 'required|numeric',
+            'amount'      => [
+                'required',
+                'regex:/^\d+(\.\d{1,2})?$/',
+            ],
         ];
     }
 }
