@@ -22,14 +22,20 @@ class Icons {
     const SAVE          = 'bi bi-cloud-arrow-up';         // сохранить
     const EDIT          = 'bi bi-pencil-square';          // изменить
     const DELETE        = 'bi bi-trash';                  // удалить
+    const CALCULATE     = 'bi bi-calculator';             // рассчитать
     const PLUS          = 'bi bi-plus-lg';                // плюс
 
     const TITLE         = 'bi bi-text-indent-left';       // заголовок
     const LIST          = 'bi bi-list-ul';                // список
-    const CALENDAR_DAY   = 'bi bi-calendar2-date';        // дата календаря
+    const CALENDAR_DAY  = 'bi bi-calendar2-date';         // дата календаря
     const CURRENCY      = 'bi bi-currency-exchange';      // валюта
     const NOTE          = 'bi bi-card-text';              // записки
+    const PROFIT_UP     = 'bi bi-bar-chart';              // профит
+    const QUESTION      = 'bi bi-question-circle';        // вопрос
     const TOOLS         = 'bi bi-tools';                  // инструменты
+    const PERCENT       = 'bi bi-percent';                // процент
+    const PERIOD        = 'bi bi-clock-history';          // период
+    const AMOUNT        = 'bi bi-collection';             // пачка купюр
     const BALANCE_START = 'bi bi-cash';                   // 1 денежка
     const BALANCE       = 'bi bi-cash-stack';             // пачка денежек
     const BALANCE_CASH  = 'bi bi-cash-coin';              // денежка с монеткой
@@ -37,6 +43,10 @@ class Icons {
 
     const PROFIT        = 'bi bi-chevron-double-up';      // рост
     const LOSS          = 'bi bi-chevron-double-down';    // упадок
+
+    const SMILE_HAPPY   = 'bi bi-emoji-smile';            // счастливый смайлик
+    const SMILE_NEUTRAL = 'bi bi-emoji-neutral';          // нейтральный смайлик
+    const SMILE_SAD     = 'bi bi-emoji-frown';            // грустный смайлик
 
     const INSET_UD      = 'bi bi-box-arrow-in-down';      // в коробку сверху
     const OUTSET_UD     = 'bi bi-box-arrow-down';         // из коробки сверху
@@ -53,35 +63,19 @@ class Icons {
     const BANK           = 'bi bi-bank';
     const TYPE           = 'bi bi-list';
 
-
-    const PROFIT_UP      = 'bi bi-bar-chart';
     const BALANCE_UP     = 'bi bi-box-arrow-in-down';
     const BALANCE_DOWN   = 'bi bi-box-arrow-up';
 
-    const AMOUNT         = 'bi bi-collection';
-    const PERCENT        = 'bi bi-percent';
-    const PERIOD         = 'bi bi-clock-history';
     const PAYMENT        = 'bi bi-cash-stack';
-
 
     const CALENDAR_MONTH = 'bi bi-calendar3';
 
     const CHECK_LIST     = 'bi bi-card-checklist';
     const CHECKED        = 'bi bi-check2-all';
 
-    const CAPITALIZATION = 'bi bi-cash-coin';
-    const WITHDRAWAL     = 'bi bi-arrow-counterclockwise';
-    const COUNTER        = 'bi bi-123';
-
-    const QUESTION       = 'bi bi-question-circle';
-
     const PAYING         = 'bi bi-hourglass-top';
     const WAS_PAYED      = 'bi-hourglass-split';
     const WILL_PAY       = 'bi bi-hourglass-bottom';
-
-    const SMILE_HAPPY    = 'bi bi-emoji-smile';
-    const SMILE_NEUTRAL  = 'bi bi-emoji-neutral';
-    const SMILE_SAD      = 'bi bi-emoji-frown';
 
     const PAYMENT_CHECK   = 'bi bi-check2-square';
     const PAYMENT_OVERDUE = 'bi bi-exclamation-triangle';

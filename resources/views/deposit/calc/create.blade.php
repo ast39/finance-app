@@ -14,7 +14,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Рассчитать вклад') }}</div>
-
                     <div class="card-body">
 
                         <form method="post" action="{{ route('deposit.calc.store') }}">
@@ -22,8 +21,8 @@
                             @method('POST')
 
                             <div class="mb-3">
-                                <label for="depositTitle" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</label>
-                                <input type="text" readonly class="form-control" id="depositTitle" name="title" placeholder="Мой новый кредит" value="Расчет от {{ date('d-m-Y H:i:s') }}">
+                                <label for="title" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</label>
+                                <input type="text" readonly class="form-control" id="title" name="title" placeholder="Мой новый кредит" value="Расчет от {{ date('d-m-Y H:i:s') }}">
                             </div>
 
                             <div class="mb-3">
@@ -38,13 +37,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="start_date" class="form-label">{!! Icons::get(Icons::CALENDAR_MONTH) !!} {{ __('День открытия вклада') }}</label>
+                                <label for="start_date" class="form-label">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('День открытия вклада') }}</label>
                                 <input type="date" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') }}" aria-describedby="start_dateHelp" />
                                 <div id="start_dateHelp" class="form-text mb-3">{{ __('Когда открыли вклад') }}</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="amount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
+                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control subjects" id="amount" name="amount" placeholder="250000" value="{{ old('amount') }}" aria-describedby="amountHelp" />
                                     <span class="input-group-text currency">{{ __('RUB') }}</span>
@@ -71,7 +70,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="refill" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Пополнение') }}</label>
+                                <label for="refill" class="form-label">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Пополнение') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="refill" name="refill" placeholder="10000" value="{{ old('refill') }}" aria-describedby="refillHelp">
                                     <span class="input-group-text currency">{{ __('RUB') }}</span>
@@ -80,7 +79,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="capitalization" class="form-label">{!! Icons::get(Icons::CAPITALIZATION) !!} {{ __('Капитализация') }}</label>
+                                <label for="capitalization" class="form-label">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Капитализация') }}</label>
                                 <select class="form-select" id="capitalization" name="capitalization" aria-label="Default select example" aria-describedby="capitalizationHelp">
                                     <option {{ old('capitalization') == PlowBack::WITHOUT ? 'selected': '' }} value="{{ PlowBack::WITHOUT }}">{{ __('При закрытии кредита') }}</option>
                                     <option {{ old('capitalization') == PlowBack::DAILY   ? 'selected': '' }} value="{{ PlowBack::DAILY }}">{{ __('Ежедневно') }}</option>
@@ -93,13 +92,13 @@
 
                             <div class="mb-3 form-check">
                                 <input type="checkbox" {{ old('withdrawal') > 0 ? 'checked' : '' }} class="form-check-input" id="withdrawal" name="withdrawal" aria-describedby="withdrawalHelp">
-                                <label class="form-check-label" for="withdrawal">{!! Icons::get(Icons::WITHDRAWAL) !!} {{ __('Снимать проценты') }}</label>
+                                <label class="form-check-label" for="withdrawal">{!! Icons::get(Icons::RESET) !!} {{ __('Снимать проценты') }}</label>
                                 <div id="withdrawalHelp" class="form-text">{{ __('Снимать ежемесячно проценты или капитализировать во вклад') }}</div>
                             </div>
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button type="submit" class="btn btn-primary">{{ __('Рассчитать') }}</button>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::CALCULATE) !!} {{ __('Рассчитать') }}</button>
                                 </div>
                             </div>
 

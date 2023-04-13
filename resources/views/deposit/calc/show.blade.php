@@ -9,7 +9,6 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-
                     <div class="card-header">{{ __('Информация по расчету вклада') }}</div>
 
                     <div class="card-body">
@@ -26,45 +25,45 @@
                                     <div class="accordion-body">
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</th>
-                                                <th scope="col">{{ $info->deposit->title ?? '' }}</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</th>
+                                                    <th scope="col">{{ $info->deposit->title ?? '' }}</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</th>
-                                                <td>{{ number_format($info->deposit->amount ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
-                                                <td>{{ number_format($info->deposit->percent ?? '', 2, '.', ' ') }}%</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</th>
-                                                <td>{{ $info->deposit->period ?? '' }} {{ __('(в месяцах)') }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::TITLE) !!} {{ __('Пополнения') }}</th>
-                                                <td>{{ number_format($info->deposit->refill ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</td>
-                                            </tr>
-                                            <tr><td colspan="2"></td></tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Сумма пополнений') }}</th>
-                                                <td><span class="text-danger">{{ number_format($info->refills ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Заработок на процентах') }}</th>
-                                                <td><span class="text-success">{{ number_format($info->profit ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Снятые проценты') }}</th>
-                                                <td><span class="text-success">{{ number_format($info->was_withdrawn ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::BALANCE) !!} {{ __('Итого к выплате') }}</th>
-                                                <td><span class="text-primary">{{ number_format($info->to_withdraw ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</th>
+                                                    <td>{{ number_format($info->deposit->amount ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
+                                                    <td>{{ number_format($info->deposit->percent ?? '', 2, '.', ' ') }}%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</th>
+                                                    <td>{{ $info->deposit->period ?? '' }} {{ __('(в месяцах)') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Пополнения') }}</th>
+                                                    <td>{{ number_format($info->deposit->refill ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</td>
+                                                </tr>
+                                                <tr><td colspan="2">&nbsp;</td></tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Сумма пополнений') }}</th>
+                                                    <td><span class="text-danger">{{ number_format($info->refills ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Заработок на процентах') }}</th>
+                                                    <td><span class="text-success">{{ number_format($info->profit ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Снятые проценты') }}</th>
+                                                    <td><span class="text-success">{{ number_format($info->was_withdrawn ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Итого к выплате') }}</th>
+                                                    <td><span class="text-primary">{{ number_format($info->to_withdraw ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -84,13 +83,13 @@
                                             <thead>
                                             <tr>
                                                 <th class="text-center" scope="row">#</th>
-                                                <th class="text-end">{!! Icons::get(Icons::INSET) !!} {{ __('Входящий баланс') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::INSET_LR) !!} {{ __('Входящий баланс') }}</th>
                                                 <th class="text-end">{!! Icons::get(Icons::PERCENT) !!} {{ __('Проценты') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Пополнение') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::INSET_UD) !!} {{ __('Пополнение') }}</th>
                                                 <th class="text-end">{!! Icons::get(Icons::PROFIT_UP) !!} {{ __('Сумма прироста') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::BALANCE_UP) !!} {{ __('Текущий заработок') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Снятые проценты') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::OUTSET) !!} {{ __('Исходящий баланс') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Текущий заработок') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::OUTSET_UD) !!} {{ __('Снятые проценты') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::OUTSET_LR) !!} {{ __('Исходящий баланс') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -118,7 +117,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex mt-3 justify-content-md-center">
-                            <a href="{{ route('deposit.calc.create') }}" class="btn btn-secondary me-md-2">Рассчитать новый вклад</a>
+                            <a href="{{ route('deposit.calc.create') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::CALCULATE) !!} {{ __('Рассчитать новый вклад') }}</a>
                         </div>
 
                     </div>

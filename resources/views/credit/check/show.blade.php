@@ -14,7 +14,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Итоги проверки кредита') }} :: <span class="small text-secondary">{{ $checker->credit->title }}</span></div>
-
                     <div class="card-body">
 
                         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -29,22 +28,22 @@
                                     <div class="accordion-body">
                                         <table class="table table-striped">
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">{{ __('Сумма') }}</th>
-                                                <td class="text-end">{{ number_format($checker->credit->amount, 2, '.', ' ') }} {{ __('руб.') }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{{ __('Процент') }}</th>
-                                                <td class="text-end">{{ number_format($checker->credit->percent, 2, '.', ' ') }}%</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{{ __('Срок') }}</th>
-                                                <td class="text-end">{{ Helper::creditPeriod($checker->credit->period ?? 0) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{{ __('Платеж') }}</th>
-                                                <td class="text-end">{{ number_format($checker->credit->payment, 2, '.', ' ') }} {{ __('руб.') }}</td>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</th>
+                                                    <td class="text-end">{{ number_format($checker->credit->amount, 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
+                                                    <td class="text-end">{{ number_format($checker->credit->percent, 2, '.', ' ') }}%</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</th>
+                                                    <td class="text-end">{{ Helper::creditPeriod($checker->credit->period ?? 0) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Платеж') }}</th>
+                                                    <td class="text-end">{{ number_format($checker->credit->payment, 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -54,7 +53,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                        {{ __('Проверка суммы кредита') }}
+                                        {!! Icons::get(Icons::CHECK) !!}&nbsp;{{ __('Проверка суммы кредита') }}
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
@@ -85,7 +84,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                        {{ __('Проверка процента кредита') }}
+                                        {!! Icons::get(Icons::CHECK) !!}&nbsp;{{ __('Проверка процента кредита') }}
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
@@ -115,7 +114,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                                        {{ __('Проверка срока кредита') }}
+                                        {!! Icons::get(Icons::CHECK) !!}&nbsp;{{ __('Проверка срока кредита') }}
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
@@ -145,7 +144,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingFifth">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFifth" aria-expanded="false" aria-controls="panelsStayOpen-collapseFifth">
-                                        {{ __('Проверка платежа по кредиту') }}
+                                        {!! Icons::get(Icons::CHECK) !!}&nbsp;{{ __('Проверка платежа по кредиту') }}
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseFifth" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFifth">
@@ -175,7 +174,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header shadow-sm" id="panelsStayOpen-headingSix">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
-                                        {{ __('Итоги проверки') }}
+                                        {!! Icons::get(Icons::CHECK) !!}&nbsp;{{ __('Итоги проверки') }}
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
@@ -190,7 +189,7 @@
                                                 <th scope="row">{{ __('Вы отдадите') }}</th>
                                                 <td class="text-end">{{ number_format($checker->credit->amount + $checker->total_overpayment, 2, '.', ' ') }} {{ __('руб.') }}</td>
                                             </tr>
-                                            <tr><td colspan="2"></td></tr>
+                                            <tr><td colspan="2">&nbsp;</td></tr>
                                             <tr>
                                                 <th scope="row">{{ __('Процентов за весь срок кредита') }}</th>
                                                 <td class="text-end">{{ number_format($checker->total_percent, 2, '.', ' ') }} {{ __('руб.') }}</td>
@@ -213,7 +212,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex mt-3 justify-content-md-center">
-                            <a href="{{ route('credit.check.create') }}" class="btn btn-primary me-md-2">{{ __('Новый расчет') }}</a>
+                            <a href="{{ route('credit.check.create') }}" class="btn btn-primary me-md-2">{!! Icons::get(Icons::CHECK) !!} {{ __('Новая проверка') }}</a>
                         </div>
 
                     </div>

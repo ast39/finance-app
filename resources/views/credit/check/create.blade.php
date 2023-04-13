@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="amount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
+                                <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" id="amount" name="amount" placeholder="250000" value="{{ old('amount') }}" aria-describedby="amountHelp">
                                     <span class="input-group-text currency">{{ __('RUB') }}</span>
@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="payment" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</label>
+                                <label for="payment" class="form-label">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Платеж') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="payment" name="payment" placeholder="8654.09" value="{{ old('payment') }}" aria-describedby="creditPaymentHelp">
                                     <span class="input-group-text currency">{{ __('RUB') }}</span>
@@ -74,7 +74,7 @@
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button type="submit" class="btn btn-primary">{{ __('Проверить') }}</button>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::CHECK) !!} {{ __('Проверить') }}</button>
                                 </div>
                             </div>
                         </form>

@@ -12,7 +12,6 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-
                     <div class="card-header">{{ __('Информация по расчету кредиту') }}</div>
 
                     <div class="card-body">
@@ -30,41 +29,41 @@
 
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</th>
-                                                <th scope="col">{{ $info->credit->title ?? '' }}</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</th>
+                                                    <th scope="col">{{ $info->credit->title ?? '' }}</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</th>
-                                                <td><span class="{{ $info->credit->subject == CreditSubject::AMOUNT ? 'text-primary' : '' }}">{{ number_format($info->credit->amount ?? 0, 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
-                                                <td><span class="{{ $info->credit->subject == CreditSubject::PERCENT ? 'text-primary' : '' }}">{{ number_format($info->credit->percent ?? 0, 2, '.', ' ') }}%</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</th>
-                                                <td><span class="{{ $info->credit->subject == CreditSubject::PERIOD ? 'text-primary' : '' }}">{{ $info->credit->period ?? 0 }} {{ __('(в месяцах)') }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</th>
-                                                <td><span class="{{ $info->credit->subject == CreditSubject::PAYMENT ? 'text-primary' : '' }}">{{ number_format($info->credit->payment ?? 0, 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
-                                            </tr>
-                                            <tr><td colspan="2"></td></tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Тело кредита') }}</th>
-                                                <td><span class="text-success">{{ number_format($info->payments ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Проценты по кредиту') }}</th>
-                                                <td><span class="text-danger">{{ number_format($info->overpay ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Итого выплат') }}</th>
-                                                <td><span class="text-primary">{{ number_format($info->total_amount ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</th>
+                                                    <td><span class="{{ $info->credit->subject == CreditSubject::AMOUNT ? 'text-primary' : '' }}">{{ number_format($info->credit->amount ?? 0, 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
+                                                    <td><span class="{{ $info->credit->subject == CreditSubject::PERCENT ? 'text-primary' : '' }}">{{ number_format($info->credit->percent ?? 0, 2, '.', ' ') }}%</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</th>
+                                                    <td><span class="{{ $info->credit->subject == CreditSubject::PERIOD ? 'text-primary' : '' }}">{{ $info->credit->period ?? 0 }} {{ __('(в месяцах)') }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Платеж') }}</th>
+                                                    <td><span class="{{ $info->credit->subject == CreditSubject::PAYMENT ? 'text-primary' : '' }}">{{ number_format($info->credit->payment ?? 0, 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
+                                                </tr>
+                                                <tr><td colspan="2">&nbsp;</td></tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Тело кредита') }}</th>
+                                                    <td><span class="text-success">{{ number_format($info->payments ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Проценты по кредиту') }}</th>
+                                                    <td><span class="text-danger">{{ number_format($info->overpay ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Итого выплат') }}</th>
+                                                    <td><span class="text-primary">{{ number_format($info->total_amount ?? '', 2, '.', ' ') }} {{ $info->credit->currency }}</span></td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
@@ -85,11 +84,11 @@
                                             <thead>
                                             <tr>
                                                 <th class="text-center" scope="row">{!! Icons::get(Icons::LIST) !!}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::INSET) !!} {{ __('Входящий баланс') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::INSET_LR) !!} {{ __('Входящий баланс') }}</th>
                                                 <th class="text-end">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Сумма платежа') }}</th>
                                                 <th class="text-end">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Проценты') }}</th>
                                                 <th class="text-end">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Тело') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::OUTSET) !!} {{ __('Исходящий баланс') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::OUTSET_LR) !!} {{ __('Исходящий баланс') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -116,7 +115,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex mt-3 justify-content-md-center">
-                            <a href="{{ route('credit.calc.create') }}" class="btn btn-secondary me-md-2">Рассчитать новый кредит</a>
+                            <a href="{{ route('credit.calc.create') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::CALCULATE) !!} {{ __('Рассчитать новый кредит') }}</a>
                         </div>
 
                     </div>
