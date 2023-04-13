@@ -4,35 +4,49 @@ namespace App\Libs;
 
 class Icons {
 
-    const TITLE         = 'bi bi-text-indent-left';   // заголовок
-    const LIST          = 'bi bi-list-ul';            // список
-    const CATEGORY      = 'bi bi-tag';                // категория
-    const CURRENCY      = 'bi bi-currency-exchange';  // валюты
-    const NOTE          = 'bi bi-card-text';          // записки
-    const SEARCH        = 'bi bi-search';             // поиск
-    const TOOLS         = 'bi bi-tools';              // инструменты
+    const CHECK_UP      = 'bi bi-arrow-bar-up';           // меню - расчет вклада
+    const CHECK_DOWN    = 'bi bi-arrow-bar-down';         // меню - расчет кредита
+    const CHECK         = 'bi bi-check2-all';             // меню - проверка кредита
+
+    const WALLET        = 'bi bi-wallet2';                // меню - кошелек / кошелек
+    const CREDITS       = 'bi bi-calculator';             // меню кредиты
+    const DEPOSITS      = 'bi bi-box-arrow-in-down';      // меню - вклады
+    const SPEND         = 'bi bi-cart-dash';              // меню - расходы
+    const CATEGORY      = 'bi bi-tag';                    // меню - категории / категория
+    const LOGOUT        = 'bi bi-box-arrow-right';        // меню - выход
+
+    const SEARCH        = 'bi bi-search';                 // поиск
     const RESET         = 'bi bi-arrow-counterclockwise'; // откат назад
-    const BALANCE_START = 'bi bi-cash';               // 1 денежка
-    const BALANCE       = 'bi bi-cash-stack';         // пачка денежек
-    const BALANCE_CASH  = 'bi bi-cash-coin';          // денежка с монеткой
-    const TRANSACTIONS  = 'bi bi-arrow-down-up';      // транзакции
-    const WALLET        = 'bi bi-wallet2';            // кошелек
-    const INSET_UD      = 'bi bi-box-arrow-in-down';  // в коробку сверху
-    const OUTSET_UD     = 'bi bi-box-arrow-down';     // из коробки сверху
-    const INSET_DU      = 'bi bi-box-arrow-in-up';    // в коробку снизу
-    const OUTSET_DU     = 'bi bi-box-arrow-up';       // из коробки снизу
-    const INSET_LR      = 'bi bi-box-arrow-in-right'; // в коробку слева
-    const OUTSET_LR     = 'bi bi-box-arrow-right';    // из коробки слева
-    const INSET_COUNT   = 'bi bi-caret-down';         // треугольник вниз
-    const PROFIT        = 'bi bi-chevron-double-up';  // рост
-    const LOSS          = 'bi bi-chevron-double-down'; // упадок
-    const OUTSET_COUNT  = 'bi bi-caret-up';           // треугольник вверх
-    const RETURN        = 'bi bi-arrow-return-left';  // назад
-    const CREATE        = 'bi bi-folder-plus';        // добавить
-    const SAVE          = 'bi bi-cloud-arrow-up';     // сохранить
-    const EDIT          = 'bi bi-pencil-square';      // изменить
-    const DELETE        = 'bi bi-trash';              // удалить
-    const PLUS          = 'bi bi-plus-lg';            // плюс
+    const RETURN        = 'bi bi-arrow-return-left';      // назад
+    const CREATE        = 'bi bi-folder-plus';            // добавить
+    const SAVE          = 'bi bi-cloud-arrow-up';         // сохранить
+    const EDIT          = 'bi bi-pencil-square';          // изменить
+    const DELETE        = 'bi bi-trash';                  // удалить
+    const PLUS          = 'bi bi-plus-lg';                // плюс
+
+    const TITLE         = 'bi bi-text-indent-left';       // заголовок
+    const LIST          = 'bi bi-list-ul';                // список
+    const CALENDAR_DAY   = 'bi bi-calendar2-date';        // дата календаря
+    const CURRENCY      = 'bi bi-currency-exchange';      // валюта
+    const NOTE          = 'bi bi-card-text';              // записки
+    const TOOLS         = 'bi bi-tools';                  // инструменты
+    const BALANCE_START = 'bi bi-cash';                   // 1 денежка
+    const BALANCE       = 'bi bi-cash-stack';             // пачка денежек
+    const BALANCE_CASH  = 'bi bi-cash-coin';              // денежка с монеткой
+    const TRANSACTIONS  = 'bi bi-arrow-down-up';          // транзакции
+
+    const PROFIT        = 'bi bi-chevron-double-up';      // рост
+    const LOSS          = 'bi bi-chevron-double-down';    // упадок
+
+    const INSET_UD      = 'bi bi-box-arrow-in-down';      // в коробку сверху
+    const OUTSET_UD     = 'bi bi-box-arrow-down';         // из коробки сверху
+    const INSET_DU      = 'bi bi-box-arrow-in-up';        // в коробку снизу
+    const OUTSET_DU     = 'bi bi-box-arrow-up';           // из коробки снизу
+    const INSET_LR      = 'bi bi-box-arrow-in-right';     // в коробку слева
+    const OUTSET_LR     = 'bi bi-box-arrow-right';        // из коробки слева
+    const INSET_COUNT   = 'bi bi-caret-down';             // треугольник вниз
+    const OUTSET_COUNT  = 'bi bi-caret-up';               // треугольник вверх
+
 
 
 
@@ -40,14 +54,6 @@ class Icons {
     const TYPE           = 'bi bi-list';
 
 
-
-    const SPEND          = 'bi bi-cart-dash';
-    const LOGOUT         = 'bi bi-box-arrow-right';
-    const DEPOSITS       = 'bi bi-box-arrow-in-down';
-    const CREDITS        = 'bi bi-calculator';
-    const CHECK_UP       = 'bi bi-arrow-bar-up';
-    const CHECK_DOWN     = 'bi bi-arrow-bar-down';
-    const CHECK          = 'bi bi-check2-all';
     const PROFIT_UP      = 'bi bi-bar-chart';
     const BALANCE_UP     = 'bi bi-box-arrow-in-down';
     const BALANCE_DOWN   = 'bi bi-box-arrow-up';
@@ -59,7 +65,7 @@ class Icons {
 
 
     const CALENDAR_MONTH = 'bi bi-calendar3';
-    const CALENDAR_DAY   = 'bi bi-calendar2-date';
+
     const CHECK_LIST     = 'bi bi-card-checklist';
     const CHECKED        = 'bi bi-check2-all';
 
