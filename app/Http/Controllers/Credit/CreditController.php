@@ -10,6 +10,7 @@ use App\Http\Requests\Credit\CreditStoreRequest;
 use App\Http\Requests\Credit\CreditUpdateRequest;
 use App\Http\Requests\Wallet\WalletFilterRequest;
 use App\Libs\Finance\Exceptions\RequestDataException;
+use App\Libs\Helper;
 use App\Models\Credit\Credit;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
@@ -26,6 +27,7 @@ class CreditController extends Controller {
      * @param string|null $sortable
      * @return View
      * @throws BindingResolutionException
+     * @throws RequestDataException
      */
     public function index(WalletFilterRequest $request, ?string $sortable = null): View
     {
@@ -44,7 +46,11 @@ class CreditController extends Controller {
             ->where('status', config('statuses.on'))
             ->orderBy('currency')
             ->orderBy('title')
-            ->paginate(config('limits.credits'));
+            ->get();
+
+        foreach ($page_credits as $id => $credit) {
+            $page_credits[$id] = (new CreditMutator())($credit);
+        }
 
         return view('credit.index', [
             'credits'  => $page_credits,

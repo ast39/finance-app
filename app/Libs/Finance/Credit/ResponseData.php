@@ -3,6 +3,7 @@
 namespace App\Libs\Finance\Credit;
 
 use App\Libs\CreditSubject;
+use App\Libs\Helper;
 
 /**
  * Объект кредита - ответ
@@ -26,6 +27,9 @@ class ResponseData {
 
     # Остаток долга по кредиту
     public float $balance_owed;
+
+    # Дней до платежа
+    public int $days_to;
 
     # График платежей по кредиту
     public array $details;
@@ -60,6 +64,7 @@ class ResponseData {
         }, $details)), 2);
 
         $this->balance_payed = round($this->credit->amount - $this->balance_owed, 2);
+        $this->days_to       = Helper::daysToPayment($this->credit->payment_date, count($this->credit->payments ?: []));
         $this->details       = $details;
 
         switch ($this->credit->subject) {

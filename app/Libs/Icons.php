@@ -26,6 +26,7 @@ class Icons {
     const PLUS          = 'bi bi-plus-lg';                // плюс
 
     const TITLE         = 'bi bi-text-indent-left';       // заголовок
+    const BANK          = 'bi bi-bank';                   // банк
     const LIST          = 'bi bi-list-ul';                // список
     const CALENDAR_DAY  = 'bi bi-calendar2-date';         // дата календаря
     const CURRENCY      = 'bi bi-currency-exchange';      // валюта
@@ -58,9 +59,6 @@ class Icons {
     const OUTSET_COUNT  = 'bi bi-caret-up';               // треугольник вверх
 
 
-
-
-    const BANK           = 'bi bi-bank';
     const TYPE           = 'bi bi-list';
 
     const BALANCE_UP     = 'bi bi-box-arrow-in-down';

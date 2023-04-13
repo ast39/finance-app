@@ -30,11 +30,11 @@
                                 <td>{{ $deposit->deposit->depositor ?? '' }}</td>
                             </tr>
                             <tr>
-                                <th>{!! Icons::get(Icons::CALENDAR_MONTH) !!} {{ __('Дата открытия') }}</th>
+                                <th>{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата открытия') }}</th>
                                 <td>{{ date('d-m-Y', $deposit->deposit->start_date ?? 0) }}</td>
                             </tr>
                             <tr>
-                                <th>{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</th>
+                                <th>{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</th>
                                 <td>{{ $deposit->deposit->amount ?? '' }} {{ $deposit->deposit->currency }}</td>
                             </tr>
                             <tr>
@@ -46,15 +46,15 @@
                                 <td>{{ $deposit->deposit->period ?? '' }} {{ __('(в месяцах)') }}</td>
                             </tr>
                             <tr>
-                                <th>{!! Icons::get(Icons::BALANCE_UP) !!} {{ __('Пополнение') }}</th>
+                                <th>{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Пополнение') }}</th>
                                 <td>{{ $deposit->deposit->refill ?? '' }} {{ $deposit->deposit->currency }}</td>
                             </tr>
                             <tr>
-                                <th>{!! Icons::get(Icons::CAPITALIZATION) !!} {{ __('Капитализация') }}</th>
+                                <th>{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Капитализация') }}</th>
                                 <td>{{ Helper::plowBackText($deposit->deposit->capitalization ?? 0) }}</td>
                             </tr>
                             <tr>
-                                <th>{!! Icons::get(Icons::WITHDRAWAL) !!} {{ __('Проценты') }}</th>
+                                <th>{!! Icons::get(Icons::RESET) !!} {{ __('Проценты') }}</th>
                                 <td>{{ ($deposit->deposit->withdrawal ?? 0) == 1 ? __('Снимаются') : __('Капитализируются') }}</td>
                             </tr>
                             </tbody>
@@ -65,9 +65,9 @@
                             @method('DELETE')
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('deposit.index') }}" class="btn btn-secondary me-md-2">Назад</a>
-                                <a href="{{ route('deposit.edit', $deposit->deposit->deposit_id) }}" class="btn btn-warning me-md-2">Изменить</a>
-                                <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить вклад?')" class="btn btn-danger">Удалить</button>
+                                <a href="{{ route('deposit.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} Назад</a>
+                                <a href="{{ route('deposit.edit', $deposit->deposit->deposit_id) }}" class="btn btn-warning me-md-2">{!! Icons::get(Icons::EDIT) !!} Изменить</a>
+                                <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить вклад?')" class="btn btn-danger">{!! Icons::get(Icons::DELETE) !!} Удалить</button>
                             </div>
 
                         </form>
@@ -102,7 +102,7 @@
                                             @endphp
 
                                             @forelse($deposit->details as $row)
-                                                <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-success text-white': '' }}">
+                                                <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-like-a-accordion' : '' }}">
                                                     <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
                                                     <td data-label="Месяц" class="text-center">{{ date('d-m-Y', $row['date_time']) }}</td>
                                                     <td data-label="Баланс" class="text-end">{{ number_format($row['inset_balance'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
@@ -147,7 +147,7 @@
                                 <td><span class="text-success">{{ number_format($deposit->was_withdrawn ?? '', 2, '.', ' ') }} {{ $deposit->deposit->currency }}</span></td>
                             </tr>
                             <tr>
-                                <th>{!! Icons::get(Icons::BALANCE) !!} {{ __('Итого к выплате') }}</th>
+                                <th>{!! Icons::get(Icons::AMOUNT) !!} {{ __('Итого к выплате') }}</th>
                                 <td><span class="text-primary">{{ number_format($deposit->to_withdraw ?? '', 2, '.', ' ') }} {{ $deposit->deposit->currency }}</span></td>
                             </tr>
                             </tbody>

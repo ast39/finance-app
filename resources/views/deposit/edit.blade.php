@@ -16,7 +16,6 @@
                     <div class="card-header">{{ __('Изменить вклад') }}</div>
 
                     <div class="card-body">
-
                         <form method="post" action="{{ route('deposit.update', $deposit->deposit_id) }}">
                             @csrf
                             @method('PUT')
@@ -39,43 +38,51 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="depositDepositor" class="form-label">{!! Icons::get(Icons::BANK) !!} {{ __('Обьект инвестиции') }}</label>
+                                <label for="depositDepositor" class="form-label">{!! Icons::get(Icons::BANK) !!} {{ __('Объект инвестиции') }}</label>
                                 <input type="text" class="form-control" id="depositDepositor" name="depositor" placeholder="Новый банк" value="{{ $deposit->depositor }}" aria-describedby="depositDepositorHelp">
                                 <div id="depositDepositorHelp" class="form-text">Куда вы вложиил средства</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="depositStart" class="form-label">{!! Icons::get(Icons::CALENDAR_MONTH) !!} {{ __('День открытия вклада') }}</label>
+                                <label for="depositStart" class="form-label">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('День открытия вклада') }}</label>
                                 <input type="date" class="form-control" id="depositStart" name="start_date" value="{{ date('Y-m-d', $deposit->start_date) }}" />
                             </div>
 
-                            <label for="depositAmount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="depositAmount" name="amount" placeholder="250000" value="{{ $deposit->amount }}">
-                                <span class="input-group-text">руб.</span>
+                            <div class="mb-3">
+                                <label for="depositAmount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="depositAmount" name="amount" placeholder="250000" value="{{ $deposit->amount }}">
+                                    <span class="input-group-text currency">{{ $deposit->currency }}</span>
+                                </div>
                             </div>
-
-                            <label for="depositPercent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="depositPercent" name="percent" placeholder="14.9" value="{{ $deposit->percent }}">
-                                <span class="input-group-text">%</span>
-                            </div>
-
-                            <label for="depositPeriod" class="form-label">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="depositPeriod" name="period" placeholder="36" value="{{ $deposit->period }}">
-                                <span class="input-group-text">месяцев</span>
-                            </div>
-
-                            <label for="depositRefill" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Пополнение') }}</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="depositRefill" name="refill" placeholder="10000" value="{{ $deposit->refill }}" aria-describedby="depositRefillHelp">
-                                <span class="input-group-text">руб.</span>
-                            </div>
-                            <div id="depositRefillHelp" class="form-text mb-3">{{ __('Сумма ежемесячного пополнения вклада') }}</div>
 
                             <div class="mb-3">
-                                <label for="capitalization" class="form-label">{!! Icons::get(Icons::CAPITALIZATION) !!} {{ __('Капитализация') }}</label>
+                                <label for="depositPercent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="depositPercent" name="percent" placeholder="14.9" value="{{ $deposit->percent }}">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="depositPeriod" class="form-label">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="depositPeriod" name="period" placeholder="36" value="{{ $deposit->period }}">
+                                    <span class="input-group-text">месяцев</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="depositRefill" class="form-label">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Пополнение') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="depositRefill" name="refill" placeholder="10000" value="{{ $deposit->refill }}" aria-describedby="depositRefillHelp">
+                                    <span class="input-group-text currency">{{ $deposit->currency }}</span>
+                                </div>
+                                <div id="depositRefillHelp" class="form-text mb-3">{{ __('Сумма ежемесячного пополнения вклада') }}</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="capitalization" class="form-label">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Капитализация') }}</label>
                                 <select class="form-select" id="capitalization" name="capitalization" aria-label="Default select example" aria-describedby="depositPlowBackHelp">
                                     <option {{ $deposit->capitalization == PlowBack::WITHOUT ? 'selected': '' }} value="{{ PlowBack::WITHOUT }}">{{ __('При закрытии кредита') }}</option>
                                     <option {{ $deposit->capitalization == PlowBack::DAILY   ? 'selected': '' }} value="{{ PlowBack::DAILY }}">{{ __('Ежедневно') }}</option>
@@ -88,13 +95,15 @@
 
                             <div class="mb-3 form-check">
                                 <input type="checkbox" {{ $deposit->withdrawal > 0 ? 'checked' : '' }} class="form-check-input" id="depositWd" name="withdrawal" aria-describedby="depositWdHelp">
-                                <label class="form-check-label" for="depositWd">{!! Icons::get(Icons::WITHDRAWAL) !!}  {{ __('Снимать проценты') }}</label>
+                                <label class="form-check-label" for="depositWd">{!! Icons::get(Icons::RESET) !!}  {{ __('Снимать проценты') }}</label>
                                 <div id="depositWdHelp" class="form-text">{{ __('Снимать ежемесячно проценты или капитализировать во вклад') }}</div>
                             </div>
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('deposit.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                            <div class="mb-3">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <a href="{{ route('deposit.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::SAVE) !!} {{ __('Сохранить') }}</button>
+                                </div>
                             </div>
                         </form>
 
@@ -113,4 +122,14 @@
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script type="module">
+            $(document).ready(function() {
+                $('#currency').change(function() {
+                    $('.currency').html($(this).val());
+                });
+            });
+        </script>
+    @endpush
 @endsection

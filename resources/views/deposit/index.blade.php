@@ -24,7 +24,7 @@
                                     <th>{!! Icons::get(Icons::BANK) !!} Банк</th>
                                     <th class="text-center">{!! Icons::get(Icons::PERCENT) !!} Процент</th>
                                     <th class="text-end">{!! Icons::get(Icons::PROFIT_UP) !!} Заработок</th>
-                                    <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} Баланс</th>
+                                    <th class="text-end">{!! Icons::get(Icons::AMOUNT) !!} Баланс</th>
                                     <th class="text-end">{!! Icons::get(Icons::TOOLS) !!} Действия</th>
                                 </tr>
                             </thead>
@@ -35,8 +35,8 @@
                                         <td data-label="Название"><a class="text-decoration-none text-primary" href="{{ route('deposit.show', $deposit->deposit_id) }}">{{ $deposit->title ?? '' }}</a></td>
                                         <td data-label="Банк">{{ $deposit->depositor ?? '' }}</td>
                                         <td data-label="Процент" class="text-center">{{ $deposit->percent ?? 0 }}%</td>
-                                        <td data-label="Заработок" class="text-end">{{ number_format($deposit->profit, 2, '.', ' ') }} {{ __('р.') }}</td>
-                                        <td data-label="Баланс" class="text-end">{{ number_format($deposit->to_withdraw, 2, '.', ' ') }} {{ __('р.') }}</td>
+                                        <td data-label="Заработок" class="text-end">{{ number_format($deposit->profit, 2, '.', ' ') }} {{ $deposit->currency }}</td>
+                                        <td data-label="Баланс" class="text-end">{{ number_format($deposit->to_withdraw, 2, '.', ' ') }} {{ $deposit->currency }}</td>
                                         <td data-label="Действия" class="text-end">
                                             <form method="post" action="{{ route('deposit.destroy', $deposit->deposit_id) }}">
                                                 @csrf
@@ -55,7 +55,7 @@
                         </table>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                            <a href="{{ route('deposit.create') }}" class="btn btn-primary">Добавить вклад</a>
+                            <a href="{{ route('deposit.create') }}" class="btn btn-primary">{!! Icons::get(Icons::CREATE) !!} {{ __('Добавить вклад') }}</a>
                         </div>
 
                     </div>

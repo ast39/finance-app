@@ -1,5 +1,6 @@
 @php
     use App\Libs\Icons;
+    use App\Libs\Helper;
 @endphp
 
 @extends('layouts.app')
@@ -53,34 +54,36 @@
                                 @forelse($credits as $credit)
                                     <tr>
                                         <td data-label="#"><b>{{ $loop->iteration }}</b></td>
-                                        <td data-label="{{ __('Название') }}"><a class="text-decoration-none text-primary" href="{{ route('credit.show', $credit['credit_id']) }}">{{ $credit['title'] ?? '' }}</a></td>
-                                        <td data-label="{{ __('Банк') }}">{{ $credit['creditor'] ?? '' }}</td>
+                                        <td data-label="{{ __('Название') }}"><a class="text-decoration-none text-primary" href="{{ route('credit.show', $credit->credit->credit_id) }}">{{ $credit->credit->title ?? '' }}</a></td>
+                                        <td data-label="{{ __('Банк') }}">{{ $credit->credit->creditor ?? '' }}</td>
 
-                                        <td data-label="{{ __('Дней до платежа') }}" class="text-center {{ $credit['days_to'] <= 5 ? 'text-danger' : ($credit['days_to'] <= 10 ? 'text-warning' : 'text-success') }}">
-                                            {{ $credit['days_to'] < 0 ? __('Просрочен') : ($credit['days_to'] > 0 ? $credit['days_to'] . Helper::number($credit['days_to'] ?? 0, [__('день'), __('дня'), __('дней')]) : __('Сегодня')) }}
+                                        <td data-label="{{ __('Дней до платежа') }}" class="text-center {{ $credit->days_to <= 5 ? 'text-danger' : ($credit->days_to <= 10 ? 'text-warning' : 'text-success') }}">
+                                            {{ $credit->days_to < 0 ? __('Просрочен') : ($credit->days_to > 0 ? $credit->days_to . Helper::number($credit->days_to ?? 0, [__('день'), __('дня'), __('дней')]) : __('Сегодня')) }}
                                         </td>
-                                        <td data-label="{{ __('Сумма платежа') }}" class="text-end">{{ number_format($credit['payment'], 2, '.', ' ')}} {{ __('р.') }}</td>
-                                        <td data-label="{{ __('Выплачено долга') }}" class="text-end">{{ number_format($credit['data']->balance_payed, 0, '.', ' ') }} {{ __('р.') }}</td>
-                                        <td data-label="{{ __('Остаток') }}" class="text-end">{{ number_format($credit['data']->balance_owed, 0, '.', ' ') }} {{ __('р.') }}</td>
+                                        <td data-label="{{ __('Сумма платежа') }}" class="text-end">{{ number_format($credit->credit->payment, 2, '.', ' ')}} {{ $credit->credit->currency }}</td>
+                                        <td data-label="{{ __('Выплачено долга') }}" class="text-end">{{ number_format($credit->balance_payed, 0, '.', ' ') }} {{ $credit->credit->currency }}</td>
+                                        <td data-label="{{ __('Остаток') }}" class="text-end">{{ number_format($credit->balance_owed, 0, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                         <td data-label="{{ __('Действия') }}" class="text-end">
-                                            <form method="post" action="{{ route('manage.credit.destroy', $credit['credit_id']) }}">
+                                            <form method="post" action="{{ route('credit.destroy', $credit->credit->credit_id) }}">
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <a title="{{ __('Открыть') }}" href="{{ route('credit.show', $credit['credit_id']) }}" class="btn btn-primary"><i class="bi bi-text-center" style="font-size: 1rem"></i></a>
-                                                <a title="{{ __('Изменить') }}" href="{{ route('credit.edit', $credit['credit_id']) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                                <button type="submit" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кредит?') }}')" class="btn btn-danger"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
+                                                <a title="Открыть" href="{{ route('credit.show', $credit->credit->credit_id) }}" class="btn btn-sm btn-primary me-1"><i class="bi bi-text-center" style="font-size: 1rem"></i></a>
+                                                <a title="Изменить" href="{{ route('credit.edit', $credit->credit->credit_id) }}" class="btn btn-sm btn-warning me-1"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
+                                                <button type="submit" title="Удалить" onclick="return confirm('Вы уверены, что хотите удалить кредит?')" class="btn btn-sm btn-danger"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
                                             </form>
                                         </td>
                                     </tr>
                                 @empty
-                                    <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('У вас нет текущих кредитов') }}</div>
+                                    <tr>
+                                        <td colspan="8" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('У вас нет текущих кредитов') }}</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                            <a href="{{ route('credit.create') }}" class="btn btn-primary">Добавить кредит</a>
+                            <a href="{{ route('credit.create') }}" class="btn btn-primary">{!! Icons::get(Icons::CREATE) !!} {{ __('Добавить кредит') }}</a>
                         </div>
 
 {{--                        <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument">--}}
