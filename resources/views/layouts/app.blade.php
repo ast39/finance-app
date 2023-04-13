@@ -94,6 +94,10 @@
                                         <a class="dropdown-item" href="{{ route('spend.index') }}">{!! Icons::get(Icons::SPEND) !!} {{ __('Траты') }}</a>
                                     @endif
 
+                                    @if (Route::has('spend.category.index'))
+                                        <a class="dropdown-item" href="{{ route('spend.category.index') }}">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категории') }}</a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {!! Icons::get(Icons::LOGOUT) !!} {{ __('Logout') }}
                                     </a>

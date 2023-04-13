@@ -12,7 +12,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Добавить расход') }}</div>
-
                     <div class="card-body">
 
                         {{--Форма добавления расхода --}}
@@ -35,23 +34,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="category_id" class="form-label">{!! Icons::get(Icons::TAG) !!} {{ __('Категория') }}</label>
-                                <select name="category_id" id="category_id" class="form-select form-control" aria-describedby="category_idHelp">
-                                    @forelse($categories as $category)
-                                        <option value="{{ $category->category_id }}">{{ $category->title }}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
-                                <div id="category_idHelp" class="form-text">{{ __('Категория расхода') }}</div>
-                                @error('category_id')
-                                    <p class="text-danger mt-2">{{ $message }}</p>
-                                @enderror
+                                <label for="category_id" class="form-label">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</label>
+                                <div class="input-group mb-3">
+                                    <select name="category_id" id="category_id" class="form-select form-control" aria-describedby="category_idHelp">
+                                        @forelse($categories as $category)
+                                            <option value="{{ $category->category_id }}">{{ $category->title }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    <a href="{{ route('spend.category.create') }}" class="btn btn-outline-secondary" type="button" id="button-addon2">{!! Icons::get(Icons::PLUS) !!}</a>
+                                </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="note" class="form-label">{!! Icons::get(Icons::NOTE) !!} {{ __('Описание') }}</label>
                                 <textarea class="form-control" id="note" name="note" placeholder="{{ __('Описание кошелька') }}" rows="5" aria-describedby="noteHelp">{{ old('note') }}</textarea>
-                                <div id="noteHelp" class="form-text">{{ __('Заметка о назначении кошелька') }}</div>
+                                <div id="noteHelp" class="form-text">{{ __('Заметка о назначении платежа') }}</div>
                                 @error('note')
                                     <p class="text-danger mt-2">{{ $message }}</p>
                                 @enderror
@@ -60,7 +58,7 @@
                             <div class="mb-3">
                                 <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
                                 <input type="text" class="form-control" id="amount" name="amount" placeholder="1000" value="{{ old('amount') }}" aria-describedby="amountHelp">
-                                <div id="amountHelp" class="form-text mb-3">{{ __('Начальная сумма в кошельке') }}</div>
+                                <div id="amountHelp" class="form-text mb-3">{{ __('Сумма платежа') }}</div>
                                 @error('amount')
                                     <p class="text-danger mt-2">{{ $message }}</p>
                                 @enderror
@@ -68,8 +66,8 @@
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <a href="{{ route('spend.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                    <button type="submit" class="btn btn-primary">{{ __('Добавить') }}</button>
+                                    <a href="{{ route('spend.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::CREATE) !!} {{ __('Добавить') }}</button>
                                 </div>
                             </div>
                         </form>

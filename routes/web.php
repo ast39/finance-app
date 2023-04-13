@@ -163,7 +163,6 @@ Route::group(['prefix' => 'spend', 'middleware' => ['auth']], function() {
         Route::get('', [SpendCategoryController::class, 'index'])->name('spend.category.index');
         Route::get('create', [SpendCategoryController::class, 'create'])->name('spend.category.create');
         Route::post('', [SpendCategoryController::class, 'store'])->name('spend.category.store');
-        Route::get('{id}', [SpendCategoryController::class, 'show'])->name('spend.category.show');
         Route::get('{id}/edit', [SpendCategoryController::class, 'edit'])->name('spend.category.edit');
         Route::put('{id}', [SpendCategoryController::class, 'update'])->name('spend.category.update');
         Route::delete('{id}', [SpendCategoryController::class, 'destroy'])->name('spend.category.destroy');

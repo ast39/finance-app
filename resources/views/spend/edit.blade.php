@@ -30,22 +30,21 @@
                                 </select>
                                 <div id="wallet_idHelp" class="form-text">{{ __('С какого кошелька платим') }}</div>
                                 @error('wallet_id')
-                                <p class="text-danger mt-2">{{ $message }}</p>
+                                    <p class="text-danger mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="category_id" class="form-label">{!! Icons::get(Icons::TAG) !!} {{ __('Категория') }}</label>
-                                <select name="category_id" id="category_id" class="form-select form-control" aria-describedby="category_idHelp">
-                                    @forelse($categories as $category)
-                                        <option value="{{ $category->category_id }}" {{ $spend->category_id == $category->category_id ? 'selected' : '' }}>{{ $category->title }}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
-                                <div id="category_idHelp" class="form-text">{{ __('Категория расхода') }}</div>
-                                @error('category_id')
-                                <p class="text-danger mt-2">{{ $message }}</p>
-                                @enderror
+                                <label for="category_id" class="form-label">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</label>
+                                <div class="input-group mb-3">
+                                    <select name="category_id" id="category_id" class="form-select form-control" aria-describedby="category_idHelp">
+                                        @forelse($categories as $category)
+                                            <option value="{{ $category->category_id }}" {{ $spend->category_id == $category->category_id ? 'selected' : '' }}>{{ $category->title }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                    <a href="{{ route('spend.category.create') }}" class="btn btn-outline-secondary" type="button" id="button-addon2">{!! Icons::get(Icons::PLUS) !!}</a>
+                                </div>
                             </div>
 
                             <div class="mb-3">
@@ -59,7 +58,7 @@
 
                             <div class="mb-3">
                                 <label for="amount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
-                                <input type="text" class="form-control" id="amount" name="amount" placeholder="1000" value="{{ $spend->amount }}" aria-describedby="amountHelp">
+                                <input type="text" class="form-control" id="amount" name="amount" placeholder="1000" value="{{ abs($spend->amount) }}" aria-describedby="amountHelp">
                                 <div id="amountHelp" class="form-text mb-3">{{ __('Начальная сумма в кошельке') }}</div>
                                 @error('amount')
                                     <p class="text-danger mt-2">{{ $message }}</p>
@@ -68,8 +67,8 @@
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <a href="{{ route('spend.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                    <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                                    <a href="{{ route('spend.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::SAVE) !!} {{ __('Сохранить') }}</button>
                                 </div>
                             </div>
                         </form>

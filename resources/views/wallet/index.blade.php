@@ -109,9 +109,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4">
-                                            <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</div>
-                                        </td>
+                                        <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</td>
                                     </tr>
                                 @endforelse
                             </tbody>

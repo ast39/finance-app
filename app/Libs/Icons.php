@@ -5,6 +5,8 @@ namespace App\Libs;
 class Icons {
 
     const TITLE         = 'bi bi-text-indent-left';   // заголовок
+    const LIST          = 'bi bi-list-ul';            // список
+    const CATEGORY      = 'bi bi-tag';                // категория
     const CURRENCY      = 'bi bi-currency-exchange';  // валюты
     const NOTE          = 'bi bi-card-text';          // записки
     const SEARCH        = 'bi bi-search';             // поиск
@@ -30,14 +32,15 @@ class Icons {
     const SAVE          = 'bi bi-cloud-arrow-up';     // сохранить
     const EDIT          = 'bi bi-pencil-square';      // изменить
     const DELETE        = 'bi bi-trash';              // удалить
+    const PLUS          = 'bi bi-plus-lg';            // плюс
 
 
 
     const BANK           = 'bi bi-bank';
     const TYPE           = 'bi bi-list';
-    const CATEGORY       = 'bi bi-list-ul';
 
-    const TAG            = 'bi bi-tag';
+
+
     const SPEND          = 'bi bi-cart-dash';
     const LOGOUT         = 'bi bi-box-arrow-right';
     const DEPOSITS       = 'bi bi-box-arrow-in-down';
@@ -63,7 +66,6 @@ class Icons {
     const CAPITALIZATION = 'bi bi-cash-coin';
     const WITHDRAWAL     = 'bi bi-arrow-counterclockwise';
     const COUNTER        = 'bi bi-123';
-    const LIST           = 'bi bi-list-ol';
 
     const QUESTION       = 'bi bi-question-circle';
 

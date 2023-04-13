@@ -12,7 +12,6 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-
                     <div class="card-header">{{ __('Мои расходы') }}</div>
 
                     <div class="card-body">
@@ -47,8 +46,8 @@
                                 </div>
 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button type="submit" class="btn btn-primary">{{ __('Показать') }}</button>
-                                    <a href="{{ route('spend.index') }}" class="btn btn-secondary">{{ __('Сброс') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::SEARCH) !!} {{ __('Показать') }}</button>
+                                    <a href="{{ route('spend.index') }}" class="btn btn-secondary">{!! Icons::get(Icons::RESET) !!} {{ __('Сброс') }}</a>
                                 </div>
                             </form>
                         </div>
@@ -59,46 +58,48 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{!! Icons::get(Icons::TITLE) !!} {{ __('Дата') }}</th>
-                                    <th class="text-center">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Категория') }}</th>
-                                    <th class="text-center">{!! Icons::get(Icons::BALANCE) !!} {{ __('Кошелек') }}</th>
-                                    <th>{!! Icons::get(Icons::BALANCE) !!} {{ __('Комментарий') }}</th>
-                                    <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</th>
+                                    <th>{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата') }}</th>
+                                    <th class="text-center">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</th>
+                                    <th class="text-center">{!! Icons::get(Icons::WALLET) !!} {{ __('Кошелек') }}</th>
+                                    <th>{!! Icons::get(Icons::NOTE) !!} {{ __('Комментарий') }}</th>
+                                    <th class="text-end">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Сумма') }}</th>
                                     <th class="text-end">{!! Icons::get(Icons::TOOLS) !!} {{ __('Действия') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @forelse($spends as $spend)
-                                <tr class="align-middle">
-                                    <td data-label="#"><b>{{ ($spends->currentpage() - 1) * $spends->perpage() + $loop->index + 1 }}</b></td>
-                                    <td data-label="{{ __('Дата') }}">{{ date('d.m.Y', $spend->created_at) }}</td>
-                                    <td class="text-center" data-label="{{ __('Категория') }}">{{ $spend->category->title ?? '' }}</td>
-                                    <td class="text-center" data-label="{{ __('Кошелек') }}">{{ $spend->wallet->title ?? ' - ' }}</td>
-                                    <td data-label="{{ __('Комментарий') }}">{{ $spend->note ?? '' }}</td>
-                                    <td class="text-end" data-label="{{ __('Сумма') }}">{{ number_format($spend->amount ?? 0, 2, '.', ' ') }} {{ $spend->wallet->currency->abbr ?? '' }}</td>
-                                    <td class="text-end" data-label="{{ __('Действия') }}">
-                                        <form method="post" action="{{ route('spend.destroy', $spend->spend_id) }}">
-                                            @csrf
-                                            @method('DELETE')
+                                @forelse($spends as $spend)
+                                    <tr class="align-middle">
+                                        <td data-label="#"><b>{{ ($spends->currentpage() - 1) * $spends->perpage() + $loop->index + 1 }}</b></td>
+                                        <td data-label="{{ __('Дата') }}">{{ date('d.m.Y', $spend->created_at) }}</td>
+                                        <td class="text-center" data-label="{{ __('Категория') }}">{{ $spend->category->title ?? '' }}</td>
+                                        <td class="text-center" data-label="{{ __('Кошелек') }}">{{ $spend->wallet->title ?? ' - ' }}</td>
+                                        <td data-label="{{ __('Комментарий') }}">{{ $spend->note ?? '' }}</td>
+                                        <td class="text-end" data-label="{{ __('Сумма') }}">{{ number_format($spend->amount ?? 0, 2, '.', ' ') }} {{ $spend->wallet->currency->abbr ?? '' }}</td>
+                                        <td class="text-end" data-label="{{ __('Действия') }}">
+                                            <form method="post" action="{{ route('spend.destroy', $spend->spend_id) }}">
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <a title="{{ __('Изменить') }}" href="{{ route('spend.edit', $spend->spend_id) }}" class="btn btn-sm btn-warning me-1"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
-                                            <button type="submit" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Вы уверены, что хотите удалить запись?') }}')" class="btn btn-sm btn-danger"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('У вас не было расходов') }}</div>
-                            @endforelse
+                                                <a title="{{ __('Изменить') }}" href="{{ route('spend.edit', $spend->spend_id) }}" class="btn btn-sm btn-warning me-1"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
+                                                <button type="submit" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Вы уверены, что хотите удалить запись?') }}')" class="btn btn-sm btn-danger"><i class="bi bi-trash" style="font-size: 1rem"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('У вас не было расходов') }}</td>
+                                    </tr>
+                                @endforelse
 
-                            <div>
-                                {{ $spends->links() }}
-                            </div>
+                                <div>
+                                    {{ $spends->links() }}
+                                </div>
                             </tbody>
                         </table>
 
-                        {{-- Кнопка добавления кошелька --}}
+                        {{-- Кнопка добавления расхода --}}
                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                            <a href="{{ route('spend.create') }}" class="btn btn-primary">{{ __('Добавить расход') }}</a>
+                            <a href="{{ route('spend.create') }}" class="btn btn-primary">{!! Icons::get(Icons::WALLET) !!} {{ __('Добавить расход') }}</a>
                         </div>
 
                         {{-- Сальдо по расходам --}}
@@ -109,7 +110,7 @@
                                     <th class="text-start">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</th>
                                     <th class="text-center">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
                                     <th class="text-center">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Транзакций по категории') }}</th>
-                                    <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Потрачено в категории') }}</th>
+                                    <th class="text-end">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Потрачено в категории') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,23 +124,17 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4">
-                                                <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</div>
-                                            </td>
+                                            <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</td>
                                         </tr>
                                     @endforelse
                                 @empty
                                     <tr>
-                                        <td colspan="4">
-                                            <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</div>
-                                        </td>
+                                        <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
-
                     </div>
-
                 </div>
             </div>
         </div>
