@@ -44,10 +44,11 @@ class CreditManager {
         ?float   $payment,
         ?array   $payments,
         ?int     $credit_id = null,
+        ?string  $creditor  = null,
     ): RequestData|string
     {
         try {
-            return new RequestData($title, $currency, $payment_type, $start_date, $payment_date, $subject, $amount, $percent, $period, $payment, $payments, $credit_id);
+            return new RequestData($title, $currency, $payment_type, $start_date, $payment_date, $subject, $amount, $percent, $period, $payment, $payments, $credit_id, $creditor);
         } catch (RequestDataException $exception) {
             return $exception->getCode() . ': '. $exception->getMessage();
         }

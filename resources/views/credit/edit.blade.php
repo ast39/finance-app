@@ -45,43 +45,53 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="creditStart" class="form-label">{!! Icons::get(Icons::CALENDAR_MONTH) !!} {{ __('День взятия кредита') }}</label>
+                                <label for="creditStart" class="form-label">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('День взятия кредита') }}</label>
                                 <input type="date" class="form-control" id="creditStart" name="start_date" value="{{ date('Y-m-d', $credit->start_date) }}" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="creditPayDay" class="form-label">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('День первого платежа') }}</label>
+                                <label for="creditPayDay" class="form-label">{!! Icons::get(Icons::CALENDAR) !!} {{ __('День первого платежа') }}</label>
                                 <input type="date" class="form-control" id="creditPayDay" name="payment_date" value="{{ date('Y-m-d', $credit->payment_date) }}" />
                             </div>
 
-                            <label for="creditAmount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="creditAmount" name="amount" value="{{ $credit->amount ?? '' }}" placeholder="250000">
-                                <span class="input-group-text">{{ __('руб.') }}</span>
+                            <div class="mb-3">
+                                <label for="creditAmount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="creditAmount" name="amount" value="{{ $credit->amount ?? '' }}" placeholder="250000">
+                                    <span class="input-group-text currency">{{ $credit->currency }}</span>
+                                </div>
                             </div>
 
-                            <label for="creditPercent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="creditPercent" name="percent" value="{{ $credit->percent ?? '' }}" placeholder="14.9">
-                                <span class="input-group-text">%</span>
+                            <div class="mb-3">
+                                <label for="creditPercent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="creditPercent" name="percent" value="{{ $credit->percent ?? '' }}" placeholder="14.9">
+                                    <span class="input-group-text">%</span>
+                                </div>
                             </div>
 
-                            <label for="creditPeriod" class="form-label">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="creditPeriod" name="period" value="{{ $credit->period ?? '' }}" placeholder="36">
-                                <span class="input-group-text">{{ __('месяцев') }}</span>
+                            <div class="mb-3">
+                                <label for="creditPeriod" class="form-label">{!! Icons::get(Icons::PERIOD) !!} {{ __('Срок') }}</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="creditPeriod" name="period" value="{{ $credit->period ?? '' }}" placeholder="36">
+                                    <span class="input-group-text">{{ __('месяцев') }}</span>
+                                </div>
                             </div>
 
-                            <label for="creditPayment" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="creditPayment" name="payment" value="{{ $credit->payment ?? '' }}" placeholder="8654.09" aria-describedby="creditPaymentHelp">
-                                <span class="input-group-text">{{ __('руб.') }}</span>
+                            <div class="mb-3">
+                                <label for="creditPayment" class="form-label">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Платеж') }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="creditPayment" name="payment" value="{{ $credit->payment ?? '' }}" placeholder="8654.09" aria-describedby="creditPaymentHelp">
+                                    <span class="input-group-text currency">{{ $credit->currency }}</span>
+                                </div>
+                                <div id="creditPaymentHelp" class="form-text mb-3">{{ __('Ваш ежемесячный платеж по кредиту') }}</div>
                             </div>
-                            <div id="creditPaymentHelp" class="form-text mb-3">{{ __('Ваш ежемесячный платеж по кредиту') }}</div>
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('credit.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                <button type="submit" class="btn btn-primary">{{ __('Сохранить') }}</button>
+                            <div class="mb-3">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <a href="{{ route('credit.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::SAVE) !!} {{ __('Сохранить') }}</button>
+                                </div>
                             </div>
 
                         </form>
@@ -101,4 +111,14 @@
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script type="module">
+            $(document).ready(function() {
+                $('#currency').change(function() {
+                    $('.currency').html($(this).val());
+                });
+            });
+        </script>
+    @endpush
 @endsection

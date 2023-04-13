@@ -30,16 +30,16 @@
                                     <td>{{ $credit->credit->creditor ?? '' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::CALENDAR_MONTH) !!} {{ __('Дата взятия кредита') }}</th>
-                                    <td>{{ date('d-m-Y', $credit->credit->start_date ?? 0) }}</td>
+                                    <th>{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата взятия кредита') }}</th>
+                                    <td>{{ date('d.m.Y', $credit->credit->start_date ?? 0) }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата первого платежа') }}</th>
-                                    <td>{{ date('d-m-Y', $credit->credit->payment_date ?? 0) }}</td>
+                                    <th>{!! Icons::get(Icons::CALENDAR) !!} {{ __('Дата первого платежа') }}</th>
+                                    <td>{{ date('d.m.Y', $credit->credit->payment_date ?? 0) }}</td>
                                 </tr>
                                 <tr>
                                     <th>{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</th>
-                                    <td>{{ number_format($credit->credit->amount ?? '', 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                    <td>{{ number_format($credit->credit->amount ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
                                 <tr>
                                     <th>{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</th>
@@ -51,27 +51,26 @@
                                 </tr>
                                 <tr>
                                     <th>{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</th>
-                                    <td>{{ number_format($credit->credit->payment ?? '', 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                    <td>{{ number_format($credit->credit->payment ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
 
-                                <tr><td colspan="2"></td></tr>
+                                <tr><td colspan="2">&nbsp;</td></tr>
+
                                 <tr>
                                     <th>{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Переплата') }}</th>
-                                    <td>{{ number_format($credit->overpay ?? '', 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                    <td>{{ number_format($credit->overpay ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
                                 <tr>
                                     <th>{!! Icons::get(Icons::PAYING) !!} {{ __('Сумма выплат') }}</th>
-                                    <td>{{ number_format($credit->total_amount ?? '', 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                    <td>{{ number_format($credit->total_amount ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
-
-                                <tr><td colspan="2"></td></tr>
                                 <tr>
                                     <th>{!! Icons::get(Icons::WAS_PAYED) !!} {{ __('Выплачено долга') }}</th>
-                                    <td>{{ number_format($credit->balance_payed ?? '', 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                    <td>{{ number_format($credit->balance_payed ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
                                 <tr>
                                     <th>{!! Icons::get(Icons::WILL_PAY) !!} {{ __('Остаток долга') }}</th>
-                                    <td>{{ number_format($credit->balance_owed ?? '', 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                    <td>{{ number_format($credit->balance_owed ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,10 +80,10 @@
                             @method('DELETE')
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <a href="{{ route('credit.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                <a href="{{ route('credit.payment.create', $credit->credit->credit_id) }}" class="btn btn-primary me-md-2">{{ __('Внести платеж') }}</a>
-                                <a href="{{ route('credit.edit', $credit->credit->credit_id) }}" class="btn btn-warning me-md-2">{{ __('Изменить') }}</a>
-                                <button type="submit" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кредит?') }}')" class="btn btn-danger">{{ __('Удалить') }}</button>
+                                <a href="{{ route('credit.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                <a href="{{ route('credit.payment.create', $credit->credit->credit_id) }}" class="btn btn-primary me-md-2">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Внести платеж') }}</a>
+                                <a href="{{ route('credit.edit', $credit->credit->credit_id) }}" class="btn btn-warning me-md-2">{!! Icons::get(Icons::EDIT) !!} {{ __('Изменить') }}</a>
+                                <button type="submit" onclick="return confirm('{{ __('Вы уверены, что хотите удалить кредит?') }}')" class="btn btn-danger">{!! Icons::get(Icons::DELETE) !!} {{ __('Удалить') }}</button>
                             </div>
 
                         </form>
@@ -121,7 +120,7 @@
                                             @forelse($credit->details as $row)
                                                 <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-active': '' }}">
                                                     <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
-                                                    <td data-label="{{ __('Месяц') }}" class="text-center">{{ date('d-m-Y', $row['date_time']) }}</td>
+                                                    <td data-label="{{ __('Месяц') }}" class="text-center">{{ date('d.m.Y', $row['date_time']) }}</td>
                                                     <td data-label="{{ __('Баланс') }}" class="text-end">{{ number_format($row['inset_balance'], 2, '.', ' ') }}</td>
                                                     <td data-label="{{ __('Платеж') }}" class="text-end">{{ number_format($row['credit_payment'], 2, '.', ' ') }}</td>
                                                     <td data-label="{{ __('Проценты') }}" class="text-end">{{ number_format($row['payment_percent'], 2, '.', ' ') }}</td>
@@ -163,7 +162,7 @@
                                 <td>{{ number_format($payed_percent + $payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">{!! Icons::get(Icons::CHECKED) !!} {{ __('Сделано платежей') }}</th>
+                                <th scope="row">{!! Icons::get(Icons::CHECK) !!} {{ __('Сделано платежей') }}</th>
                                 <td>{{ $payed_payments }}</td>
                             </tr>
                             <tr>
@@ -171,7 +170,7 @@
                                 <td>{{ count($credit->details) - $payed_payments }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">{!! Icons::get(Icons::SPEND) !!} {{ __('Остаток долга') }}</th>
+                                <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Остаток долга') }}</th>
                                 <td>{{ number_format($credit->credit->amount - $payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
                             </tr>
                             </tbody>

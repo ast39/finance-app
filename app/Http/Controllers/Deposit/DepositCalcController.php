@@ -38,7 +38,7 @@ class DepositCalcController extends Controller {
 
         $data['owner_id'] = Auth::id() ?? null;
         $data['withdrawal'] = ($data['withdrawal'] ?? 'off') == 'on' ? 1 : 0;
-        $data['start_date'] = strtotime(($data['start_date'] ?? date('d-m-Y', time())) . ' 09:00:00');
+        $data['start_date'] = strtotime(($data['start_date'] ?? date('d.m.Y', time())) . ' 09:00:00');
         $id = DepositCalculate::create($data)->deposit_id;
 
         return redirect()->route('deposit.calc.show', $id);

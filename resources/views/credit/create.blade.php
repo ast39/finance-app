@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="creditStart" class="form-label">{!! Icons::get(Icons::CALENDAR_MONTH) !!} {{ __('Дата взятия кредита') }}</label>
+                                <label for="creditStart" class="form-label">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата взятия кредита') }}</label>
                                 <input type="date" class="form-control" id="creditStart" name="start_date" value="{{ old('start_date') }}" />
                                 @error('start_date')
                                     <p class="text-danger mt-2">{{ $message }}</p>
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="creditPayDay" class="form-label">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата первого платежа') }}</label>
+                                <label for="creditPayDay" class="form-label">{!! Icons::get(Icons::CALENDAR) !!} {{ __('Дата первого платежа') }}</label>
                                 <input type="date" class="form-control" id="creditPayDay" name="payment_date" value="{{ old('payment_date') }}" />
                                 @error('payment_date')
                                     <p class="text-danger mt-2">{{ $message }}</p>
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="creditAmount" class="form-label">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Сумма') }}</label>
+                                <label for="creditAmount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" id="creditAmount" name="amount" placeholder="250000" value="{{ old('amount') }}">
                                     <span class="input-group-text currency">{{ __('RUB') }}</span>
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="creditPayment" class="form-label">{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</label>
+                                <label for="creditPayment" class="form-label">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Платеж') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="creditPayment" name="payment" placeholder="8654.09" value="{{ old('payment') }}" aria-describedby="creditPaymentHelp">
                                     <span class="input-group-text currency">{{ __('RUB') }}</span>
@@ -111,8 +111,8 @@
 
                             <div class="mb-3">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <a href="{{ route('credit.index') }}" class="btn btn-secondary me-md-2">{{ __('Назад') }}</a>
-                                    <button type="submit" class="btn btn-primary">{{ __('Добавить') }}</button>
+                                    <a href="{{ route('credit.index') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::RETURN) !!} {{ __('Назад') }}</a>
+                                    <button type="submit" class="btn btn-primary">{!! Icons::get(Icons::CREATE) !!} {{ __('Добавить') }}</button>
                                 </div>
                             </div>
                         </form>

@@ -28,7 +28,9 @@ class Icons {
     const TITLE         = 'bi bi-text-indent-left';       // заголовок
     const BANK          = 'bi bi-bank';                   // банк
     const LIST          = 'bi bi-list-ul';                // список
+    const CHECK_LIST    = 'bi bi-card-checklist';         // чек лист
     const CALENDAR_DAY  = 'bi bi-calendar2-date';         // дата календаря
+    const CALENDAR      = 'bi bi-calendar3';              // общий календарь
     const CURRENCY      = 'bi bi-currency-exchange';      // валюта
     const NOTE          = 'bi bi-card-text';              // записки
     const PROFIT_UP     = 'bi bi-bar-chart';              // профит
@@ -66,10 +68,6 @@ class Icons {
 
     const PAYMENT        = 'bi bi-cash-stack';
 
-    const CALENDAR_MONTH = 'bi bi-calendar3';
-
-    const CHECK_LIST     = 'bi bi-card-checklist';
-    const CHECKED        = 'bi bi-check2-all';
 
     const PAYING         = 'bi bi-hourglass-top';
     const WAS_PAYED      = 'bi-hourglass-split';

@@ -22,7 +22,7 @@
 
                             <div class="mb-3">
                                 <label for="title" class="form-label">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</label>
-                                <input type="text" readonly class="form-control" id="title" name="title" value="{{ __('Расчет от') }} {{ date('d-m-Y H:i:s') }}" aria-describedby="amountHelp">
+                                <input type="text" readonly class="form-control" id="title" name="title" value="{{ __('Расчет от') }} {{ date('d.m.Y H:i:s') }}" aria-describedby="amountHelp">
                             </div>
 
                             <div class="mb-3">

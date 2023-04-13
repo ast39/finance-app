@@ -31,7 +31,7 @@
                             </tr>
                             <tr>
                                 <th>{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата открытия') }}</th>
-                                <td>{{ date('d-m-Y', $deposit->deposit->start_date ?? 0) }}</td>
+                                <td>{{ date('d.m.Y', $deposit->deposit->start_date ?? 0) }}</td>
                             </tr>
                             <tr>
                                 <th>{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</th>
@@ -104,7 +104,7 @@
                                             @forelse($deposit->details as $row)
                                                 <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-like-a-accordion' : '' }}">
                                                     <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
-                                                    <td data-label="Месяц" class="text-center">{{ date('d-m-Y', $row['date_time']) }}</td>
+                                                    <td data-label="Месяц" class="text-center">{{ date('d.m.Y', $row['date_time']) }}</td>
                                                     <td data-label="Баланс" class="text-end">{{ number_format($row['inset_balance'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
                                                     <td data-label="Проценты" class="text-end">{{ number_format($row['monthly_profit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
                                                     <td data-label="Пополнение" class="text-end">{{ number_format($row['monthly_refill'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>

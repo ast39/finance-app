@@ -64,7 +64,7 @@ class DepositController extends Controller {
         $data = $request->validated();
 
         $data['owner_id']   = Auth::id();
-        $data['start_date'] = strtotime(($data['start_date'] ?? date('d-m-Y', time())) . ' 09:00:00');
+        $data['start_date'] = strtotime(($data['start_date'] ?? date('d.m.Y', time())) . ' 09:00:00');
         $data['withdrawal'] = ($data['withdrawal'] ?? 'off') == 'on' ? 1 : 0;
 
         return redirect()->route('deposit.show', Deposit::create($data)->deposit_id);
@@ -108,7 +108,7 @@ class DepositController extends Controller {
     {
         $data = $request->validated();
 
-        $data['start_date'] = strtotime(($data['start_date'] ?? date('d-m-Y', time())) . ' 09:00:00');
+        $data['start_date'] = strtotime(($data['start_date'] ?? date('d.m.Y', time())) . ' 09:00:00');
         $data['withdrawal'] = ($data['withdrawal'] ?? 'off') == 'on' ? 1 : 0;
 
         $deposit = Deposit::find($id);

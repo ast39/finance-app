@@ -30,6 +30,7 @@ class CreditMutator {
             $credit->payment,
             $credit->payments->toArray(),
             $credit->credit_id ?? null,
+            $credit->creditor ?? null,
         );
 
         return (new CreditManager())->data($credit);

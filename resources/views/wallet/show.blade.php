@@ -97,7 +97,7 @@
                                                 @forelse($wallet['payments'] as $payment)
                                                     <tr class="align-middle">
                                                         <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
-                                                        <td data-label="{{ __('Дата') }}" class="text-center">{{ date('d-m-Y', $payment['date_time']) }}</td>
+                                                        <td data-label="{{ __('Дата') }}" class="text-center">{{ date('d.m.Y', $payment['date_time']) }}</td>
                                                         <td data-label="{{ __('Баланс') }}" class="text-end">{{ number_format($payment['inset_balance'], 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}</td>
                                                         <td data-label="{{ __('Прирост') }}" class="text-end {{ $payment['transaction_amount'] > 0 ? 'text-success': 'text-danger' }}">
                                                            {{ number_format($payment['transaction_amount'], 2, '.', ' ') }} {{ $wallet['currency']['abbr'] }}

@@ -45,6 +45,9 @@ class RequestData {
     # Список сделанных платежей
     public ?array  $payments;
 
+    # Банк
+    public ?string $creditor;
+
 
     /**
      * @param string $title
@@ -58,6 +61,8 @@ class RequestData {
      * @param int|null $period
      * @param float|null $payment
      * @param array|null $payments
+     * @param int|null $credit_id
+     * @param string|null $creditor
      * @throws RequestDataException
      */
     public function __construct(
@@ -73,6 +78,7 @@ class RequestData {
         ?float  $payment      = null,
         ?array  $payments     = null,
         ?int    $credit_id    = null,
+        ?string $creditor     = null,
     ) {
         $this->title        = $title;
         $this->currency     = $currency;
@@ -86,6 +92,7 @@ class RequestData {
         $this->payment    = (float) str_replace(',', '.', $payment);
         $this->payments   = $payments ?: [];
         $this->credit_id  = $credit_id;
+        $this->creditor   = $creditor;
 
         $this->validate();
     }

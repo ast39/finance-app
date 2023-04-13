@@ -77,8 +77,8 @@ class CreditController extends Controller {
         $data = $request->validated();
 
         $data['owner_id']     = Auth::id();
-        $data['start_date']   = strtotime(($data['start_date']   ?? date('d-m-Y', time())) . ' 09:00:00');
-        $data['payment_date'] = strtotime(($data['payment_date'] ?? date('d-m-Y', time())) . ' 09:00:00');
+        $data['start_date']   = strtotime(($data['start_date']   ?? date('d.m.Y', time())) . ' 09:00:00');
+        $data['payment_date'] = strtotime(($data['payment_date'] ?? date('d.m.Y', time())) . ' 09:00:00');
 
         return redirect()->route('credit.show', Credit::create($data)->credit_id);
     }
@@ -122,8 +122,8 @@ class CreditController extends Controller {
     {
         $data = $request->validated();
 
-        $data['start_date']   = strtotime(($data['start_date']   ?? date('d-m-Y', time())) . ' 09:00:00');
-        $data['payment_date'] = strtotime(($data['payment_date'] ?? date('d-m-Y', time())) . ' 09:00:00');
+        $data['start_date']   = strtotime(($data['start_date']   ?? date('d.m.Y', time())) . ' 09:00:00');
+        $data['payment_date'] = strtotime(($data['payment_date'] ?? date('d.m.Y', time())) . ' 09:00:00');
 
         $credit = Credit::find($id);
         if (is_null($credit)) {
