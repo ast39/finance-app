@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\Dictionarable;
 use App\Http\Filters\CreditFilter;
 use App\Http\Mutators\CreditMutator;
+use App\Http\Mutators\CreditSaldoMurtator;
 use App\Http\Requests\Credit\CreditStoreRequest;
 use App\Http\Requests\Credit\CreditUpdateRequest;
 use App\Http\Requests\Wallet\WalletFilterRequest;
 use App\Libs\Finance\Exceptions\RequestDataException;
-use App\Libs\Helper;
 use App\Models\Credit\Credit;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
@@ -41,19 +41,23 @@ class CreditController extends Controller {
             'queryParams' => array_filter($data)
         ]);
 
-        $page_credits = Credit::where('owner_id', Auth::id())
+        $_credits = Credit::where('owner_id', Auth::id())
             ->filter($filter)
             ->where('status', config('statuses.on'))
             ->orderBy('currency')
             ->orderBy('title')
             ->get();
 
-        foreach ($page_credits as $id => $credit) {
-            $page_credits[$id] = (new CreditMutator())($credit);
+        $credits = [];
+        foreach ($_credits as $id => $credit) {
+            $credits[$id] = (new CreditMutator())($credit);
         }
 
+        $saldo = (new CreditSaldoMurtator())($credits);
+
         return view('credit.index', [
-            'credits'  => $page_credits,
+            'credits'  => $credits,
+            'saldo'    => $saldo,
             'sortable' => $sortable,
         ]);
     }

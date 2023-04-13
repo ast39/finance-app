@@ -53,24 +53,13 @@
                                     <th>{!! Icons::get(Icons::PAYMENT) !!} {{ __('Платеж') }}</th>
                                     <td>{{ number_format($credit->credit->payment ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
-
-                                <tr><td colspan="2">&nbsp;</td></tr>
-
                                 <tr>
                                     <th>{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Переплата') }}</th>
                                     <td>{{ number_format($credit->overpay ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{!! Icons::get(Icons::PAYING) !!} {{ __('Сумма выплат') }}</th>
+                                    <th>{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Сумма выплат') }}</th>
                                     <td>{{ number_format($credit->total_amount ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{!! Icons::get(Icons::WAS_PAYED) !!} {{ __('Выплачено долга') }}</th>
-                                    <td>{{ number_format($credit->balance_payed ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{!! Icons::get(Icons::WILL_PAY) !!} {{ __('Остаток долга') }}</th>
-                                    <td>{{ number_format($credit->balance_owed ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -102,13 +91,13 @@
                                             <thead>
                                             <tr>
                                                 <th class="text-center" scope="row">#</th>
-                                                <th class="text-center">{{ __('Месяц') }}</th>
-                                                <th class="text-end">{{ __('Баланс') }}</th>
-                                                <th class="text-end">{{ __('Платеж') }}</th>
-                                                <th class="text-end">{{ __('Проценты') }}</th>
-                                                <th class="text-end">{{ __('Тело') }}</th>
-                                                <th class="text-end">{{ __('Остаток') }}</th>
-                                                <th class="text-center">{{ __('Оплата') }}</th>
+                                                <th class="text-center">{!! Icons::get(Icons::CALENDAR) !!} {{ __('Месяц') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::INSET_LR) !!} {{ __('Баланс') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Платеж') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::PERCENT) !!} {{ __('Проценты') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Тело') }}</th>
+                                                <th class="text-end">{!! Icons::get(Icons::OUTSET_LR) !!} {{ __('Остаток') }}</th>
+                                                <th class="text-center">{!! Icons::get(Icons::CHECK) !!} {{ __('Оплата') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -149,35 +138,41 @@
 
                         <table class="table table-striped mt-3">
                             <tbody>
-                            <tr>
-                                <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Выплачено процентов') }}</th>
-                                <td>{{ number_format($payed_percent, 2, '.', ' ') }} {{ __('руб.') }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Выплачено долга') }}</th>
-                                <td>{{ number_format($payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Выплачено всего') }}</th>
-                                <td>{{ number_format($payed_percent + $payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">{!! Icons::get(Icons::CHECK) !!} {{ __('Сделано платежей') }}</th>
-                                <td>{{ $payed_payments }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">{!! Icons::get(Icons::CHECK_LIST) !!} {{ __('Осталось платежей') }}</th>
-                                <td>{{ count($credit->details) - $payed_payments }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Остаток долга') }}</th>
-                                <td>{{ number_format($credit->credit->amount - $payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
-                            </tr>
+                                <tr>
+                                    <th>{!! Icons::get(Icons::WAS_PAYED) !!} {{ __('Выплачено долга (План)') }}</th>
+                                    <td>{{ number_format($credit->balance_payed ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{!! Icons::get(Icons::WILL_PAY) !!} {{ __('Остаток долга (План)') }}</th>
+                                    <td>{{ number_format($credit->balance_owed ?? '', 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{!! Icons::get(Icons::CHECK) !!} {{ __('Сделано платежей') }}</th>
+                                    <td>{{ $payed_payments }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{!! Icons::get(Icons::CHECK_LIST) !!} {{ __('Осталось платежей') }}</th>
+                                    <td>{{ count($credit->details) - $payed_payments }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Выплачено всего') }}</th>
+                                    <td>{{ number_format($payed_percent + $payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{!! Icons::get(Icons::SMILE_SAD) !!} {{ __('Выплачено процентов') }}</th>
+                                    <td>{{ number_format($payed_percent, 2, '.', ' ') }} {{ $credit->credit->currency }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{!! Icons::get(Icons::SMILE_HAPPY) !!} {{ __('Выплачено долга') }}</th>
+                                    <td>{{ number_format($payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Остаток долга') }}</th>
+                                    <td>{{ number_format($credit->credit->amount - $payed_body, 2, '.', ' ') }} {{ __('руб.') }}</td>
+                                </tr>
                             </tbody>
                         </table>
-
                     </div>
-
                 </div>
             </div>
         </div>

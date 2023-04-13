@@ -60,22 +60,18 @@ class Icons {
     const INSET_COUNT   = 'bi bi-caret-down';             // треугольник вниз
     const OUTSET_COUNT  = 'bi bi-caret-up';               // треугольник вверх
 
+    const PAYMENT_CHECK   = 'bi bi-check2-square';        // платеж внесен
+    const PAYMENT_OVERDUE = 'bi bi-exclamation-triangle'; // платеж просрочен
+    const PAYMENT_WAITING = 'bi bi-stopwatch';            // в ожидании платежа
 
     const TYPE           = 'bi bi-list';
-
     const BALANCE_UP     = 'bi bi-box-arrow-in-down';
     const BALANCE_DOWN   = 'bi bi-box-arrow-up';
-
     const PAYMENT        = 'bi bi-cash-stack';
-
-
-    const PAYING         = 'bi bi-hourglass-top';
     const WAS_PAYED      = 'bi-hourglass-split';
     const WILL_PAY       = 'bi bi-hourglass-bottom';
 
-    const PAYMENT_CHECK   = 'bi bi-check2-square';
-    const PAYMENT_OVERDUE = 'bi bi-exclamation-triangle';
-    const PAYMENT_WAITING = 'bi bi-stopwatch';
+
 
     /**
      * @param string $class

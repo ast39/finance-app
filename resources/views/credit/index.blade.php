@@ -58,7 +58,7 @@
                                         <td data-label="{{ __('Банк') }}">{{ $credit->credit->creditor ?? '' }}</td>
 
                                         <td data-label="{{ __('Дней до платежа') }}" class="text-center {{ $credit->days_to <= 5 ? 'text-danger' : ($credit->days_to <= 10 ? 'text-warning' : 'text-success') }}">
-                                            {{ $credit->days_to < 0 ? __('Просрочен') : ($credit->days_to > 0 ? $credit->days_to . Helper::number($credit->days_to ?? 0, [__('день'), __('дня'), __('дней')]) : __('Сегодня')) }}
+                                            {{ Helper::paymentStatus($credit->days_to) }}
                                         </td>
                                         <td data-label="{{ __('Сумма платежа') }}" class="text-end">{{ number_format($credit->credit->payment, 2, '.', ' ')}} {{ $credit->credit->currency }}</td>
                                         <td data-label="{{ __('Выплачено долга') }}" class="text-end">{{ number_format($credit->balance_payed, 0, '.', ' ') }} {{ $credit->credit->currency }}</td>
@@ -82,33 +82,42 @@
                             </tbody>
                         </table>
 
+                        {{-- Кнопка добавления кредита --}}
                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                             <a href="{{ route('credit.create') }}" class="btn btn-primary">{!! Icons::get(Icons::CREATE) !!} {{ __('Добавить кредит') }}</a>
                         </div>
 
-{{--                        <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument">--}}
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                <th class="text-center">{{ __('Всего кредитов') }}</th>--}}
-{{--                                <th class="text-center">{{ __('Сумма кредитов') }}</th>--}}
-{{--                                <th class="text-center">{{ __('Выплачено долга') }}</th>--}}
-{{--                                <th class="text-center">{{ __('Остаток долга') }}</th>--}}
-{{--                                <th class="text-center">{{ __('Платежей в месяц') }}</th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-{{--                            <tbody>--}}
-{{--                            <tr>--}}
-{{--                                <td data-label="{{ __('Всего кредитов') }}" class="text-center">{{ count($credits ?: []) }}</td>--}}
-{{--                                <td data-label="{{ __('Сумма кредитов') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['amount'];}, $credits)), 0, '.', ' ') }} {{ __('руб.') }}</td>--}}
-{{--                                <td data-label="{{ __('Выплачено долга') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['data']->balance_payed;}, $credits)), 0, '.', ' ') }} {{ __('руб.') }}</td>--}}
-{{--                                <td data-label="{{ __('Остаток долга') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['data']->balance_owed;}, $credits)), 0, '.', ' ') }} {{ __('руб.') }}</td>--}}
-{{--                                <td data-label="{{ __('Платежей в месяц') }}" class="text-center">{{ number_format(array_sum(array_map(function($e) {return $e['payment'];}, $credits)), 0, '.', ' ') }} {{ __('руб.') }}</td>--}}
-{{--                            </tr>--}}
-{{--                            </tbody>--}}
-{{--                        </table>--}}
-
+                        {{-- Сальдо по кредитам --}}
+                        <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument caption-top">
+                            <caption>{{ __('Сальдо по всем кредитам') }}</caption>
+                            <thead>
+                                <tr>
+                                    <th class="text-start">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
+                                    <th class="text-center">{{ __('Всего кредитов') }}</th>
+                                    <th class="text-center">{{ __('Сумма кредитов') }}</th>
+                                    <th class="text-center">{{ __('Выплачено долга') }}</th>
+                                    <th class="text-center">{{ __('Остаток долга') }}</th>
+                                    <th class="text-center">{{ __('Платежей в месяц') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($saldo as $currency => $data)
+                                    <tr class="align-middle">
+                                        <td data-label="{{ __('Валюта') }}" class="text-start">{{ $currency }}</td>
+                                        <td data-label="{{ __('Всего кредитов') }}" class="text-center">{{ $data['count'] ?? 0 }}</td>
+                                        <td data-label="{{ __('Сумма кредитов') }}" class="text-center">{{ number_format($data['amount'], 0, '.', ' ') }} {{ $currency }}</td>
+                                        <td data-label="{{ __('Выплачено долга') }}" class="text-center">{{ number_format($data['payed'], 0, '.', ' ') }} {{ $currency }}</td>
+                                        <td data-label="{{ __('Остаток долга') }}" class="text-center">{{ number_format($data['debt'], 0, '.', ' ') }} {{ $currency }}</td>
+                                        <td data-label="{{ __('Платежей в месяц') }}" class="text-center">{{ number_format($data['payments'], 0, '.', ' ') }} {{ $currency }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кредитов не найдено') }}</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
             </div>
         </div>

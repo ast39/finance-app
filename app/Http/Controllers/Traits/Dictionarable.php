@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Traits;
 
+use App\Http\Mutators\CreditMutator;
 use App\Http\Mutators\WalletMutator;
 use App\Http\Resources\Spend\SpendCategoryResource;
 use App\Http\Resources\Wallet\WalletCurrencyResource;
+use App\Models\Credit\Credit;
 use App\Models\Spend\Spend;
 use App\Models\Spend\SpendCategory;
 use App\Models\Wallet\Wallet;

@@ -79,6 +79,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if (Route::has('wall.index'))
+                                        <a class="dropdown-item" href="{{ route('wall.index') }}">{!! Icons::get(Icons::CALENDAR) !!}  {{ __('События') }}</a>
+                                    @endif
+
                                     @if (Route::has('wallet.index'))
                                         <a class="dropdown-item" href="{{ route('wallet.index') }}">{!! Icons::get(Icons::WALLET) !!} {{ __('Кошельки') }}</a>
                                     @endif

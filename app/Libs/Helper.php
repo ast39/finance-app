@@ -59,6 +59,11 @@ class Helper {
         # Сделаны ли платежи заранее
         $shift = $payments_count - $payments_must_been;
 
+        # Если сегодня день списания и платежа не было - фиксируем это
+        if ($shift < 0 && $today == $payment_day) {
+            return 0;
+        }
+
         # Если платежей сделано меньше, чем должно было быть, то фиксируем просрочку
         if ($shift < 0) {
             return -1;
@@ -67,11 +72,22 @@ class Helper {
         # Определяем дату следующего платежа с учетом заранее сделанных платежей (если они есть)
         $payment_date = TimeManager::shiftMonth($payment_date, $shift);
 
-        # День платежа сегодня
-        if ($today == $payment_day && $shift != 0) {
-            return 0;
+        # Дней до очередного платежа
+        return ceil(($payment_date - $time) / TimeManager::DAY);
+    }
+
+    /**
+     * @param int $days
+     * @return string
+     */
+    public static function paymentStatus(int $days): string
+    {
+        if ($days < 0) {
+            return 'Просрочен';
+        } else if ($days == 0) {
+            return 'Списание сегодня';
         } else {
-            return floor(($payment_date - $time) / TimeManager::DAY);
+            return $days . self::number($days, [__('день'), __('дня'), __('дней')]);
         }
     }
 

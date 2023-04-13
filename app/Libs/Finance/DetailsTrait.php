@@ -20,47 +20,45 @@ trait DetailsTrait {
     ): array
     {
         $details  = [];
-        $overpay  = 0;
-        $payments = 0;
 
         $inset_balance        = $credit->amount;
         $old_payment_date     = $credit->start_date;
         $current_payment_date = $credit->payment_date;
 
+        $monthly_payment = $credit->payment;
+
         for ($i = 1; $i <= $credit->period; $i++) {
 
             $current_percent = ceil($this->getPercentByPeriod($old_payment_date, $current_payment_date, $inset_balance, $credit->percent));
-            $current_body    = $credit->payment - $current_percent;
+            $current_body    = $monthly_payment - $current_percent;
             $outset_balance  = $inset_balance - $current_body;
 
             if ($outset_balance < 0) {
 
-                $difference = abs($outset_balance);
-                $credit->payment -= $difference;
-                $current_body -= $difference;
-                $outset_balance = 0;
+                $difference       = abs($outset_balance);
+                $monthly_payment -= $difference;
+                $current_body    -= $difference;
+                $outset_balance   = 0;
             }
 
             if ($i == $credit->period && $outset_balance > 0) {
 
-                $credit->payment += $outset_balance;
-                $current_body += $outset_balance;
-                $outset_balance = 0;
+                $monthly_payment += $outset_balance;
+                $current_body    += $outset_balance;
+                $outset_balance   = 0;
             }
 
             $details[$i] = [
 
-                'date_time' => $current_payment_date,
-                'inset_balance' => $inset_balance,
-                'credit_payment' => $credit->payment,
+                'date_time'       => $current_payment_date,
+                'inset_balance'   => $inset_balance,
+                'credit_payment'  => $monthly_payment,
                 'payment_percent' => $current_percent,
-                'payment_body' => $current_body,
-                'outset_balance' => $outset_balance,
-                'status' => count($credit->payments) >= $i,
+                'payment_body'    => $current_body,
+                'outset_balance'  => $outset_balance,
+                'status'          => count($credit->payments) >= $i,
             ];
 
-            $overpay      += $current_percent;
-            $payments     += $credit->payment;
             $inset_balance = $outset_balance;
 
             $old_payment_date     = $current_payment_date;

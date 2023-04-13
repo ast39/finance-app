@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\{
     Route, Auth
 };
 
+use App\Http\Controllers\WallController;
+
 
 Route::get('/', function () {
     return redirect('/wallet/item');
@@ -168,5 +170,8 @@ Route::group(['prefix' => 'spend', 'middleware' => ['auth']], function() {
         Route::delete('{id}', [SpendCategoryController::class, 'destroy'])->name('spend.category.destroy');
     });
 });
+
+# События
+Route::get('wall', WallController::class)->name('wall.index');
 
 Auth::routes();
