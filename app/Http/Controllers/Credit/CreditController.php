@@ -9,7 +9,7 @@ use App\Http\Mutators\CreditMutator;
 use App\Http\Mutators\CreditSaldoMurtator;
 use App\Http\Requests\Credit\CreditStoreRequest;
 use App\Http\Requests\Credit\CreditUpdateRequest;
-use App\Http\Requests\Wallet\WalletFilterRequest;
+use App\Http\Requests\Credit\CreditFilterRequest;
 use App\Libs\Finance\Exceptions\RequestDataException;
 use App\Models\Credit\Credit;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -23,13 +23,13 @@ class CreditController extends Controller {
 
 
     /**
-     * @param WalletFilterRequest $request
+     * @param CreditFilterRequest $request
      * @param string|null $sortable
      * @return View
      * @throws BindingResolutionException
      * @throws RequestDataException
      */
-    public function index(WalletFilterRequest $request, ?string $sortable = null): View
+    public function index(CreditFilterRequest $request, ?string $sortable = null): View
     {
         $sortable = in_array($sortable, ['till', 'percent', 'payment', 'amount', 'overpay'])
             ? $sortable
@@ -52,6 +52,19 @@ class CreditController extends Controller {
         foreach ($_credits as $id => $credit) {
             $credits[$id] = (new CreditMutator())($credit);
         }
+
+        usort($credits, function($e1, $e2) use ($sortable) {
+
+            return match($sortable) {
+
+                'till'    => $e1->days_to > $e2->days_to,
+                'payment' => $e1->credit->payment < $e2->credit->payment,
+                'overpay' => $e1->overpay < $e2->overpay,
+                'amount'  => $e1->credit->amount < $e2->credit->amount,
+
+                default   => $e1->credit->percent < $e2->credit->percent,
+            };
+        });
 
         $saldo = (new CreditSaldoMurtator())($credits);
 

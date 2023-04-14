@@ -47,6 +47,13 @@ return new class extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::table('credit_checks', function(Blueprint $table) {
+            $table->foreign('owner_id', 'credit_check_owner_key')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+
         Schema::table('credit_payments', function(Blueprint $table) {
             $table->foreign('credit_id', 'credit_payment_key')
                 ->references('credit_id')
