@@ -35,6 +35,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img class="me-2 mb-2" src="{{ asset('/logo.png') }}" width="30" height="30" />
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -130,6 +131,80 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>MyFinances
+                        </h6>
+                        <p>
+                            Это персональное финансовое приложение, разработанное как PWA (Progressive Web Application)
+                            на основе Laravel.
+                            <br /><br />
+                            Актуальная версия приложения 2.0.1
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Открытые модули
+                        </h6>
+                        <p>Кредитный калькулятор</p>
+                        <p>Калькулятор вкладов</p>
+                        <p>Проверка кредита</p>
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Закрытые модули
+                        </h6>
+                        <p>Домашняя бухгалтерия</p>
+                        <p>Учет расходов</p>
+                        <p>Финансовый менеджер</p>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">Контакты</h6>
+                        <p><i class="fas fa-home me-3">Адрес: </i> Россия, Калининград, 236048</p>
+                        <p><i class="fas fa-envelope me-3">Email:</i> alexandr.status@gmail.com</p>
+                        <p><i class="fas fa-phone me-3">Тел.:</i> +7 911 487 7251</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2022-{{ date('Y', time()) }} Copyright:
+            <a class="text-reset fw-bold" href="#">ASt Group</a>
+        </div>
+    </footer>
 
 @stack('js')
 
