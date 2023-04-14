@@ -117,7 +117,10 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex mt-3 justify-content-md-center">
-                            <a href="{{ route('deposit.calc.create') }}" class="btn btn-secondary me-md-2">{!! Icons::get(Icons::CALCULATE) !!} {{ __('Рассчитать новый вклад') }}</a>
+                            @auth()
+                                <a href="{{ route('deposit.calc.index') }}" class="btn btn-secondary">{!! Icons::get(Icons::RETURN) !!}  {{ __('Назад') }}</a>
+                            @endauth
+                            <a href="{{ route('deposit.calc.create') }}" class="btn btn-primary me-md-2">{!! Icons::get(Icons::CALCULATE) !!} {{ __('Рассчитать новый вклад') }}</a>
                         </div>
 
                     </div>

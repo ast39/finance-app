@@ -56,6 +56,7 @@ trait DetailsTrait {
                 'payment_percent' => $current_percent,
                 'payment_body'    => $current_body,
                 'outset_balance'  => $outset_balance,
+                'note'            => $credit->payments[$i - 1]['note'] ?? '',
                 'status'          => count($credit->payments) >= $i,
             ];
 

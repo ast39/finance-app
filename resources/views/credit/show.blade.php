@@ -107,7 +107,7 @@
                                             @endphp
 
                                             @forelse($credit->details as $row)
-                                                <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-active': '' }}">
+                                                <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-like-a-accordion' : '' }}">
                                                     <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
                                                     <td data-label="{{ __('Месяц') }}" class="text-center">{{ date('d.m.Y', $row['date_time']) }}</td>
                                                     <td data-label="{{ __('Баланс') }}" class="text-end">{{ number_format($row['inset_balance'], 2, '.', ' ') }}</td>
@@ -115,7 +115,7 @@
                                                     <td data-label="{{ __('Проценты') }}" class="text-end">{{ number_format($row['payment_percent'], 2, '.', ' ') }}</td>
                                                     <td data-label="{{ __('Тело') }}" class="text-end">{{ number_format($row['payment_body'], 2, '.', ' ') }}</td>
                                                     <td data-label="{{ __('Остаток') }}" class="text-end">{{ number_format($row['outset_balance'], 2, '.', ' ') }}</td>
-                                                    <td data-label="{{ __('Оплата') }}" class="text-center {{ Helper::getPaymentTextColor($row['date_time'], $row['status']) }}"><i class="{{ Helper::getPaymentIcon($row['date_time'], $row['status']) }}"></i></td>
+                                                    <td title="{{ $row['note'] ?? '' }}" data-label="{{ __('Оплата') }}" class="text-center {{ Helper::getPaymentTextColor($row['date_time'], $row['status']) }}"><i class="{{ Helper::getPaymentIcon($row['date_time'], $row['status']) }}"></i></td>
                                                 </tr>
 
                                                 @php

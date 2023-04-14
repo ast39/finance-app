@@ -23,9 +23,9 @@
                             <thead>
                                 <tr>
                                     <th class="text-start">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Дата') }}</th>
+                                    <th class="text-start">{!! Icons::get(Icons::TITLE) !!} {{ __('Название') }}</th>
                                     <th class="text-start">{!! Icons::get(Icons::BANK) !!} {{ __('Банк') }}</th>
                                     <th class="text-end">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Платеж') }}</th>
-                                    <th class="text-start">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
                                     <th class="text-center">{!! Icons::get(Icons::CHECK) !!} {{ __('Статус') }}</th>
                                 </tr>
                             </thead>
@@ -33,12 +33,13 @@
                                 @forelse($credits as $credit)
                                     <tr>
                                         <td data-label="{{ __('Дата') }}" class="text-start">{{ $credit['date'] }}</td>
+                                        <td data-label="{{ __('Название') }}" class="text-start"><a href="{{ route('credit.show', $credit['credit_id']) }}">{{ $credit['title'] }}</a></td>
                                         <td data-label="{{ __('Банк') }}" class="text-start">{{ $credit['creditor'] }}</td>
-                                        <td data-label="{{ __('Платеж') }}" class="text-end">{{ $credit['payment'] }}</td>
-                                        <td data-label="{{ __('Валюта') }}" class="text-start">{{ $credit['currency'] }}</td>
+                                        <td data-label="{{ __('Платеж') }}" class="text-end">{{ $credit['payment'] }} {{ $credit['currency'] }}</td>
                                         <td data-label="{{ __('Статус') }}" class="text-center {{ Helper::getPaymentTextColor($credit['date_time'], $credit['status']) }}"><i class="{{ Helper::getPaymentIcon($credit['date_time'], $credit['status']) }}"></i></td>
                                     </tr>
                                 @empty
+                                    <tr><td colspan="5" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">У Вас не текущих кредитов</td></tr>
                                 @endforelse
                                 <tr><td colspan="5">&nbsp;</td></tr>
                                 <tr>

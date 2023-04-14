@@ -22,6 +22,20 @@ class CreditCheckController extends Controller {
     /**
      * @return View
      */
+    public function index(): view
+    {
+        $page_credits = CreditCheck::where('owner_id', Auth::id())
+            ->orderByDesc('created_at')
+            ->paginate(config('limits.history'));
+
+        return view('credit.check.index', [
+            'credits' => $page_credits,
+        ]);
+    }
+
+    /**
+     * @return View
+     */
     public function create(): View
     {
         return view('credit.check.create', [
@@ -50,17 +64,52 @@ class CreditCheckController extends Controller {
      */
     public function show(int $id): View|RedirectResponse
     {
-        $credit = CreditCheck::findOrFail($id);
+        # Расчет проводит авторизованный пользователь
+        if (Auth::check()) {
 
-        $credit = (new CreditCheckMutator())($credit);
+            # Расчет должен принадлежать ему
+            $credit = CreditCheck::where('owner_id', Auth::id())
+                ->findOrFail($id);
+        }
+        # Расчет проводит гость
+        else {
 
-        if (!($credit instanceof ResponseData)) {
-            return redirect()->route('credit.check.create')->withErrors(['action' => 'Ошибка ' . $credit]);
+            # Расчет должен быть гостевой
+            $credit = CreditCheck::where('owner_id', null)
+                ->findOrFail($id);
+        }
+
+        $credit_data = (new CreditCheckMutator())($credit);
+
+        # Удаляем расчет, если он гостевой, чтобы не захламлять БД
+        # (то есть гостевой расчет доступен 1 раз до перезагрузки страницы)
+        if (is_null($credit->owner_id) && !Auth::check()) {
+            $credit->delete();
+        }
+
+        if (!($credit_data instanceof ResponseData)) {
+            return redirect()->route('credit.check.create')->withErrors(['action' => 'Ошибка ' . $credit_data]);
         }
 
         return view('credit.check.show', [
-            'checker' => $credit
+            'checker' => $credit_data
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $check = CreditCheck::find($id);
+        if (is_null($check)) {
+            return back()->withErrors(['action' => 'Удаляемый расчет не найден']);
+        }
+
+        $check->delete();
+
+        return redirect()->route('credit.check.index');
     }
 
 }

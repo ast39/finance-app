@@ -212,6 +212,9 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex mt-3 justify-content-md-center">
+                            @auth()
+                                <a href="{{ route('credit.check.index') }}" class="btn btn-secondary">{!! Icons::get(Icons::RETURN) !!}  {{ __('Назад') }}</a>
+                            @endauth
                             <a href="{{ route('credit.check.create') }}" class="btn btn-primary me-md-2">{!! Icons::get(Icons::CHECK) !!} {{ __('Новая проверка') }}</a>
                         </div>
 

@@ -156,7 +156,7 @@ class Helper {
         $months -= $years * 12;
 
         return $years . ' ' . self::number($years, [__('год'), __('года'), __('лет')])
-            . $months . ' ' . self::number($months, [__('месяц'), __('месяца'), __('месяцев')]);
+            . ' ' . $months . ' ' . self::number($months, [__('месяц'), __('месяца'), __('месяцев')]);
     }
 
     /**

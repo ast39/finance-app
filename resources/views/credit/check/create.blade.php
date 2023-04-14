@@ -14,8 +14,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Проверить кредит') }}</div>
-
                     <div class="card-body">
+
+                        <div class="text-end">
+                            <a href="{{ route('credit.check.index') }}">История расчетов</a>
+                        </div>
 
                         <form method="post" action="{{ route('credit.check.store') }}">
                             @csrf

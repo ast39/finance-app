@@ -9,7 +9,7 @@ use App\Http\Controllers\Credit\{
 };
 
 use App\Http\Controllers\Deposit\{
-    DepositController, DepositCalcController, DepositPaymentController
+    DepositController, DepositCalcController
 };
 
 use App\Http\Controllers\Spend\{
@@ -24,8 +24,11 @@ use App\Http\Controllers\WallController;
 
 
 Route::get('/', function () {
-    return redirect('/wallet/item');
+    return redirect('/wall');
 });
+
+# События
+Route::get('wall', WallController::class)->middleware('auth')->name('wall.index');
 
 # Кошелек
 Route::group(['prefix' => 'wallet', 'middleware' => ['auth']], function() {
@@ -66,19 +69,7 @@ Route::group(['prefix' => 'wallet', 'middleware' => ['auth']], function() {
 });
 
 # Кредит
-Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
-
-    # Кредиты
-    Route::group(['prefix' => 'item'], function () {
-
-        Route::get('index/{sortable?}', [CreditController::class, 'index'])->name('credit.index');
-        Route::get('create', [CreditController::class, 'create'])->name('credit.create');
-        Route::post('', [CreditController::class, 'store'])->name('credit.store');
-        Route::get('{id}', [CreditController::class, 'show'])->name('credit.show');
-        Route::get('{id}/edit', [CreditController::class, 'edit'])->name('credit.edit');
-        Route::put('{id}', [CreditController::class, 'update'])->name('credit.update');
-        Route::delete('{id}', [CreditController::class, 'destroy'])->name('credit.destroy');
-    });
+Route::group(['prefix' => 'credit'], function() {
 
     # Калькуляция
     Route::group(['prefix' => 'calculate'], function () {
@@ -96,16 +87,55 @@ Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
         Route::get('{id}', [CreditCheckController::class, 'show'])->name('credit.check.show');
     });
 
+});
+
+# Кредит
+Route::group(['prefix' => 'credit', 'middleware' => ['auth']], function() {
+
+    # Кредиты
+    Route::group(['prefix' => 'item'], function () {
+
+        Route::get('index/{sortable?}', [CreditController::class, 'index'])->name('credit.index');
+        Route::get('create', [CreditController::class, 'create'])->name('credit.create');
+        Route::post('', [CreditController::class, 'store'])->name('credit.store');
+        Route::get('{id}', [CreditController::class, 'show'])->name('credit.show');
+        Route::get('{id}/edit', [CreditController::class, 'edit'])->name('credit.edit');
+        Route::put('{id}', [CreditController::class, 'update'])->name('credit.update');
+        Route::delete('{id}', [CreditController::class, 'destroy'])->name('credit.destroy');
+    });
+
+    # Калькуляция
+    Route::group(['prefix' => 'calculate'], function () {
+
+        Route::get('', [CreditCalcController::class, 'index'])->name('credit.calc.index');
+        Route::delete('{id}', [CreditCalcController::class, 'destroy'])->name('credit.calc.destroy');
+    });
+
+    # Проверка
+    Route::group(['prefix' => 'check'], function () {
+
+        Route::get('', [CreditCheckController::class, 'index'])->name('credit.check.index');
+        Route::delete('{id}', [CreditCheckController::class, 'destroy'])->name('credit.check.destroy');
+    });
+
     # Транзакции
     Route::group(['prefix' => 'payment'], function () {
 
-        Route::get('', [CreditPaymentController::class, 'index'])->name('credit.payment.index');
         Route::get('create/{credit_id}', [CreditPaymentController::class, 'create'])->name('credit.payment.create');
         Route::post('', [CreditPaymentController::class, 'store'])->name('credit.payment.store');
-        Route::get('{id}', [CreditPaymentController::class, 'show'])->name('credit.payment.show');
-        Route::get('{id}/edit', [CreditPaymentController::class, 'edit'])->name('credit.payment.edit');
-        Route::put('{id}', [CreditPaymentController::class, 'update'])->name('credit.payment.update');
         Route::delete('{id}', [CreditPaymentController::class, 'destroy'])->name('credit.payment.destroy');
+    });
+});
+
+# Вклад
+Route::group(['prefix' => 'deposit'], function() {
+
+    # Калькуляция
+    Route::group(['prefix' => 'calculate'], function () {
+
+        Route::get('create', [DepositCalcController::class, 'create'])->name('deposit.calc.create');
+        Route::post('', [DepositCalcController::class, 'store'])->name('deposit.calc.store');
+        Route::get('{id}', [DepositCalcController::class, 'show'])->name('deposit.calc.show');
     });
 });
 
@@ -127,21 +157,8 @@ Route::group(['prefix' => 'deposit', 'middleware' => ['auth']], function() {
     # Калькуляция
     Route::group(['prefix' => 'calculate'], function () {
 
-        Route::get('create', [DepositCalcController::class, 'create'])->name('deposit.calc.create');
-        Route::post('', [DepositCalcController::class, 'store'])->name('deposit.calc.store');
-        Route::get('{id}', [DepositCalcController::class, 'show'])->name('deposit.calc.show');
-    });
-
-    # Транзакции
-    Route::group(['prefix' => 'payment'], function () {
-
-        Route::get('', [DepositPaymentController::class, 'index'])->name('deposit.payment.index');
-        Route::get('create', [DepositPaymentController::class, 'create'])->name('deposit.payment.create');
-        Route::post('', [DepositPaymentController::class, 'store'])->name('deposit.payment.store');
-        Route::get('{id}', [DepositPaymentController::class, 'show'])->name('deposit.payment.show');
-        Route::get('{id}/edit', [DepositPaymentController::class, 'edit'])->name('deposit.payment.edit');
-        Route::put('{id}', [DepositPaymentController::class, 'update'])->name('deposit.payment.update');
-        Route::delete('{id}', [DepositPaymentController::class, 'destroy'])->name('deposit.payment.destroy');
+        Route::get('', [DepositCalcController::class, 'index'])->name('deposit.calc.index');
+        Route::delete('{id}', [DepositCalcController::class, 'destroy'])->name('deposit.calc.destroy');
     });
 });
 
@@ -170,8 +187,5 @@ Route::group(['prefix' => 'spend', 'middleware' => ['auth']], function() {
         Route::delete('{id}', [SpendCategoryController::class, 'destroy'])->name('spend.category.destroy');
     });
 });
-
-# События
-Route::get('wall', WallController::class)->name('wall.index');
 
 Auth::routes();

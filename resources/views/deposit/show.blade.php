@@ -83,47 +83,46 @@
                                     <div class="accordion-body">
                                         <table class="table table-striped admin-table__adapt admin-table__instrument">
                                             <thead>
-                                            <tr>
-                                                <th class="text-center" scope="row">#</th>
-                                                <th class="text-center">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Месяц') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Баланс') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::PERCENT) !!} {{ __('Проценты') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::BALANCE_UP) !!} {{ __('Пополнение') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::PROFIT_UP) !!} {{ __('Прирост') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::PROFIT) !!} {{ __('Заработок') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::BALANCE_DOWN) !!} {{ __('Снятие') }}</th>
-                                                <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Остаток') }}</th>
-                                            </tr>
+                                                <tr>
+                                                    <th class="text-center" scope="row">#</th>
+                                                    <th class="text-center">{!! Icons::get(Icons::CALENDAR_DAY) !!} {{ __('Месяц') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::AMOUNT) !!} {{ __('Баланс') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::PERCENT) !!} {{ __('Проценты') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::BALANCE_UP) !!} {{ __('Пополнение') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::PROFIT_UP) !!} {{ __('Прирост') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::PROFIT) !!} {{ __('Заработок') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::BALANCE_DOWN) !!} {{ __('Снятие') }}</th>
+                                                    <th class="text-end">{!! Icons::get(Icons::BALANCE) !!} {{ __('Остаток') }}</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-
-                                            @php
-                                                $profit_percent = $profit_refill = 0;
-                                            @endphp
-
-                                            @forelse($deposit->details as $row)
-                                                <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-like-a-accordion' : '' }}">
-                                                    <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
-                                                    <td data-label="Месяц" class="text-center">{{ date('d.m.Y', $row['date_time']) }}</td>
-                                                    <td data-label="Баланс" class="text-end">{{ number_format($row['inset_balance'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                    <td data-label="Проценты" class="text-end">{{ number_format($row['monthly_profit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                    <td data-label="Пополнение" class="text-end">{{ number_format($row['monthly_refill'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                    <td data-label="Прирост" class="text-end">{{ number_format($row['monthly_deposit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                    <td data-label="Заработок" class="text-end">{{ number_format($row['total_profit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                    <td data-label="Снятие" class="text-end">{{ number_format($row['was_withdrawn'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                    <td data-label="Остаток" class="text-end">{{ number_format($row['withdrawal_now'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
-                                                </tr>
-
                                                 @php
-                                                    if ($row['date_time'] < time()) {
-
-                                                        $profit_percent += $row['monthly_profit'];
-                                                        $profit_refill  += $row['monthly_refill'];
-                                                    }
+                                                    $profit_percent = $profit_refill = 0;
                                                 @endphp
-                                            @empty
-                                                <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Расчет не удался') }}</div>
-                                            @endforelse
+
+                                                @forelse($deposit->details as $row)
+                                                    <tr class="{{ date('Y', $row['date_time']) == date('Y', time()) && date('m', $row['date_time']) == date('m', time()) ? 'bg-like-a-accordion' : '' }}">
+                                                        <td data-label="#" class="text-center">{{ $loop->iteration }}</td>
+                                                        <td data-label="Месяц" class="text-center">{{ date('d.m.Y', $row['date_time']) }}</td>
+                                                        <td data-label="Баланс" class="text-end">{{ number_format($row['inset_balance'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                        <td data-label="Проценты" class="text-end">{{ number_format($row['monthly_profit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                        <td data-label="Пополнение" class="text-end">{{ number_format($row['monthly_refill'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                        <td data-label="Прирост" class="text-end">{{ number_format($row['monthly_deposit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                        <td data-label="Заработок" class="text-end">{{ number_format($row['total_profit'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                        <td data-label="Снятие" class="text-end">{{ number_format($row['was_withdrawn'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                        <td data-label="Остаток" class="text-end">{{ number_format($row['withdrawal_now'], 0, '.', ' ') }} {{ $deposit->deposit->currency }}</td>
+                                                    </tr>
+
+                                                    @php
+                                                        if ($row['date_time'] < time()) {
+
+                                                            $profit_percent += $row['monthly_profit'];
+                                                            $profit_refill  += $row['monthly_refill'];
+                                                        }
+                                                    @endphp
+                                                @empty
+                                                    <div class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Расчет не удался') }}</div>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>

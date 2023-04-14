@@ -14,8 +14,12 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Рассчитать кредит') }}</div>
-
                     <div class="card-body">
+
+                        <div class="text-end">
+                            <a href="{{ route('credit.calc.index') }}">История расчетов</a>
+                        </div>
+
                         <form method="post" action="{{ route('credit.calc.store') }}">
                             @csrf
                             @method('POST')

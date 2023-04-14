@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Mutators\CreditEventMutator;
 use App\Models\Credit\Credit;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class WallController extends Controller {
@@ -18,6 +19,10 @@ class WallController extends Controller {
             ->get();
 
         $credits = (new CreditEventMutator())($credits);
+
+        $credits = Arr::sort($credits, function($e) {
+            return (int) date('d', $e['date_time']);
+        });
 
         return view('wall.index', [
             'credits' => $credits,

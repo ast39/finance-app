@@ -16,6 +16,10 @@
                     <div class="card-header">{{ __('Рассчитать вклад') }}</div>
                     <div class="card-body">
 
+                        <div class="text-end">
+                            <a href="{{ route('deposit.calc.index') }}">История расчетов</a>
+                        </div>
+
                         <form method="post" action="{{ route('deposit.calc.store') }}">
                             @csrf
                             @method('POST')

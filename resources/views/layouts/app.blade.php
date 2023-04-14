@@ -7,6 +7,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('logo.png') }}">
+
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('/logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -73,16 +79,18 @@
                                 </li>
                             @endif
                         @else
+                            @if (Route::has('wall.index'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('wall.index') }}">{!! Icons::get(Icons::CALENDAR) !!} {{ __('События') }}</a>
+                                </li>
+                            @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {!! Icons::get(Icons::USER) !!} {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if (Route::has('wall.index'))
-                                        <a class="dropdown-item" href="{{ route('wall.index') }}">{!! Icons::get(Icons::CALENDAR) !!}  {{ __('События') }}</a>
-                                    @endif
-
                                     @if (Route::has('wallet.index'))
                                         <a class="dropdown-item" href="{{ route('wallet.index') }}">{!! Icons::get(Icons::WALLET) !!} {{ __('Кошельки') }}</a>
                                     @endif
@@ -124,5 +132,14 @@
     </div>
 
 @stack('js')
+
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service Worker был зарегистрирован для области действия: " + reg.scope);
+        });
+    }
+</script>
 </body>
 </html>

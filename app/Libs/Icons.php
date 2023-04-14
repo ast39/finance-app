@@ -4,6 +4,7 @@ namespace App\Libs;
 
 class Icons {
 
+    const USER          = 'bi bi-person';                 // пользователь
     const CHECK_UP      = 'bi bi-arrow-bar-up';           // меню - расчет вклада
     const CHECK_DOWN    = 'bi bi-arrow-bar-down';         // меню - расчет кредита
     const CHECK         = 'bi bi-check2-all';             // меню - проверка кредита

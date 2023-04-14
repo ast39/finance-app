@@ -18,9 +18,11 @@ class CreditEventMutator {
 
         foreach ($credits as $credit) {
             $events[] = [
+                'credit_id' => $credit['credit_id'],
                 'date'      => date('d', $credit['payment_date']) . '.'
                     . date('m', time()) . '.' . date('Y', time()),
                 'date_time' => $this->paymentDate($credit),
+                'title'     => $credit['title'],
                 'creditor'  => $credit['creditor'],
                 'payment'   => $credit['payment'],
                 'currency'  => $credit['currency'],
@@ -47,11 +49,13 @@ class CreditEventMutator {
 
             $current_payment_date = $this->plusMonth($current_payment_date);
         }
+
+        return false;
     }
 
     /**
      * @param array $credit
-     * @return bool
+     * @return int
      */
     private function paymentDate(array $credit): int
     {
@@ -65,6 +69,8 @@ class CreditEventMutator {
 
             $current_payment_date = $this->plusMonth($current_payment_date);
         }
+
+        return 0;
     }
 
     /**
