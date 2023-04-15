@@ -31,8 +31,9 @@ class SpendObserver {
     {
         WalletPayment::where('spend_id', $spend->spend_id)
             ->update([
-                'amount' => $spend->amount,
-                'note'   => SpendCategory::where('category_id', $spend->category_id)->first()->title . ': ' . $spend->note,
+                'wallet_id' => $spend->wallet_id,
+                'amount'    => $spend->amount,
+                'note'      => SpendCategory::where('category_id', $spend->category_id)->first()->title . ': ' . $spend->note,
             ]);
     }
 
