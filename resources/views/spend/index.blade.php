@@ -104,7 +104,7 @@
 
                         {{-- Сальдо по расходам --}}
                         <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument caption-top">
-                            <caption>{{ __('Сальдо по всем расходам') }}</caption>
+                            <caption>{{ __('Сальдо по категориям') }}</caption>
                             <thead>
                                 <tr>
                                     <th class="text-start">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Категория') }}</th>
@@ -114,6 +114,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $payed = ['RUB' => 0, 'USD' => 0, 'EUR' => 0];
+                                    $ops   = ['RUB' => 0, 'USD' => 0, 'EUR' => 0];
+                                @endphp
                                 @forelse($spend_list as $category => $wallet)
                                     @forelse($wallet as $currency => $spends)
                                         <tr class="align-middle">
@@ -122,15 +126,42 @@
                                             <td data-label="{{ __('Транзакций по категории') }}" class="text-center">{{ array_sum(array_map(function($e) {return count($e);}, $wallet)) }}</td>
                                             <td data-label="{{ __('Потрачено в категории') }}" class="text-end">{{ number_format(array_sum(array_map(function($e) {return $e['amount'];}, $spends)), 2, '.', ' ') }} {{ $currency }}</td>
                                         </tr>
+                                        @php
+                                            $payed[$currency] += array_sum(array_map(function($e) {return $e['amount'];}, $spends));
+                                            $ops[$currency]   += array_sum(array_map(function($e) {return count($e);}, $wallet));
+                                        @endphp
                                     @empty
                                         <tr>
-                                            <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</td>
+                                            <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Расходов не найдено') }}</td>
                                         </tr>
                                     @endforelse
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Кошельков не найдено') }}</td>
+                                        <td colspan="4" class="text-center p-2 mb-2 bg-secondary bg-gradient text-white rounded">{{ __('Расходов не найдено') }}</td>
                                     </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+
+                        <table class="table table-striped mt-3 admin-table__adapt admin-table__instrument caption-top">
+                            <caption>{{ __('Сальдо по валютам') }}</caption>
+                            <thead>
+                                <tr>
+                                    <th class="text-start">{!! Icons::get(Icons::CURRENCY) !!} {{ __('Валюта') }}</th>
+                                    <th class="text-center">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Кол-во операций') }}</th>
+                                    <th class="text-center">{!! Icons::get(Icons::CATEGORY) !!} {{ __('Кол-во категорий') }}</th>
+                                    <th class="text-end">{!! Icons::get(Icons::TRANSACTIONS) !!} {{ __('Сумма операций') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($payed as $currency => $amount)
+                                    <tr>
+                                        <td class="text-start">{{ $currency }}</td>
+                                        <td class="text-center">{{ $ops[$currency] }}</td>
+                                        <td class="text-center">{{ count($spend_list) }}</td>
+                                        <td class="text-end">{{ number_format($payed[$currency], 2, '.', ' ') }} {{ $currency }}</td>
+                                    </tr>
+                                @empty
                                 @endforelse
                             </tbody>
                         </table>
