@@ -156,10 +156,10 @@
                             <tbody>
                                 @forelse($payed as $currency => $amount)
                                     <tr>
-                                        <td class="text-start">{{ $currency }}</td>
-                                        <td class="text-center">{{ $ops[$currency] }}</td>
-                                        <td class="text-center">{{ count($spend_list) }}</td>
-                                        <td class="text-end">{{ number_format($payed[$currency], 2, '.', ' ') }} {{ $currency }}</td>
+                                        <td data-label="{{ __('Валюта') }}" class="text-start">{{ $currency }}</td>
+                                        <td data-label="{{ __('Кол-во операций') }}" class="text-center">{{ $ops[$currency] }}</td>
+                                        <td data-label="{{ __('Кол-во категорий') }}" class="text-center">{{ count($spend_list) }}</td>
+                                        <td data-label="{{ __('Сумма операций') }}" class="text-end">{{ number_format($payed[$currency], 2, '.', ' ') }} {{ $currency }}</td>
                                     </tr>
                                 @empty
                                 @endforelse

@@ -46,7 +46,8 @@ class Wallet extends Model {
      */
     public function payments(): HasMany
     {
-        return $this->hasMany(WalletPayment::class, 'wallet_id', 'wallet_id');
+        return $this->hasMany(WalletPayment::class, 'wallet_id', 'wallet_id')
+            ->orderByDesc('created_at');
     }
 
 
