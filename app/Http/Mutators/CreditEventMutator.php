@@ -83,7 +83,10 @@ class CreditEventMutator {
      */
     private function firstPaymentInFuture(array $credit): bool
     {
-        return date('m', $credit['payment_date']) != date('m', time());
+        $zero_first_payment_day = strtotime(date('d.m.Y', $credit['payment_date']) . ' 00:00:00');
+        $zero_today             = strtotime(date('d.m.Y', time()) . ' 00:00:00');
+
+        return $zero_first_payment_day > $zero_today;
     }
 
     /**

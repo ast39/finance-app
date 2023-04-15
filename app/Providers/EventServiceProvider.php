@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Credit\Credit;
+use App\Models\Credit\CreditPayment;
 use App\Models\Spend\Spend;
+use App\Observers\CreditObserver;
+use App\Observers\CreditPaymentObserver;
 use App\Observers\SpendObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -28,6 +31,8 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Spend::observe(SpendObserver::class);
+        Credit::observe(CreditObserver::class);
+        CreditPayment::observe(CreditPaymentObserver::class);
     }
 
     /**
