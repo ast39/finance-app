@@ -29,6 +29,7 @@ class CreditManager {
      * @param float|null $payment
      * @param array|null $payments
      * @param int|null $credit_id
+     * @param string|null $creditor
      * @return RequestData|string
      */
     public static function setCredit(

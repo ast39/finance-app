@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Deposit;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\Dictionarable;
 use App\Http\Filters\DepositFilter;
-use App\Http\Mutators\DepositCalculateMutator;
+use App\Http\Mutators\DepositMutator;
 use App\Http\Requests\Deposit\DepositFilterRequest;
 use App\Http\Requests\Deposit\DepositStoreRequest;
 use App\Http\Requests\Deposit\DepositUpdateRequest;
@@ -79,7 +79,7 @@ class DepositController extends Controller {
         $deposit = Deposit::where('owner_id', Auth::id())
             ->findOrFail($id);
 
-        $deposit = (new DepositCalculateMutator())($deposit);
+        $deposit = (new DepositMutator())($deposit);
 
         return view('deposit.show', [
             'deposit'  => $deposit,

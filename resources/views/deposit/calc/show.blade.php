@@ -1,5 +1,6 @@
 @php
     use App\Libs\Icons;
+    use App\Libs\Helper;
 @endphp
 
 @extends('layouts.app')
@@ -47,7 +48,13 @@
                                                     <th scope="row">{!! Icons::get(Icons::BALANCE_START) !!} {{ __('Пополнения') }}</th>
                                                     <td>{{ number_format($info->deposit->refill ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</td>
                                                 </tr>
+                                                <tr>
+                                                    <th scope="row">{!! Icons::get(Icons::BALANCE_CASH) !!} {{ __('Капитализация') }}</th>
+                                                    <td>{{ Helper::plowBackText($info->deposit->capitalization) }}</td>
+                                                </tr>
+
                                                 <tr><td colspan="2">&nbsp;</td></tr>
+
                                                 <tr>
                                                     <th scope="row">{!! Icons::get(Icons::SMILE_NEUTRAL) !!} {{ __('Сумма пополнений') }}</th>
                                                     <td><span class="text-danger">{{ number_format($info->refills ?? '', 2, '.', ' ') }} {{ $info->deposit->currency }}</span></td>

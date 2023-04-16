@@ -28,7 +28,7 @@ class CreditCalculateMutator {
             $credit->percent,
             $credit->period,
             $credit->payment,
-            null
+            null,
         );
 
         return match($credit->subject) {

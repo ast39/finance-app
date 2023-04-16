@@ -25,23 +25,25 @@ class DepositManager {
      * @param bool $withdrawal
      * @param int|null $start_date
      * @param int|null $deposit_id
+     * @param string|null $depositor
      * @return RequestData|string
      */
     public static function setDeposit(
-        string $title,
-        string $currency,
-        float  $amount,
-        float  $percent,
-        int    $period,
-        float  $refill,
-        int    $capitalization,
-        bool   $withdrawal,
-        ?int   $start_date = null,
-        ?int   $deposit_id = null,
+        string  $title,
+        string  $currency,
+        float   $amount,
+        float   $percent,
+        int     $period,
+        float   $refill,
+        int     $capitalization,
+        bool    $withdrawal,
+        ?int    $start_date = null,
+        ?int    $deposit_id = null,
+        ?string $depositor  = null,
     ): RequestData|string
     {
         try {
-            return new RequestData($title, $currency, $amount, $percent, $period, $refill, $capitalization, $withdrawal, $start_date, $deposit_id);
+            return new RequestData($title, $currency, $amount, $percent, $period, $refill, $capitalization, $withdrawal, $start_date, $deposit_id, $depositor);
         } catch (RequestDataException $exception) {
             return $exception->getCode() . ': '. $exception->getMessage();
         }

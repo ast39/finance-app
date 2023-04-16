@@ -51,19 +51,21 @@ class RequestData {
      * @param bool $withdrawal
      * @param int|null $start_date
      * @param int|null $deposit_id
+     * @param string|null $depositor
      * @throws RequestDataException
      */
     public function __construct(
-        string $title,
-        string $currency,
-        float  $amount,
-        float  $percent,
-        int    $period,
-        float  $refill,
-        int    $capitalization,
-        bool   $withdrawal,
-        ?int   $start_date = null,
-        ?int   $deposit_id = null,
+        string  $title,
+        string  $currency,
+        float   $amount,
+        float   $percent,
+        int     $period,
+        float   $refill,
+        int     $capitalization,
+        bool    $withdrawal,
+        ?int    $start_date = null,
+        ?int    $deposit_id = null,
+        ?string $depositor  = null,
     )
     {
         $this->title          = $title;
@@ -76,6 +78,7 @@ class RequestData {
         $this->withdrawal     = $withdrawal;
         $this->start_date     = $start_date ?: time();
         $this->deposit_id     = $deposit_id ?: null;
+        $this->depositor      = $depositor  ?: null;
 
         $this->validate();
     }
