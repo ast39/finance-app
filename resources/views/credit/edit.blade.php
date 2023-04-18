@@ -57,7 +57,7 @@
                             <div class="mb-3">
                                 <label for="creditAmount" class="form-label">{!! Icons::get(Icons::BALANCE) !!} {{ __('Сумма') }}</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="creditAmount" name="amount" value="{{ $credit->amount ?? '' }}" placeholder="250000">
+                                    <input type="text" class="form-control" id="creditAmount" name="amount" value="{{ number_format($credit->amount, 2) }}" placeholder="250000">
                                     <span class="input-group-text currency">{{ $credit->currency }}</span>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                             <div class="mb-3">
                                 <label for="creditPercent" class="form-label">{!! Icons::get(Icons::PERCENT) !!} {{ __('Процент') }}</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="creditPercent" name="percent" value="{{ $credit->percent ?? '' }}" placeholder="14.9">
+                                    <input type="text" class="form-control" id="creditPercent" name="percent" value="{{ number_format($credit->percent, 2) }}" placeholder="14.9">
                                     <span class="input-group-text">%</span>
                                 </div>
                             </div>
